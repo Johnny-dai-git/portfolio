@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuanjun Dai – Chip / Hardware</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:       #f0f5ff;
+  --bg2:      #e8effd;
+  --surface:  #ffffff;
+  --surface2: #f4f7ff;
+  --border:   rgba(59, 130, 246, 0.2);
+  --border2:  rgba(59, 130, 246, 0.1);
+  --accent:   #d97706;
+  --accent2:  #d97706;
+  --teal:     #0891b2;
+  --purple:   #7c3aed;
+  --green:    #059669;
+  --orange:   #d97706;
+  --red:      #dc2626;
+  --text:     #0f172a;
+  --text2:    #334155;
+  --text3:    #64748b;
+  --hero-from: #0f172a;
+  --hero-to:   #1e3a5f;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HERO SLIDESHOW ──────────────────────────────────────── */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.6s ease-in-out;
+}
+.hero-slide.active { opacity: 1; }
+
+/* dark + blue tint overlay so text stays readable */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    160deg,
+    rgba(5, 15, 40, 0.78) 0%,
+    rgba(8, 25, 65, 0.72) 50%,
+    rgba(5, 15, 40, 0.82) 100%
+  );
+}
+
+/* ── CIRCUIT CANVAS (hero only) ─────────────────────────── */
+#circuit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0.38;
+  z-index: 2;
+}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border2);
+  padding: 0 2.5rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 12px rgba(37,99,235,0.07);
+}
+
+.nav-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+.nav-logo span { color: var(--teal); }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--text3);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ────────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  background: #050f28;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 2rem 5rem;
+  overflow: hidden;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 5;
+  max-width: 820px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(96,165,250,0.18);
+  border: 1.5px solid rgba(96,165,250,0.5);
+  border-radius: 100px;
+  padding: 0.55rem 1.6rem;
+  font-size: 1.15rem;
+  color: #e0f2fe;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.6rem;
+  animation: fadeDown 0.7s ease both;
+}
+.hero-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #34d399;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-name {
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 0.6rem;
+  color: #fff;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.hero-name .grad {
+  background: linear-gradient(100deg,#fbbf24 0%,#f97316 50%,#60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: #93c5fd;
+  font-weight: 400;
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.01em;
+  animation: fadeUp 0.7s 0.18s ease both;
+}
+
+.hero-desc {
+  font-size: 1.25rem;
+  color: #e0f2fe;
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.75;
+  font-weight: 500;
+  animation: fadeUp 0.7s 0.26s ease both;
+}
+
+.hero-links {
+  display: flex;
+  gap: 0.85rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.34s ease both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background: #3b82f6;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(59,130,246,0.45);
+}
+.btn-primary:hover {
+  background: #2563eb;
+  box-shadow: 0 0 36px rgba(59,130,246,0.6);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: rgba(255,255,255,0.07);
+  color: #bfdbfe;
+  border: 1px solid rgba(96,165,250,0.3);
+}
+.btn-outline:hover {
+  background: rgba(96,165,250,0.15);
+  border-color: rgba(96,165,250,0.6);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  margin-top: 4.5rem;
+  animation: fadeUp 0.7s 0.42s ease both;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(96,165,250,0.2);
+  border-radius: 14px;
+  padding: 1.4rem 2rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.stat-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid rgba(96,165,250,0.15);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-size: 2.4rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, #facc15, #fb923c, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(251,146,60,0.5));
+}
+.stat-label {
+  font-size: 0.85rem;
+  color: #e0f2fe;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.3rem;
+}
+
+/* ── SECTION SHELL ───────────────────────────────────────── */
+section {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent2);
+  opacity: 0.6;
+}
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ── ABOUT ───────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.about-text p {
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.about-text p strong { color: var(--text); font-weight: 600; }
+.about-contact {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.95rem;
+  color: var(--text2);
+}
+.contact-icon {
+  width: 28px; height: 28px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+.contact-item a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+.contact-item a:hover { color: var(--teal); }
+
+.edu-cards { display: flex; flex-direction: column; gap: 1rem; }
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  border-left: 3px solid var(--accent2);
+  box-shadow: 0 2px 12px rgba(37,99,235,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.edu-card:hover {
+  box-shadow: 0 6px 24px rgba(37,99,235,0.12);
+  transform: translateY(-2px);
+}
+.edu-degree { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 2px; }
+.edu-school { font-size: 0.92rem; color: var(--text3); margin-top: 0.3rem; }
+.edu-date   { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent2); margin-top: 0.5rem; }
+
+/* ── PROJECTS ────────────────────────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: all 0.25s;
+  box-shadow: 0 2px 10px rgba(37,99,235,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.proj-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent2), var(--teal));
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+.proj-card:hover {
+  border-color: rgba(59,130,246,0.35);
+  box-shadow: 0 10px 32px rgba(37,99,235,0.13);
+  transform: translateY(-3px);
+}
+.proj-card:hover::after { transform: scaleX(1); }
+
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+.tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+.tag-ebpf  { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.tag-ml    { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+.tag-dist  { background: #f0f9ff; color: #0369a1; border: 1px solid #7dd3fc; }
+.tag-llm   { background: #fefce8; color: #92400e; border: 1px solid #fcd34d; }
+.tag-sec   { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+.tag-sdn   { background: #f5f3ff; color: #6d28d9; border: 1px solid #c4b5fd; }
+
+.proj-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.55rem;
+  line-height: 1.35;
+}
+.proj-desc {
+  font-size: 0.92rem;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.proj-metric { font-weight: 700; color: var(--accent); }
+
+.proj-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.proj-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.link-paper  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.link-paper:hover  { background: #dbeafe; box-shadow: 0 2px 8px rgba(37,99,235,0.2); }
+.link-code   { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+.link-code:hover   { background: #dcfce7; box-shadow: 0 2px 8px rgba(5,150,105,0.2); }
+.link-review { background: #fefce8; color: #92400e; border: 1px solid #fde68a; cursor: default; }
+
+/* ── PUBLICATIONS ────────────────────────────────────────── */
+.pub-summary-card {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0d3060 100%);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(37,99,235,0.18);
+  color: white;
+}
+.pub-stat { flex: 1; text-align: center; }
+.pub-stat-num {
+  font-size: 2.8rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.pub-stat-label { font-size: 0.82rem; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; }
+.pub-divider { width: 1px; height: 60px; background: rgba(96,165,250,0.2); margin: 0 1rem; }
+.pub-venues { flex: 2; padding-left: 1.5rem; }
+.pub-venues p { font-size: 0.95rem; color: #bfdbfe; line-height: 1.75; }
+.pub-venues strong { color: #fff; }
+
+.pub-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.pub-item {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 1.1rem 1.4rem;
+  border-left: 3px solid var(--border2);
+  transition: all 0.2s;
+  box-shadow: 0 1px 6px rgba(37,99,235,0.04);
+}
+.pub-item:hover { border-left-color: var(--accent2); box-shadow: 0 4px 16px rgba(37,99,235,0.1); transform: translateX(3px); }
+.pub-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; line-height: 1.4; }
+.pub-meta  { font-size: 0.77rem; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.pub-venue-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  font-family: 'JetBrains Mono', monospace;
+}
+.badge-ieee   { background: #dbeafe; color: #1e40af; }
+.badge-acm    { background: #ede9fe; color: #5b21b6; }
+.badge-review { background: #fef3c7; color: #92400e; }
+.badge-spring  { background: #dcfce7; color: #166534; }
+.badge-accepted { background: #d1fae5; color: #065f46; font-weight: 700; }
+
+/* ── EXPERIENCE ──────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px; top: 12px; bottom: 12px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent2), #bfdbfe, transparent);
+}
+.timeline-item { position: relative; margin-bottom: 2rem; }
+.timeline-dot {
+  position: absolute;
+  left: -2rem; top: 10px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2.5px solid var(--accent2);
+  box-shadow: 0 0 10px rgba(59,130,246,0.35);
+}
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 2px 10px rgba(37,99,235,0.05);
+  transition: all 0.2s;
+}
+.exp-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.12); border-color: var(--border); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.25rem; }
+.exp-role { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+.exp-date { font-size: 0.82rem; color: var(--accent2); font-family: 'JetBrains Mono', monospace; white-space: nowrap; flex-shrink: 0; background: #eff6ff; padding: 0.18rem 0.5rem; border-radius: 4px; }
+.exp-org  { font-size: 0.92rem; color: var(--text3); margin-bottom: 0.8rem; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.exp-bullets li {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+.exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent2); font-size: 0.78rem; top: 0.25em; }
+.exp-bullets strong { color: var(--accent); font-weight: 600; }
+
+/* ── SKILLS ──────────────────────────────────────────────── */
+.skills-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.skill-category {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 1.3rem 1.4rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+  transition: all 0.2s;
+}
+.skill-category:hover { border-color: var(--border); box-shadow: 0 6px 20px rgba(37,99,235,0.1); }
+.skill-cat-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-tag {
+  font-size: 0.86rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.18s;
+}
+.skill-tag:hover { background: #dbeafe; border-color: #93c5fd; color: var(--accent); }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border-top: 1px solid var(--border2);
+  color: var(--text3);
+  font-size: 0.92rem;
+  background: var(--surface);
+}
+footer a { color: var(--accent2); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about-grid    { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-section{ grid-template-columns: 1fr; }
+  .pub-summary-card { flex-direction: column; gap: 1.2rem; }
+  .pub-divider   { display: none; }
+  .pub-venues    { padding-left: 0; }
+  .hero-stats    { flex-direction: column; gap: 0; }
+  nav { padding: 0 1rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.82rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">jd<span>.</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div id="hero">
+
+  <!-- Background photo slideshow -->
+  <div class="hero-slides">
+    <!-- GPU chip closeup -->
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=1920&q=80&fit=crop');"></div>
+    <!-- Neural network glowing nodes -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1920&q=80&fit=crop');"></div>
+    <!-- Abstract neural network / AI brain -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1920&q=80&fit=crop');"></div>
+    <!-- Network data flow / telemetry visualization -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&fit=crop');"></div>
+    <!-- Network cables / router / SDN infra -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=1920&q=80&fit=crop');"></div>
+    <!-- Data center blue server racks -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=80&fit=crop');"></div>
+    <!-- Server room corridor -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1920&q=80&fit=crop');"></div>
+    <!-- Cloud computing / global infrastructure -->
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&fit=crop');"></div>
+  </div>
+
+  <!-- Dark overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Circuit board canvas on top -->
+  <canvas id="circuit-canvas"></canvas>
+
+  <!-- Slide indicators -->
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10;" id="slide-dots"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge">PhD Candidate · Case Western Reserve University</div>
+    <h1 class="hero-name"><span class="grad">Yuanjun Dai</span></h1>
+    <p class="hero-title">Systems Software Engineer &nbsp;·&nbsp; NPU/ASIC &nbsp;·&nbsp; Low-Level Systems &amp; eBPF Profiling</p>
+    <p class="hero-desc">
+      Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:yxd429@case.edu" class="btn btn-primary">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+        Get in Touch
+      </a>
+      <a href="https://github.com/Johnny-dai-git" target="_blank" class="btn btn-outline">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank" class="btn btn-outline">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+        Google Scholar
+      </a>
+      <a href="../resumes/Yuanjun_Dai_Resume_D_Hardware.pdf" target="_blank" class="btn btn-outline">
+        <svg width="13" height="13" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        Download CV
+      </a>
+    </div>
+    <div class="hero-stats" style="margin-top:4rem;">
+      <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Publications</div></div>
+      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">First-Author</div></div>
+      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Yrs Industry</div></div>
+      <div class="stat-item"><div class="stat-num">64</div><div class="stat-label">A100 GPUs</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>I'm a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University,
+      specializing in AI infrastructure, distributed ML systems, and eBPF-based observability.
+      My research sits at the intersection of systems software and machine learning — building
+      the low-level infrastructure that makes large-scale AI training and inference efficient.</p>
+      <p>I've published <strong>8 papers (7 first-author)</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC,
+      ACM TOIT, and Springer SecureComm. Before my PhD, I spent 5+ years in industry at
+      <strong>Cisco</strong>, <strong>Broadcom</strong>, <strong>Midea Group</strong>, and
+      <strong>Xiaomi</strong>, spanning low-level systems engineering at Cisco and Broadcom (NPU/ASIC, HPC) to product and ML roles at Midea Group and Xiaomi.</p>
+      <div class="about-contact">
+        <div class="contact-item"><div class="contact-icon">📍</div>Cleveland, OH</div>
+        <div class="contact-item"><div class="contact-icon">✉️</div><a href="mailto:yxd429@case.edu">yxd429@case.edu</a></div>
+        <div class="contact-item"><div class="contact-icon">📞</div>216-269-2394</div>
+        <div class="contact-item"><div class="contact-icon">🐙</div><a href="https://github.com/Johnny-dai-git" target="_blank">github.com/Johnny-dai-git</a></div>
+      </div>
+    </div>
+    <div class="edu-cards fade-in">
+      <div class="edu-card">
+        <div class="edu-degree">Ph.D. in Computer Science</div>
+        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;">AI Infrastructure</div>
+        <div class="edu-school">Case Western Reserve University</div>
+        <div class="edu-date">08/2019 – Present</div>
+      </div>
+      <div class="edu-card" style="border-left-color:var(--teal);">
+        <div class="edu-degree">M.S. in Electrical and Computer Engineering</div>
+        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;">Computer Microarchitecture</div>
+        <div class="edu-school">University of Pittsburgh</div>
+      </div>
+      <div class="edu-card" style="border-left-color:var(--green);">
+        <div class="edu-degree">B.S. in Electrical Engineering</div>
+        <div class="edu-school">Northeastern University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH ── -->
+<section id="research" style="background:var(--bg2);border-radius:24px;">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Research Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-ebpf">HashPipe Algorithm</span><span class="tag tag-ebpf">Top-K Tracking</span><span class="tag tag-ebpf">Per-PID Profiling</span><span class="tag tag-dist">In-Kernel Telemetry</span><span class="tag tag-ml">DML Observability</span></div>
+      <div class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</div>
+      <div class="proj-desc">Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe's <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.</div>
+      <div class="proj-links">
+        <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-dist">Network Telemetry</span><span class="tag tag-ebpf">In-Kernel</span><span class="tag tag-ml">Count-Min Sketch</span><span class="tag tag-ebpf">Atomic Operations</span><span class="tag tag-dist">Retransmission Detection</span><span class="tag tag-dist">Flow Reconstruction</span></div>
+      <div class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</div>
+      <div class="proj-desc">In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.</div>
+      <div class="proj-links">
+        <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/Psketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-ml">Reinforcement Learning</span><span class="tag tag-ml">PPO</span><span class="tag tag-dist">PyTorch DDP</span><span class="tag tag-dist">BytePS</span><span class="tag tag-llm">Batch Scheduling</span><span class="tag tag-llm">A100 GPU</span><span class="tag tag-dist">Model Training</span></div>
+      <div class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</div>
+      <div class="proj-desc">System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.</div>
+      <div class="proj-links">
+        <a href="https://arxiv.org/abs/2510.08522" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/DML-via-RL" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-sdn">SDN</span><span class="tag tag-sec">DDoS Mitigation</span><span class="tag tag-dist">Control-Plane Elasticity</span><span class="tag tag-sdn">OvS Overlay</span><span class="tag tag-sdn">OpenFlow</span><span class="tag tag-dist">Round-Robin Scheduling</span><span class="tag tag-dist">Large-Flow Migration</span><span class="tag tag-ml">ECMP Load Balancing</span></div>
+      <div class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</div>
+      <div class="proj-desc">Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.</div>
+      <div class="proj-links">
+        <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-llm">LLM Inference</span><span class="tag tag-llm">vLLM / TensorRT-LLM</span><span class="tag tag-llm">Continuous Batching</span><span class="tag tag-dist">NVIDIA Device Plugin</span><span class="tag tag-dist">ArgoCD GitOps</span><span class="tag tag-ml">DCGM GPU Telemetry</span><span class="tag tag-sec">Zero-Trust NetworkPolicy</span><span class="tag tag-ml">Prometheus / Grafana</span></div>
+      <div class="proj-name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</div>
+      <div class="proj-desc">K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.</div>
+      <div class="proj-links">
+        <a href="https://github.com/Johnny-dai-git/llm-deployment" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-dist">Model Training</span><span class="tag tag-ml">Transport Protocol</span><span class="tag tag-dist">NCCL</span><span class="tag tag-ml">Gradient Prioritization</span><span class="tag tag-ebpf">Kernel Bypass</span><span class="tag tag-ml">SACK</span><span class="tag tag-dist">Cross-Datacenter</span></div>
+      <div class="proj-name">PRISM – Priority-Aware Transport for Distributed ML Training</div>
+      <div class="proj-desc">Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.</div>
+      <div class="proj-links">
+        <a href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <span class="proj-link-btn link-review">🔄 Under Review</span>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Side-Channel</span><span class="tag tag-sec">MLaaS Security</span><span class="tag tag-dist">MXNet</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ebpf">Intel RAPL</span><span class="tag tag-dist">BSP / PS Arch</span><span class="tag tag-ml">Model Reconstruction</span></div>
+      <div class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
+      <div class="proj-desc">Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.</div>
+      <div class="proj-links">
+        <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in" style="grid-column:1/-1;max-width:510px;">
+      <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
+      <div class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
+      <div class="proj-desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM’s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
+      <div class="proj-links">
+        <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-dist">DeepSpeed ZeRO-3</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
+      <div class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
+      <div class="proj-desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
+      <div class="proj-links">
+        <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PUBLICATIONS ── -->
+<section id="publications">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="pub-summary-card fade-in">
+    <div class="pub-stat"><div class="pub-stat-num">8</div><div class="pub-stat-label">Total Papers</div></div>
+    <div class="pub-divider"></div>
+    <div class="pub-stat"><div class="pub-stat-num">7</div><div class="pub-stat-label">First-Author</div></div>
+    <div class="pub-divider"></div>
+    <div class="pub-stat"><div class="pub-stat-num">3</div><div class="pub-stat-label">Under Review</div></div>
+    <div class="pub-divider"></div>
+    <div class="pub-venues">
+      <p>Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
+      3 manuscripts under review. &nbsp;<a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank" style="color:#93c5fd;">Google Scholar ↗</a></p>
+    </div>
+  </div>
+
+  <div class="pub-list">
+    <div class="pub-item fade-in">
+      <div class="pub-title">DYNAMIX: RL-Based Adaptive Batch Scheduling for Distributed ML Training <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE IPDPS</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://arxiv.org/abs/2510.08522" target="_blank" style="color:var(--accent2);">arXiv:2510.08522 ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">Priority-Based eBPF Network Flow Telemetry for AI/DML Infrastructure <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE ICNC 2026</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">High-Resolution eBPF System Resource Profiling for DML Workloads <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE CCNC 2026</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">Scotch: Elastically Augmenting Control-Path Throughput in SDN <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-acm">ACM TOIT</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1145/3559759" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">Training-Time Side-Channel Attacks on Distributed ML Systems <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-spring">Springer SecureComm</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" style="color:var(--accent2);">NSF PAR ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis <span class="pub-venue-badge badge-review">Under Review · ACM TOPS</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" style="color:var(--accent2);">Preprint ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">PRISM: Priority-Aware Transport for Distributed ML Training <span class="pub-venue-badge badge-review">Under Review</span></div>
+      <div class="pub-meta">Yuanjun Dai et al. · <a href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing" target="_blank" style="color:var(--accent2);">Preprint ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">Domain-Adapted LLMs for Clinical Risk Adjustment Coding <span class="pub-venue-badge badge-review">Under Review</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" style="color:var(--accent2);">Preprint ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience" style="background:var(--bg2);border-radius:24px;">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Research Assistant, AI Infrastructure &amp; ML Systems</div>
+          <div class="exp-date">08/2019 – Present</div>
+        </div>
+        <div class="exp-org">Case Western Reserve University</div>
+        <ul class="exp-bullets">
+          <li>Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment</li>
+          <li><strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)</li>
+          <li>Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Technical Product Manager</div>
+          <div class="exp-date">07/2018 – 01/2019</div>
+        </div>
+        <div class="exp-org">Xiaomi</div>
+        <ul class="exp-bullets">
+          <li>Market-facing PM role: conducted competitive analysis and user research to define product requirements for a smart IoT appliance</li>
+          <li>Assessed technical feasibility and complexity of proposed features; delivered initial technical proposals covering architecture trade-offs and implementation risks to align engineering and business stakeholders</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Product Manager</div>
+          <div class="exp-date">09/2016 – 06/2018</div>
+        </div>
+        <div class="exp-org">Midea Group</div>
+        <ul class="exp-bullets">
+          <li>Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design</li>
+          <li>Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX — bridging product requirements and engineering execution</li>
+          <li>Product debuted at <strong>2018 AWE Show</strong> and won the <strong>Red Dot Design Award</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Software Engineer II</div>
+          <div class="exp-date">06/2015 – 08/2016</div>
+        </div>
+        <div class="exp-org">Cisco Systems, Inc.</div>
+        <ul class="exp-bullets">
+          <li>Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK</li>
+          <li>Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Software Engineer Intern</div>
+          <div class="exp-date">10/2014 – 05/2015</div>
+        </div>
+        <div class="exp-org">Broadcom (Emulex)</div>
+        <ul class="exp-bullets">
+          <li>Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong></li>
+          <li>Ported Linux-only BladeEngine ASIC management CLI to Windows Server</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Engineer Intern</div>
+          <div class="exp-date">01/2014 – 04/2014</div>
+        </div>
+        <div class="exp-org">Tenova I2S</div>
+        <ul class="exp-bullets">
+          <li>Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-section">
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span><span class="skill-tag">C/C++</span>
+        <span class="skill-tag">Java</span><span class="skill-tag">Bash</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">AI / ML</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PyTorch DDP/FSDP</span><span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">BytePS</span><span class="skill-tag">Megatron-LM</span>
+        <span class="skill-tag">NCCL</span><span class="skill-tag">DeepSpeed</span><span class="skill-tag">vLLM</span><span class="skill-tag">TensorRT-LLM</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Kubernetes</span><span class="skill-tag">Docker</span>
+        <span class="skill-tag">CI/CD</span><span class="skill-tag">ArgoCD</span><span class="skill-tag">Helm</span>
+        <span class="skill-tag">Slurm</span>
+        <span class="skill-tag">HPC</span><span class="skill-tag">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Observability</div>
+      <div class="skill-tags">
+        <span class="skill-tag">eBPF</span><span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Grafana</span><span class="skill-tag">DCGM Exporter</span>
+        <span class="skill-tag">Intel RAPL</span><span class="skill-tag">Kernel Tracing</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Cloud & HPC</div>
+      <div class="skill-tags">
+        
+        <span class="skill-tag">Lambda Labs HPC</span><span class="skill-tag">NSF FABRIC</span><span class="skill-tag">CloudLab</span>
+        <span class="skill-tag">SDN / OpenFlow</span><span class="skill-tag">Ryu</span>
+        <span class="skill-tag">P4</span><span class="skill-tag">NPU/ASIC</span><span class="skill-tag">BCM SDK</span>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Research Areas</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Distributed ML</span><span class="skill-tag">ML Security</span>
+        <span class="skill-tag">Side-Channel Analysis</span><span class="skill-tag">RL Scheduling</span>
+        <span class="skill-tag">eBPF Systems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2025 Yuanjun Dai &nbsp;·&nbsp;
+    <a href="mailto:yxd429@case.edu">yxd429@case.edu</a> &nbsp;·&nbsp;
+    <a href="https://github.com/Johnny-dai-git" target="_blank">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank">Google Scholar</a>
+  </p>
+</footer>
+
+<script>
+/* ── Hero Slideshow ── */
+(function() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsEl = document.getElementById('slide-dots');
+  let cur = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.style.cssText = `width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,${i===0?'0.9':'0.35'});transition:all 0.3s;cursor:pointer;`;
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].style.background = 'rgba(255,255,255,0.35)';
+    dotsEl.children[cur].style.transform = '';
+    cur = n;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].style.background = 'rgba(255,255,255,0.9)';
+    dotsEl.children[cur].style.transform = 'scale(1.3)';
+  }
+
+  setInterval(() => goTo((cur + 1) % slides.length), 4000);
+})();
+
+/* ── Circuit Board Animation ── */
+const canvas = document.getElementById('circuit-canvas');
+const ctx    = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width  = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const GRID = 40;
+const nodes = [];
+const traces = [];
+const pulses = [];
+
+// Build grid nodes
+function buildGrid() {
+  nodes.length = 0; traces.length = 0;
+  const cols = Math.ceil(W / GRID) + 1;
+  const rows = Math.ceil(H / GRID) + 1;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (Math.random() > 0.45) {
+        nodes.push({ x: c * GRID, y: r * GRID, type: Math.random() > 0.8 ? 'chip' : 'node' });
+      }
+    }
+  }
+  // Connect nearby nodes
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[j].x - nodes[i].x;
+      const dy = nodes[j].y - nodes[i].y;
+      if ((Math.abs(dx) === GRID && dy === 0) || (Math.abs(dy) === GRID && dx === 0)) {
+        if (Math.random() > 0.35) {
+          traces.push({ a: nodes[i], b: nodes[j] });
+        }
+      }
+    }
+  }
+}
+buildGrid();
+
+// Spawn data pulses
+function spawnPulse() {
+  if (traces.length === 0) return;
+  const t = traces[Math.floor(Math.random() * traces.length)];
+  const forward = Math.random() > 0.5;
+  pulses.push({
+    trace: t,
+    t: 0,
+    speed: 0.008 + Math.random() * 0.012,
+    forward,
+    color: Math.random() > 0.5 ? '#34d399' : '#60a5fa',
+    size: 2 + Math.random() * 2
+  });
+}
+
+setInterval(spawnPulse, 120);
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw traces
+  ctx.lineWidth = 0.8;
+  for (const tr of traces) {
+    ctx.strokeStyle = 'rgba(96,165,250,0.18)';
+    ctx.beginPath();
+    ctx.moveTo(tr.a.x, tr.a.y);
+    ctx.lineTo(tr.b.x, tr.b.y);
+    ctx.stroke();
+  }
+
+  // Draw nodes
+  for (const n of nodes) {
+    if (n.type === 'chip') {
+      ctx.strokeStyle = 'rgba(96,165,250,0.4)';
+      ctx.fillStyle   = 'rgba(96,165,250,0.06)';
+      ctx.lineWidth   = 1;
+      ctx.beginPath();
+      ctx.rect(n.x - 6, n.y - 6, 12, 12);
+      ctx.fill(); ctx.stroke();
+    } else {
+      ctx.fillStyle = 'rgba(96,165,250,0.35)';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Draw & update pulses
+  for (let i = pulses.length - 1; i >= 0; i--) {
+    const p = pulses[i];
+    p.t += p.speed;
+    if (p.t >= 1) { pulses.splice(i, 1); continue; }
+    const ta = p.forward ? p.trace.a : p.trace.b;
+    const tb = p.forward ? p.trace.b : p.trace.a;
+    const x = ta.x + (tb.x - ta.x) * p.t;
+    const y = ta.y + (tb.y - ta.y) * p.t;
+    // glow
+    const g = ctx.createRadialGradient(x, y, 0, x, y, p.size * 4);
+    g.addColorStop(0, p.color + 'cc');
+    g.addColorStop(1, p.color + '00');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, y, p.size * 4, 0, Math.PI * 2);
+    ctx.fill();
+    // dot
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(x, y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ── Scroll Fade-In ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ── Nav Active Highlight ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (a) a.style.color = 'var(--accent)';
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>

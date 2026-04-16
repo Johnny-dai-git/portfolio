@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Liberation Sans', Arial, sans-serif;
+    font-size: 8.8pt;
+    color: #1a1a1a;
+    background: white;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.45in 0.50in 0.40in 0.50in;
+    margin: 0 auto;
+    background: white;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  .name {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #0d0d0d;
+    margin-bottom: 4px;
+  }
+
+  .contact {
+    font-size: 8.4pt;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .contact a { color: #555; text-decoration: none; }
+
+  .header-rule {
+    border: none;
+    border-top: 0.7px solid #444;
+    margin-bottom: 8px;
+  }
+
+  /* ── SUMMARY ─────────────────────────────────────────── */
+  .summary-text {
+    font-size: 8.8pt;
+    color: #222;
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+
+  /* ── SECTIONS ────────────────────────────────────────── */
+  .section {
+    margin-top: 8px;
+  }
+
+  .section-title {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    border-bottom: 0.5px solid #333;
+    padding-bottom: 2px;
+    margin-bottom: 7px;
+  }
+
+  /* ── EDUCATION ───────────────────────────────────────── */
+  .edu-entry {
+    margin-bottom: 6px;
+  }
+
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .edu-degree {
+    font-size: 9.2pt;
+    font-weight: 600;
+    color: #0d0d0d;
+  }
+
+  .edu-date {
+    font-size: 8.2pt;
+    color: #666;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .edu-school {
+    font-size: 8.4pt;
+    color: #555;
+    margin-top: 1px;
+  }
+
+  /* ── JOB / RESEARCH ENTRIES ──────────────────────────── */
+  .entry {
+    margin-bottom: 7px;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .entry-title {
+    font-size: 9.2pt;
+    font-weight: 600;
+    color: #0d0d0d;
+  }
+
+  .entry-date {
+    font-size: 8.2pt;
+    color: #666;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .entry-org {
+    font-size: 8.4pt;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  .entry-url {
+    font-size: 7.8pt;
+    color: #3a6abf;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* ── BULLET LIST ─────────────────────────────────────── */
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.bullets li {
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 4px;
+    line-height: 1.40;
+    color: #1a1a1a;
+    font-size: 8.6pt;
+  }
+
+  ul.bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+    color: #333;
+    font-size: 9pt;
+  }
+
+  .proj-name {
+    font-weight: 600;
+  }
+
+  .proj-link {
+    font-weight: 400;
+    color: #3a6abf;
+    font-size: 8pt;
+    text-decoration: none;
+  }
+  .proj-link:hover { text-decoration: underline; }
+  a.proj-link { color: #3a6abf; }
+
+  .metric {
+    font-weight: 600;
+  }
+
+  /* ── PROJECT (additional) ────────────────────────────── */
+  .proj-entry {
+    margin-bottom: 6px;
+  }
+
+  .proj-title {
+    font-size: 9.2pt;
+    font-weight: 600;
+    color: #0d0d0d;
+  }
+
+  .proj-gh {
+    font-size: 7.8pt;
+    color: #3a6abf;
+    display: block;
+    margin: 1px 0 3px 0;
+  }
+
+  /* ── PUBLICATIONS ────────────────────────────────────── */
+  .pub-text {
+    font-size: 8.6pt;
+    color: #1a1a1a;
+    line-height: 1.45;
+  }
+
+  .pub-link {
+    color: #3a6abf;
+    font-weight: 500;
+  }
+
+  /* ── SKILLS ──────────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 115px 1fr;
+    gap: 4px 6px;
+  }
+
+  .skill-label {
+    font-size: 8.6pt;
+    font-weight: 600;
+    color: #0d0d0d;
+    white-space: nowrap;
+  }
+
+  .skill-value {
+    font-size: 8.6pt;
+    color: #1a1a1a;
+  }
+
+  /* ── PRINT ───────────────────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; padding: 0.45in 0.50in 0.40in 0.50in; width: 100%; }
+    @page { size: letter; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="name">YUANJUN (JOHNNY) DAI</div>
+  <div class="contact">
+    216-269-2394 &nbsp;•&nbsp; yxd429@case.edu &nbsp;•&nbsp;
+    github.com/Johnny-dai-git &nbsp;•&nbsp; Cleveland, OH
+  </div>
+  <hr class="header-rule">
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p class="summary-text">
+      AI Infrastructure Engineer and PhD Candidate at Case Western Reserve University, specializing in
+      distributed ML systems, eBPF-based observability, and large-scale LLM deployment.
+      Published <strong>8 research papers (7 first-author)</strong> at IEEE, ACM, and Springer venues.
+      5+ years of industry experience at <strong>Cisco</strong> and <strong>Broadcom</strong> in
+      high-performance networking and systems optimization.
+    </p>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">Ph.D. Candidate in Computer Science (AI Infrastructure)</span>
+        <span class="edu-date">08/2019 – Present</span>
+      </div>
+      <div class="edu-school">Case Western Reserve University</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">M.S. in Electrical and Computer Engineering (Computer Microarchitecture)</span>
+      </div>
+      <div class="edu-school">University of Pittsburgh</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">B.S. in Electrical Engineering</span>
+      </div>
+      <div class="edu-school">Northeastern University</div>
+    </div>
+  </div>
+
+  <!-- RESEARCH EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Research &amp; Systems Engineering Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Research Assistant, AI Infrastructure &amp; ML Systems</span>
+      </div>
+      <div class="entry-org">Case Western Reserve University</div>
+
+      <ul class="bullets">
+
+        <li>
+          <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span><br>
+          PPO-based centralized RL scheduler dynamically adapting batch size via real-time system signals;
+          evaluated on PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves
+          <span class="metric">46% training speedup</span> over optimal fixed batch size strategy
+          with improved model generalization, on up to <span class="metric">64 A100 GPUs</span>
+          at Ohio Supercomputer Center and Lambda Labs HPC.
+        </li>
+
+        <li>
+          <span class="proj-name">PRISM – Priority-Aware Transport for Distributed ML Training</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span><br>
+          Priority-based selective reliability transport between NCCL/Gloo and UDP; magnitude-based
+          gradient classification with full retransmission for high-priority and local compensation for
+          low-priority; dual congestion windows, adaptive window borrowing, GPU-accelerated TopK,
+          SACK-based tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves
+          <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP
+          on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at 144-worker scale
+          on commodity infrastructure.
+        </li>
+
+        <li>
+          <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
+          Analyzed MXNet BSP PS-architecture communication patterns via push/pull instrumentation;
+          modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic
+          and Intel RAPL power side channels with outlier filtering and polynomial regression for
+          energy profiling; achieved <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
+          across ZFNet, AlexNet, and VGG variants — exposing DNN architecture stealing surfaces
+          in MLaaS co-location environments.
+        </li>
+
+        <li>
+          <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span><br>
+          In-kernel eBPF priority-aware sketch framework (priority table + heavy flow table + 3-layer CMS);
+          sequence-number-based retransmission detection; atomic operations for thread-safe concurrent
+          updates; voting-based collision resolution and CMS minimum-value flow reconstruction;
+          achieved <span class="metric">96% Top-K accuracy, 100% priority-packet recall</span>,
+          and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed with CAIDA 2019 traffic.
+        </li>
+
+        <li>
+          <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span><br>
+          Developed a per-PID eBPF profiler with in-kernel Top-K tracking, delivering
+          <span class="metric">10–14× finer temporal resolution</span> than top/htop,
+          ~11 ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.
+        </li>
+
+        <li>
+          <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span><br>
+          Designed a distributed control-plane overlay using OvS-based traffic offloading and large-flow
+          migration; <span class="metric">reduced controller congestion by &gt;70%</span> on a 34-node
+          GENI Clos topology.
+        </li>
+
+        <li>
+          <span class="proj-name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
+          Built a K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM
+          inference with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD automation across
+          <span class="metric">50+ Kubernetes deployments</span>.
+        </li>
+
+        <li>
+          <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
+          Fine-tuned PubMedBERT and Qwen-7B for HCC coding from EHR notes; achieved
+          <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="metric">0.81/0.802</span>
+          on MIMIC-IV with imbalance-aware training and per-label calibration.
+        </li>
+
+        <li>
+          <span class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing">Paper</a></span><br>
+          Designed a BiLSTM pipeline aligning CPU/memory energy traces with per-layer timestamps;
+          reliably distinguishes Conv, FC, and activation layers during distributed ML training
+          using ensemble learning.
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- INDUSTRY EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Industry Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer II</span>
+        <span class="entry-date">06/2015 – 08/2016</span>
+      </div>
+      <div class="entry-org">Cisco Systems, Inc.</div>
+      <ul class="bullets">
+        <li>Developed NPU/ASIC features for a 100 Gbps core router serving hyperscalers (Azure, AWS, Alibaba Cloud)
+          using Broadcom BCM SDK; contributed to QoS and ECMP modules, tuned forwarding pipelines,
+          <span class="metric">reducing forwarding latency by ~10%</span> under heavy load.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Applied Research Engineer</span>
+        <span class="entry-date">09/2016 – 06/2018</span>
+      </div>
+      <div class="entry-org">Midea Group</div>
+      <ul class="bullets">
+        <li>Led ML model training and deployment for a smart appliance product; designed data pipeline,
+          applied transfer learning and ensemble techniques, deployed scalable Docker-based services on
+          Alibaba Cloud. Product launched at 2018 AWE Show and won the <span class="metric">Red Dot Design Award</span>.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Technical Product Manager</span>
+        <span class="entry-date">07/2018 – 01/2019</span>
+      </div>
+      <div class="entry-org">Xiaomi</div>
+      <ul class="bullets">
+        <li>Defined system-level architecture for an IoT-enabled smart appliance with PID-based temperature
+          control and cloud-connected app integration, translating product constraints into deployable system designs.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer Intern</span>
+        <span class="entry-date">10/2014 – 05/2015</span>
+      </div>
+      <div class="entry-org">Broadcom (Emulex)</div>
+      <ul class="bullets">
+        <li>Replaced polling-based data acquisition with a DMA + circular-buffer architecture in an RTOS pipeline,
+          <span class="metric">reducing CPU load by 30%</span> and improving sampling rate and control-loop responsiveness.</li>
+        <li>Ported a Linux-only management CLI for BladeEngine ASIC-based CNA hardware to Windows Server,
+          adapting system calls, threading models, and error handling.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Engineer Intern</span>
+        <span class="entry-date">01/2014 – 04/2014</span>
+      </div>
+      <div class="entry-org">Tenova I2S</div>
+      <ul class="bullets">
+        <li>Re-architected an RTOS data acquisition pipeline using DMA and circular buffers,
+          <span class="metric">reducing CPU load by 42%</span> and improving sampling rate and control-loop responsiveness.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ADDITIONAL PROJECTS -->
+  <div class="section">
+    <div class="section-title">Additional Systems Engineering Experience</div>
+
+    <div class="proj-entry">
+      <div class="proj-title">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
+      <span class="proj-gh">github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation</span>
+      <ul class="bullets">
+        <li>Designed an end-to-end pipelined CPU from custom ISA through RTL, synthesis, and layout;
+          5-stage pipeline with hazard handling and branch prediction, achieving
+          <span class="metric">~3× speedup</span> over single-cycle design.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="section">
+    <div class="section-title">Publications</div>
+    <p class="pub-text">
+      8 research papers (7 first-author) in distributed systems, ML systems, and AI infrastructure,
+      published/accepted at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm;
+      3 manuscripts under review at ACM TOPS. &nbsp;
+      Full list: <a class="pub-link" href="https://scholar.google.com/citations?user=maCNFMAAAAAJ">scholar.google.com/citations?user=maCNFMAAAAAJ</a>
+    </p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-label">Languages</span>
+      <span class="skill-value">Python, C/C++, Java, Bash, SQL</span>
+
+      <span class="skill-label">AI / ML</span>
+      <span class="skill-value">PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, vLLM, TensorRT-LLM</span>
+
+      <span class="skill-label">Infrastructure</span>
+      <span class="skill-value">Kubernetes, Docker, ArgoCD, Helm, Kustomize, Slurm, HPC, GitHub Actions CI/CD</span>
+
+      <span class="skill-label">Observability</span>
+      <span class="skill-value">eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing</span>
+
+      <span class="skill-label">Cloud &amp; HPC</span>
+      <span class="skill-value">AWS, GCP, Lambda Labs HPC, NSF FABRIC Testbed, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)</span>
+
+      <span class="skill-label">Research</span>
+      <span class="skill-value">Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

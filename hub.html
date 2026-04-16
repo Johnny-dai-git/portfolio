@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuanjun Dai – Portfolio Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f0f5ff;
+  color: #0f172a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+.grad {
+  background: linear-gradient(100deg, #2563eb, #0891b2, #059669);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.subtitle {
+  font-size: 1rem; color: #64748b; margin-bottom: 0.6rem; text-align: center;
+}
+.contact-row {
+  display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+  font-size: 0.82rem; color: #64748b; margin-bottom: 3rem;
+}
+.contact-row a { color: #2563eb; text-decoration: none; }
+.contact-row a:hover { text-decoration: underline; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+  max-width: 1000px;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 1.6rem 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.22s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--c);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  border-color: transparent;
+}
+.card-ver {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--c);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.card-targets {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+.card-tags {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.3rem;
+}
+.tag {
+  font-size: 0.68rem; font-weight: 600;
+  padding: 0.18rem 0.5rem; border-radius: 100px;
+  background: color-mix(in srgb, var(--c) 12%, white);
+  color: var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, white);
+  font-family: 'JetBrains Mono', monospace;
+}
+.card-links {
+  display: flex; gap: 0.6rem; margin-top: 0.6rem;
+}
+.card-btn {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 0.75rem; font-weight: 600;
+  padding: 0.3rem 0.7rem; border-radius: 6px;
+  text-decoration: none; transition: all 0.18s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.btn-site {
+  background: var(--c); color: #fff;
+}
+.btn-site:hover { opacity: 0.85; }
+.btn-pdf {
+  background: #f1f5f9; color: #334155;
+  border: 1px solid #e2e8f0;
+}
+.btn-pdf:hover { background: #e2e8f0; }
+
+.base-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
+}
+.base-card-text h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.base-card-text p  { font-size: 0.82rem; color: #64748b; }
+.base-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.btn-base {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.4rem 0.9rem; border-radius: 8px;
+  text-decoration: none; transition: all 0.18s;
+}
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; }
+.btn-secondary:hover { background: #e2e8f0; }
+
+footer { margin-top: 2.5rem; font-size: 0.78rem; color: #94a3b8; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1><span class="grad">Yuanjun Dai</span></h1>
+<p class="subtitle">AI Infrastructure Engineer · PhD Candidate · CWRU</p>
+<div class="contact-row">
+  <span>📍 Cleveland, OH</span>
+  <a href="mailto:yxd429@case.edu">✉️ yxd429@case.edu</a>
+  <a href="https://github.com/Johnny-dai-git" target="_blank">🐙 GitHub</a>
+  <a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank">📚 Google Scholar</a>
+</div>
+
+<div class="grid">
+
+  <div style="--c:#6366f1;">
+    <div class="card-ver">Version A</div>
+    <div class="card-title">AI Infra / LLM</div>
+    <div class="card-targets">OpenAI · Anthropic · Together AI · Mistral</div>
+    <div class="card-tags">
+      <span class="tag">vLLM</span><span class="tag">TensorRT-LLM</span>
+      <span class="tag">Distributed Training</span><span class="tag">K8s</span>
+    </div>
+    <div class="card-links">
+      <a href="versions/ai-llm.html" class="card-btn btn-site" style="--c:#6366f1;">🌐 Website</a>
+      <a href="resumes/Yuanjun_Dai_Resume_A_AI_LLM.pdf" target="_blank" class="card-btn btn-pdf">📄 Resume PDF</a>
+    </div>
+  </div>
+
+  <div style="--c:#0891b2;">
+    <div class="card-ver">Version B</div>
+    <div class="card-title">Cloud Infrastructure</div>
+    <div class="card-targets">AWS · GCP · Azure · Databricks</div>
+    <div class="card-tags">
+      <span class="tag">Kubernetes</span><span class="tag">HPC/Slurm</span>
+      <span class="tag">Multi-Cloud</span><span class="tag">CI/CD</span>
+    </div>
+    <div class="card-links">
+      <a href="versions/cloud.html" class="card-btn btn-site" style="--c:#0891b2;">🌐 Website</a>
+      <a href="resumes/Yuanjun_Dai_Resume_B_Cloud.pdf" target="_blank" class="card-btn btn-pdf">📄 Resume PDF</a>
+    </div>
+  </div>
+
+  <div style="--c:#059669;">
+    <div class="card-ver">Version C</div>
+    <div class="card-title">eBPF / Observability</div>
+    <div class="card-targets">Cloudflare · Datadog · Grafana Labs · Cilium</div>
+    <div class="card-tags">
+      <span class="tag">eBPF</span><span class="tag">Kernel Networking</span>
+      <span class="tag">Prometheus</span><span class="tag">Telemetry</span>
+    </div>
+    <div class="card-links">
+      <a href="versions/ebpf.html" class="card-btn btn-site" style="--c:#059669;">🌐 Website</a>
+      <a href="resumes/Yuanjun_Dai_Resume_C_eBPF.pdf" target="_blank" class="card-btn btn-pdf">📄 Resume PDF</a>
+    </div>
+  </div>
+
+  <div style="--c:#d97706;">
+    <div class="card-ver">Version D</div>
+    <div class="card-title">Chip / Hardware</div>
+    <div class="card-targets">NVIDIA · Broadcom · Intel · Marvell</div>
+    <div class="card-tags">
+      <span class="tag">NPU/ASIC</span><span class="tag">BCM SDK</span>
+      <span class="tag">Low-Level Systems</span><span class="tag">P4</span>
+    </div>
+    <div class="card-links">
+      <a href="versions/hardware.html" class="card-btn btn-site" style="--c:#d97706;">🌐 Website</a>
+      <a href="resumes/Yuanjun_Dai_Resume_D_Hardware.pdf" target="_blank" class="card-btn btn-pdf">📄 Resume PDF</a>
+    </div>
+  </div>
+
+  <div style="--c:#dc2626;">
+    <div class="card-ver">Version E</div>
+    <div class="card-title">ML Security</div>
+    <div class="card-targets">HiddenLayer · Robust Intelligence · AI Red Teams</div>
+    <div class="card-tags">
+      <span class="tag">Side-Channel</span><span class="tag">Model Reconstruction</span>
+      <span class="tag">MLaaS Security</span>
+    </div>
+    <div class="card-links">
+      <a href="versions/security.html" class="card-btn btn-site" style="--c:#dc2626;">🌐 Website</a>
+      <a href="resumes/Yuanjun_Dai_Resume_E_Security.pdf" target="_blank" class="card-btn btn-pdf">📄 Resume PDF</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Base / General version -->
+<div class="base-card">
+  <div class="base-card-text">
+    <h3>🌐 Main Portfolio Site</h3>
+    <p>General-purpose site — all research, full background, no specific targeting</p>
+  </div>
+  <div class="base-links">
+    <a href="index.html" class="btn-base btn-primary">Open Site</a>
+    <a href="resumes/Yuanjun_Dai_Resume.pdf" target="_blank" class="btn-base btn-secondary">📄 Base Resume</a>
+    <a href="resumes/Yuanjun_Dai_Resume.docx" target="_blank" class="btn-base btn-secondary">📝 Word (.docx)</a>
+  </div>
+</div>
+
+<footer>
+  6 websites · 6 resume PDFs · 1 Word doc &nbsp;·&nbsp; Ready for GitHub Pages deployment
+</footer>
+
+<script>
+// Apply card styles
+document.querySelectorAll('.grid > div').forEach(card => {
+  card.classList.add('card');
+});
+</script>
+</body>
+</html>
