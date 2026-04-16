@@ -159,8 +159,11 @@ h = draw_text("YUANJUN (JOHNNY) DAI", ML, 22, bold=True, color=BLACK)
 move(h + 3)
 
 # Contact line
-contact = "216-269-2394   \u2022   yxd429@case.edu   \u2022   github.com/Johnny-dai-git   \u2022   johnny-dai-git.github.io/portfolio   \u2022   Cleveland, OH"
-h = draw_text(contact, ML, 8.8, color=GRAY)
+contact1 = "216-269-2394   \u2022   yxd429@case.edu   \u2022   Cleveland, OH"
+h = draw_text(contact1, ML, 8.8, color=GRAY)
+move(h + 3)
+contact2 = "github.com/Johnny-dai-git   \u2022   johnny-dai-git.github.io/portfolio"
+h = draw_text(contact2, ML, 8.5, color=BLUE)
 move(h + 2)
 
 # Thin rule under header

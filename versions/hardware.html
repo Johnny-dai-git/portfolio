@@ -754,6 +754,15 @@ footer a:hover { color: var(--accent); }
     <h2 class="section-title">Research Projects</h2>
     <div class="section-line"></div>
   </div>
+  <div class="tag-legend fade-in" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;align-items:center;">
+    <span style="font-size:0.78rem;color:#64748b;font-weight:600;margin-right:0.25rem;">Tag categories:</span>
+    <span class="tag tag-ml">ML / AI</span>
+    <span class="tag tag-dist">Distributed Systems</span>
+    <span class="tag tag-llm">LLM / NLP</span>
+    <span class="tag tag-sec">Security</span>
+    <span class="tag tag-ebpf">eBPF / Systems</span>
+    <span class="tag tag-sdn">SDN / Networking</span>
+  </div>
   <div class="projects-grid">
 
     <div class="proj-card fade-in">
@@ -825,7 +834,7 @@ footer a:hover { color: var(--accent); }
       </div>
     </div>
 
-    <div class="proj-card fade-in" style="grid-column:1/-1;max-width:510px;">
+    <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
       <div class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
       <div class="proj-desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM’s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
@@ -840,6 +849,24 @@ footer a:hover { color: var(--accent); }
       <div class="proj-desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-ml">Microarchitecture</span><span class="tag tag-ml">Pipelined CPU</span><span class="tag tag-ml">Hazard Resolution</span><span class="tag tag-ml">ASIC P&amp;R</span></div>
+      <div class="proj-name">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
+      <div class="proj-desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
+      <div class="proj-links">
+        <a href="https://github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-dist">Distributed Systems</span><span class="tag tag-dist">P2P Networking</span><span class="tag tag-dist">Socket Programming</span><span class="tag tag-ml">Java</span><span class="tag tag-dist">Multi-threading</span><span class="tag tag-dist">UDP / TCP</span></div>
+      <div class="proj-name">P2P File Sharing System</div>
+      <div class="proj-desc">Gnutella-style decentralized P2P file sharing in Java: UDP Ping/Pong for peer discovery, flooding-based QUERY propagation with traceback routing for indirect responses, and TCP for reliable file transfer; multi-threaded architecture (UDP listener, TCP query/file listeners, CentralControl) with ConcurrentHashMap + ConcurrentLinkedQueue for thread-safe state; query deduplication prevents redundant flooding.</div>
+      <div class="proj-links">
+        <a href="https://github.com/Johnny-dai-git/P2P-File-Sharing-System" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
     </div>
 
