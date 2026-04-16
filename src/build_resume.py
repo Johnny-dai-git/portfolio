@@ -159,7 +159,7 @@ h = draw_text("YUANJUN (JOHNNY) DAI", ML, 22, bold=True, color=BLACK)
 move(h + 3)
 
 # Contact line
-contact = "216-269-2394   \u2022   yxd429@case.edu   \u2022   github.com/Johnny-dai-git   \u2022   Cleveland, OH"
+contact = "216-269-2394   \u2022   yxd429@case.edu   \u2022   github.com/Johnny-dai-git   \u2022   johnny-dai-git.github.io/portfolio   \u2022   Cleveland, OH"
 h = draw_text(contact, ML, 8.8, color=GRAY)
 move(h + 2)
 
@@ -172,7 +172,7 @@ section_header("Summary")
 summary = (
     "AI Infrastructure Engineer and PhD Candidate at Case Western Reserve University, specializing in "
     "distributed ML systems, eBPF-based observability, and large-scale LLM deployment. "
-    "Published 8 research papers (6 first-author) at IEEE, ACM, and Springer venues. "
+    "Published 8 research papers (7 first-author) at IEEE, ACM, and Springer venues. "
     "5+ years of industry experience at Cisco and Broadcom in high-performance networking "
     "and systems optimization."
 )
@@ -319,11 +319,11 @@ ROW_H = 13
 LABEL_W = 115
 
 skills = [
-    ("Languages",         "Python, C/C++, Java, Bash, SQL"),
-    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, vLLM, TensorRT-LLM"),
-    ("Infrastructure",    "Kubernetes, Docker, ArgoCD, Helm, Kustomize, Slurm, HPC, GitHub Actions CI/CD"),
+    ("Languages",         "Python, C/C++, Java, Bash"),
+    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM"),
+    ("Infrastructure",    "Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions"),
     ("Observability",     "eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing"),
-    ("Cloud & Networks",  "AWS, GCP, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
+    ("Cloud & Networks",  "Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
     ("Research Areas",    "Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling"),
 ]
 
