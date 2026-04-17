@@ -793,11 +793,11 @@ footer a:hover { color: var(--accent); }
   </div>
   <div class="about-grid">
     <div class="about-text fade-in">
-      <p data-i18n="about.p1">I'm a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University,
+      <p data-i18n-html="about.p1">I'm a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University,
       specializing in AI infrastructure, distributed ML systems, and eBPF-based observability.
       My research sits at the intersection of systems software and machine learning — building
       the low-level infrastructure that makes large-scale AI training and inference efficient.</p>
-      <p data-i18n="about.p2">I've authored <strong>8 papers (7 first-author)</strong>: <strong>5 published</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm, with 3 more under review (incl. ACM TOPS). Before my PhD, I worked in industry at
+      <p data-i18n-html="about.p2">I've authored <strong>8 papers (7 first-author)</strong>: <strong>5 published</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm, with 3 more under review (incl. ACM TOPS). Before my PhD, I worked in industry at
       <strong>Cisco</strong>, <strong>Broadcom</strong>, <strong>Midea Group</strong>, and
       <strong>Xiaomi</strong>, spanning low-level systems engineering (NPU/ASIC, HPC) to product ownership and consumer product launch.</p>
       <div class="about-contact">
@@ -848,7 +848,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-ml">Reinforcement Learning</span><span class="tag tag-ml">PPO</span><span class="tag tag-dist">PyTorch DDP</span><span class="tag tag-dist">BytePS</span><span class="tag tag-llm">Batch Scheduling</span><span class="tag tag-llm">A100 GPU</span><span class="tag tag-dist">Model Training</span></div>
       <div class="proj-name" data-i18n="research.proj1.name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</div>
-      <div class="proj-desc" data-i18n="research.proj1.desc">System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.</div>
+      <div class="proj-desc" data-i18n-html="research.proj1.desc">System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.</div>
       <div class="proj-links">
         <a href="https://arxiv.org/abs/2510.08522" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/DML-via-RL" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -858,7 +858,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-dist">Model Training</span><span class="tag tag-ml">Transport Protocol</span><span class="tag tag-dist">NCCL</span><span class="tag tag-ml">Gradient Prioritization</span><span class="tag tag-ebpf">Kernel Bypass</span><span class="tag tag-ml">SACK</span><span class="tag tag-dist">Cross-Datacenter</span></div>
       <div class="proj-name" data-i18n="research.proj2.name">PRISM – Priority-Aware Transport for Distributed ML Training</div>
-      <div class="proj-desc" data-i18n="research.proj2.desc">Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.</div>
+      <div class="proj-desc" data-i18n-html="research.proj2.desc">Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <span class="proj-link-btn link-review">🔄 Under Review</span>
@@ -868,7 +868,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Side-Channel</span><span class="tag tag-sec">MLaaS Security</span><span class="tag tag-dist">MXNet</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ebpf">Intel RAPL</span><span class="tag tag-dist">BSP / PS Arch</span><span class="tag tag-ml">Model Reconstruction</span></div>
       <div class="proj-name" data-i18n="research.proj3.name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
-      <div class="proj-desc" data-i18n="research.proj3.desc">Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.</div>
+      <div class="proj-desc" data-i18n-html="research.proj3.desc">Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.</div>
       <div class="proj-links">
         <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -878,7 +878,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-dist">Network Telemetry</span><span class="tag tag-ebpf">In-Kernel</span><span class="tag tag-ml">Count-Min Sketch</span><span class="tag tag-ebpf">Atomic Operations</span><span class="tag tag-dist">Retransmission Detection</span><span class="tag tag-dist">Flow Reconstruction</span></div>
       <div class="proj-name" data-i18n="research.proj4.name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</div>
-      <div class="proj-desc" data-i18n="research.proj4.desc">In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.</div>
+      <div class="proj-desc" data-i18n-html="research.proj4.desc">In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Psketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -888,7 +888,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-ebpf">HashPipe Algorithm</span><span class="tag tag-ebpf">Top-K Tracking</span><span class="tag tag-ebpf">Per-PID Profiling</span><span class="tag tag-dist">In-Kernel Telemetry</span><span class="tag tag-ml">DML Observability</span></div>
       <div class="proj-name" data-i18n="research.proj5.name">High-Resolution eBPF System Resource Profiling for DML Workloads</div>
-      <div class="proj-desc" data-i18n="research.proj5.desc">Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe's <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.</div>
+      <div class="proj-desc" data-i18n-html="research.proj5.desc">Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe's <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -898,7 +898,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sdn">SDN</span><span class="tag tag-sec">DDoS Mitigation</span><span class="tag tag-dist">Control-Plane Elasticity</span><span class="tag tag-sdn">OvS Overlay</span><span class="tag tag-sdn">OpenFlow</span><span class="tag tag-dist">Round-Robin Scheduling</span><span class="tag tag-dist">Large-Flow Migration</span><span class="tag tag-ml">ECMP Load Balancing</span></div>
       <div class="proj-name" data-i18n="research.proj6.name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</div>
-      <div class="proj-desc" data-i18n="research.proj6.desc">Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.</div>
+      <div class="proj-desc" data-i18n-html="research.proj6.desc">Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -908,7 +908,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-llm">LLM Inference</span><span class="tag tag-llm">vLLM / TensorRT-LLM</span><span class="tag tag-llm">Continuous Batching</span><span class="tag tag-dist">NVIDIA Device Plugin</span><span class="tag tag-dist">ArgoCD GitOps</span><span class="tag tag-ml">DCGM GPU Telemetry</span><span class="tag tag-sec">Zero-Trust NetworkPolicy</span><span class="tag tag-ml">Prometheus / Grafana</span></div>
       <div class="proj-name" data-i18n="research.proj7.name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</div>
-      <div class="proj-desc" data-i18n="research.proj7.desc">K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.</div>
+      <div class="proj-desc" data-i18n-html="research.proj7.desc">K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.</div>
       <div class="proj-links">
         <a href="https://github.com/Johnny-dai-git/llm-deployment" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
@@ -917,7 +917,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-dist">DeepSpeed ZeRO-3</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
       <div class="proj-name" data-i18n="research.proj8.name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
-      <div class="proj-desc" data-i18n="research.proj8.desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
+      <div class="proj-desc" data-i18n-html="research.proj8.desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -926,7 +926,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
       <div class="proj-name" data-i18n="research.proj9.name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
-      <div class="proj-desc" data-i18n="research.proj9.desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM's ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
+      <div class="proj-desc" data-i18n-html="research.proj9.desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM's ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -935,7 +935,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ml">Microarchitecture</span><span class="tag tag-ml">Pipelined CPU</span><span class="tag tag-ml">Hazard Resolution</span><span class="tag tag-ml">ASIC P&amp;R</span></div>
       <div class="proj-name" data-i18n="research.proj10.name">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
-      <div class="proj-desc" data-i18n="research.proj10.desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
+      <div class="proj-desc" data-i18n-html="research.proj10.desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
       <div class="proj-links">
         <a href="https://github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
@@ -971,7 +971,7 @@ footer a:hover { color: var(--accent); }
     <div class="pub-stat"><div class="pub-stat-num">3</div><div class="pub-stat-label" data-i18n="pub.review">Under Review</div></div>
     <div class="pub-divider"></div>
     <div class="pub-venues">
-      <p data-i18n="pub.venues">Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
+      <p data-i18n-html="pub.venues">Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
       </p>
     </div>
   </div>
@@ -1031,9 +1031,9 @@ footer a:hover { color: var(--accent); }
         </div>
         <div class="exp-org" data-i18n="exp.ra.org">Case Western Reserve University</div>
         <ul class="exp-bullets">
-          <li data-i18n="exp.ra.bullet1">Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment</li>
-          <li data-i18n="exp.ra.bullet2"><strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)</li>
-          <li data-i18n="exp.ra.bullet3">Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong></li>
+          <li data-i18n-html="exp.ra.bullet1">Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment</li>
+          <li data-i18n-html="exp.ra.bullet2"><strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)</li>
+          <li data-i18n-html="exp.ra.bullet3">Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong></li>
         </ul>
       </div>
     </div>
@@ -1060,7 +1060,7 @@ footer a:hover { color: var(--accent); }
         </div>
         <div class="exp-org" data-i18n="exp.midea.org">Midea Group</div>
         <ul class="exp-bullets">
-          <li data-i18n="exp.midea.bullet1">Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design</li>
+          <li data-i18n-html="exp.midea.bullet1">Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design</li>
           <li data-i18n="exp.midea.bullet2">Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX — bridging product requirements and engineering execution</li>
           <li data-i18n-html="exp.midea.bullet3">Product debuted at <strong>2018 AWE Show</strong> and won the <strong>Red Dot Design Award</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a></li>
         </ul>
@@ -1089,7 +1089,7 @@ footer a:hover { color: var(--accent); }
         </div>
         <div class="exp-org" data-i18n="exp.broadcom.org">Broadcom (Emulex)</div>
         <ul class="exp-bullets">
-          <li data-i18n="exp.broadcom.bullet1">Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong></li>
+          <li data-i18n-html="exp.broadcom.bullet1">Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong></li>
           <li data-i18n="exp.broadcom.bullet2">Ported Linux-only BladeEngine ASIC management CLI to Windows Server</li>
         </ul>
       </div>
@@ -1103,7 +1103,7 @@ footer a:hover { color: var(--accent); }
         </div>
         <div class="exp-org" data-i18n="exp.tenova.org">Tenova I2S</div>
         <ul class="exp-bullets">
-          <li data-i18n="exp.tenova.bullet1">Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness</li>
+          <li data-i18n-html="exp.tenova.bullet1">Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness</li>
         </ul>
       </div>
     </div>
