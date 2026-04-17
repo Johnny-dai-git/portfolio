@@ -490,7 +490,7 @@ section {
   transition: all 0.2s;
   box-shadow: 0 1px 6px rgba(37,99,235,0.04);
 }
-.pub-item:hover { border-left-color: var(--accent2); box-shadow: 0 4px 16px rgba(37,99,235,0.1); transform: translateX(3px); }
+.pub-item:hover { border-left-color: var(--accent2); }
 .pub-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; line-height: 1.4; }
 .pub-meta  { font-size: 0.77rem; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
 .pub-venue-badge {
@@ -562,7 +562,7 @@ section {
   box-shadow: 0 2px 8px rgba(37,99,235,0.04);
   transition: all 0.2s;
 }
-.skill-category:hover { border-color: var(--border); box-shadow: 0 6px 20px rgba(37,99,235,0.1); }
+.skill-category:hover { border-color: var(--border); }
 .skill-cat-label {
   font-size: 0.82rem;
   text-transform: uppercase;
@@ -705,12 +705,12 @@ footer a:hover { color: var(--accent); }
 /* ─────────────────────────────────────────────────────────── */
 
 /* ── EFFECT 3: CARD POP-OUT ─────────────────────────────────── */
-.proj-card {
+.proj-card, .edu-card, .exp-card, .skill-category, .pub-item {
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
-.proj-card:hover {
-  transform: scale(1.045) translateY(-6px);
-  box-shadow: 0 20px 48px rgba(37,99,235,0.18), 0 8px 16px rgba(0,0,0,0.1);
+.proj-card:hover, .edu-card:hover, .exp-card:hover, .skill-category:hover, .pub-item:hover {
+  transform: scale(1.04) translateY(-5px);
+  box-shadow: 0 20px 48px rgba(37,99,235,0.15), 0 8px 16px rgba(0,0,0,0.08);
   z-index: 10;
 }
 
