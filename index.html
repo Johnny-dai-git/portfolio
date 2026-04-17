@@ -1015,7 +1015,7 @@ footer a:hover { color: var(--accent); }
   <path d="M 88,29 C 162,29 200,78 235,78"   stroke="#1a2d4a" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
   <path d="M 88,75 C 183,75 220,92 235,92"   stroke="#0a2a1a" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
   <path d="M 88,121 C 183,121 220,106 235,106" stroke="#1a0f35" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-  <path d="M 88,167 C 162,167 200,120 235,120" stroke="#2a1800" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 88,167 C 162,167 200,120 235,120" stroke="#2a1000" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
   <path d="M 325,98 L 488,98"                stroke="#1e293b" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
 
   <!-- ══ A100 GPU (blue) ══ -->
@@ -1069,26 +1069,20 @@ footer a:hover { color: var(--accent); }
   <circle cx="75" cy="108" r="3.5" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/></circle>
   <text x="68" y="126" fill="#c4b5fd" font-size="9" font-family="monospace" font-weight="700">H100</text>
 
-  <!-- ══ TPU v4 (amber) — systolic array dots ══ -->
-  <rect x="8" y="150" width="80" height="34" rx="4" fill="#1a0e00" stroke="#f59e0b" stroke-width="2"/>
-  <rect x="14" y="155" width="30" height="24" rx="2" fill="#2d1800"/>
-  <circle cx="19" cy="160" r="2.2" fill="#f59e0b" opacity="0.85"/>
-  <circle cx="26" cy="160" r="2.2" fill="#f59e0b" opacity="0.85"/>
-  <circle cx="33" cy="160" r="2.2" fill="#f59e0b" opacity="0.85"/>
-  <circle cx="40" cy="160" r="2.2" fill="#f59e0b" opacity="0.85"/>
-  <circle cx="19" cy="167" r="2.2" fill="#f59e0b" opacity="0.65"/>
-  <circle cx="26" cy="167" r="2.2" fill="#f59e0b" opacity="0.65"/>
-  <circle cx="33" cy="167" r="2.2" fill="#f59e0b" opacity="0.65"/>
-  <circle cx="40" cy="167" r="2.2" fill="#f59e0b" opacity="0.65"/>
-  <circle cx="19" cy="174" r="2.2" fill="#f59e0b" opacity="0.45"/>
-  <circle cx="26" cy="174" r="2.2" fill="#f59e0b" opacity="0.45"/>
-  <circle cx="33" cy="174" r="2.2" fill="#f59e0b" opacity="0.45"/>
-  <circle cx="40" cy="174" r="2.2" fill="#f59e0b" opacity="0.45"/>
-  <rect x="47" y="155" width="9" height="5" rx="1" fill="#2d1800"/>
-  <rect x="47" y="163" width="9" height="5" rx="1" fill="#2d1800"/>
-  <rect x="47" y="171" width="9" height="5" rx="1" fill="#2d1800"/>
+  <!-- ══ A10G GPU (orange) ══ -->
+  <rect x="8" y="150" width="80" height="34" rx="4" fill="#1a0a00" stroke="#f97316" stroke-width="2"/>
+  <rect x="14" y="155" width="30" height="24" rx="2" fill="#2d1200"/>
+  <rect x="15" y="157" width="7" height="7" rx="1" fill="#f97316" opacity="0.75"/>
+  <rect x="24" y="157" width="7" height="7" rx="1" fill="#f97316" opacity="0.75"/>
+  <rect x="33" y="157" width="7" height="7" rx="1" fill="#f97316" opacity="0.75"/>
+  <rect x="15" y="167" width="7" height="7" rx="1" fill="#f97316" opacity="0.5"/>
+  <rect x="24" y="167" width="7" height="7" rx="1" fill="#f97316" opacity="0.5"/>
+  <rect x="33" y="167" width="7" height="7" rx="1" fill="#f97316" opacity="0.5"/>
+  <rect x="47" y="155" width="9" height="5" rx="1" fill="#2d1200"/>
+  <rect x="47" y="163" width="9" height="5" rx="1" fill="#2d1200"/>
+  <rect x="47" y="171" width="9" height="5" rx="1" fill="#2d1200"/>
   <circle cx="75" cy="154" r="3.5" fill="#22c55e"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
-  <text x="68" y="172" fill="#fcd34d" font-size="9" font-family="monospace" font-weight="700">TPU</text>
+  <text x="68" y="172" fill="#fed7aa" font-size="9" font-family="monospace" font-weight="700">A10G</text>
 
   <!-- ══ NETWORK SWITCH (InfiniBand) ══ -->
   <rect x="235" y="62" width="90" height="72" rx="5" fill="#06141a" stroke="#06b6d4" stroke-width="2"/>
@@ -1096,7 +1090,7 @@ footer a:hover { color: var(--accent); }
   <rect x="235" y="74"  width="6" height="9" rx="1.5" fill="#3b82f6"/>
   <rect x="235" y="88"  width="6" height="9" rx="1.5" fill="#10b981"/>
   <rect x="235" y="102" width="6" height="9" rx="1.5" fill="#8b5cf6"/>
-  <rect x="235" y="116" width="6" height="9" rx="1.5" fill="#f59e0b"/>
+  <rect x="235" y="116" width="6" height="9" rx="1.5" fill="#f97316"/>
   <!-- Uplink port (right side) -->
   <rect x="319" y="88" width="6" height="20" rx="1.5" fill="#06b6d4"/>
   <!-- Internal routing lines -->
@@ -1167,8 +1161,8 @@ footer a:hover { color: var(--accent); }
       path="M 88,121 C 183,121 220,106 235,106"/>
   </circle>
 
-  <!-- TPU (amber): depart t=0.9s(kt=0.064) arrive t=3.4s(kt=0.243) -->
-  <circle r="7" fill="#f59e0b" opacity="0" filter="url(#dml-glow)">
+  <!-- A10G (orange): depart t=0.9s(kt=0.064) arrive t=3.4s(kt=0.243) -->
+  <circle r="7" fill="#f97316" opacity="0" filter="url(#dml-glow)">
     <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.064;0.243;0.279;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
       keyPoints="0;0;1;1" keyTimes="0;0.064;0.243;1"
