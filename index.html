@@ -872,6 +872,63 @@ footer a:hover { color: var(--accent); }
         <div class="contact-item"><div class="contact-icon">📞</div><span>216-269-2394</span></div>
         <div class="contact-item"><div class="contact-icon">🐙</div><a href="https://github.com/Johnny-dai-git" target="_blank">github.com/Johnny-dai-git</a></div>
       </div>
+
+      <!-- ── SCRAT SQUIRREL ── -->
+      <div id="contact-squirrel">
+        <div class="sq-bubble"><span data-i18n="squirrel.say">⚡ Don't just scroll — email me!</span></div>
+        <div class="sq-body-wrap">
+          <svg viewBox="0 0 80 122" width="74" height="113" xmlns="http://www.w3.org/2000/svg">
+            <!-- Big bushy tail (Scrat's signature) -->
+            <path d="M44,118 C74,104 82,73 76,44 C70,18 54,7 47,18 C42,28 46,46 43,59"
+                  stroke="#c07a1e" stroke-width="24" stroke-linecap="round" fill="none"/>
+            <path d="M44,118 C70,104 76,75 70,48 C64,28 52,18 47,27 C43,36 46,48 43,59"
+                  stroke="#ebb34e" stroke-width="15" stroke-linecap="round" fill="none"/>
+            <!-- Body -->
+            <ellipse cx="34" cy="93" rx="15" ry="21" fill="#a06828"/>
+            <!-- Left arm — waving via SVG animateTransform -->
+            <g>
+              <path d="M21,87 Q4,75 9,61" stroke="#a06828" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <circle cx="9" cy="60" r="6.5" fill="#a06828"/>
+              <animateTransform attributeName="transform" type="rotate"
+                values="-30 21 87; 28 21 87; -30 21 87"
+                keyTimes="0;0.5;1" dur="0.75s" repeatCount="indefinite"/>
+            </g>
+            <!-- Right arm -->
+            <path d="M47,87 Q60,77 58,67" stroke="#a06828" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <circle cx="58" cy="66" r="5.5" fill="#a06828"/>
+            <!-- Head -->
+            <circle cx="34" cy="56" r="22" fill="#b87a2e"/>
+            <!-- Left ear -->
+            <ellipse cx="15" cy="39" rx="7" ry="11" fill="#9a6022" transform="rotate(-20,15,39)"/>
+            <ellipse cx="15" cy="39" rx="4" ry="6.5" fill="#e8c060" transform="rotate(-20,15,39)"/>
+            <!-- Right ear -->
+            <ellipse cx="53" cy="39" rx="7" ry="11" fill="#9a6022" transform="rotate(20,53,39)"/>
+            <ellipse cx="53" cy="39" rx="4" ry="6.5" fill="#e8c060" transform="rotate(20,53,39)"/>
+            <!-- Muzzle area (lighter) -->
+            <ellipse cx="34" cy="67" rx="12" ry="10" fill="#d49040"/>
+            <!-- Scrat-style BIG eyes -->
+            <circle cx="25" cy="53" r="10.5" fill="white"/>
+            <circle cx="43" cy="53" r="10.5" fill="white"/>
+            <circle cx="25" cy="54" r="6.8" fill="#111"/>
+            <circle cx="43" cy="54" r="6.8" fill="#111"/>
+            <!-- Eye shine -->
+            <circle cx="27.5" cy="51" r="3.2" fill="white"/>
+            <circle cx="45.5" cy="51" r="3.2" fill="white"/>
+            <!-- Nose -->
+            <ellipse cx="34" cy="58" rx="4.5" ry="3.2" fill="#2a2a2a"/>
+            <!-- Smile -->
+            <path d="M26,66 Q34,74 42,66" stroke="#2a2a2a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- Long pointy snout tip (very Scrat) -->
+            <ellipse cx="34" cy="78" rx="8.5" ry="10" fill="#c28840"/>
+            <!-- Tiny tip nose -->
+            <ellipse cx="34" cy="69" rx="3" ry="2" fill="#1a1a1a"/>
+            <!-- Feet -->
+            <ellipse cx="23" cy="114" rx="13" ry="5.5" fill="#7a5015" transform="rotate(-10,23,114)"/>
+            <ellipse cx="45" cy="114" rx="13" ry="5.5" fill="#7a5015" transform="rotate(10,45,114)"/>
+          </svg>
+        </div>
+      </div>
+
     </div>
     <div class="edu-cards fade-in">
       <div class="edu-card">
@@ -1425,6 +1482,7 @@ const TRANSLATIONS = {
     'hero.title': 'Distributed ML Systems  ·  eBPF Observability  ·  LLM Deployment  ·  ML Security  ·  Cloud HPC',
     'hero.desc': 'Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.',
     'hero.btn.contact': 'Get in Touch',
+    'squirrel.say': "⚡ Don't just scroll — email me!",
     'hero.btn.cv': 'Download CV',
     'hero.stat.pubs': 'Publications',
     'hero.stat.first': 'First-Author',
@@ -1524,6 +1582,7 @@ const TRANSLATIONS = {
     'hero.title': '分布式ML系统 · eBPF可观测性 · LLM部署 · ML安全 · 云HPC',
     'hero.desc': '构建和保护大规模AI基础设施 — 分布式训练系统、内核级可观测性、生产级LLM平台和ML安全研究，涉及64个A100 GPU和50+部署。',
     'hero.btn.contact': '联系我',
+    'squirrel.say': '⚡ 别犹豫，赶紧联系我！',
     'hero.btn.cv': '下载简历',
     'hero.stat.pubs': '论文发表',
     'hero.stat.first': '第一作者',
@@ -1623,6 +1682,7 @@ const TRANSLATIONS = {
     'hero.title': '分散式ML系統 · eBPF可觀測性 · LLM部署 · ML安全 · 雲HPC',
     'hero.desc': '構建和保護大規模AI基礎設施 — 分散式訓練系統、內核級可觀測性、生產級LLM平台和ML安全研究，涉及64個A100 GPU和50+部署。',
     'hero.btn.contact': '聯絡我',
+    'squirrel.say': '⚡ 別猶豫，快來聯繫我！',
     'hero.btn.cv': '下載履歷',
     'hero.stat.pubs': '論文發表',
     'hero.stat.first': '第一作者',
@@ -2309,6 +2369,55 @@ document.addEventListener('click', () => {
 })();
 </script>
 
+<!-- ── SCRAT SQUIRREL STYLES ── -->
+<style>
+#contact-squirrel {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+.sq-bubble {
+  background: var(--card);
+  border: 1.5px solid rgba(37,99,235,0.28);
+  border-radius: 1.2rem 1.2rem 1.2rem 0;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--accent);
+  box-shadow: 0 4px 20px rgba(37,99,235,0.12);
+  position: relative;
+  animation: sq-bubble-pulse 2.2s ease-in-out infinite;
+  max-width: 210px;
+  line-height: 1.55;
+}
+/* Speech bubble tail pointing right (toward squirrel) */
+.sq-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: 14px;
+  right: -13px;
+  border: 7px solid transparent;
+  border-left: 7px solid var(--card);
+}
+.sq-body-wrap {
+  animation: sq-jump 1.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  transform-origin: bottom center;
+  display: inline-block;
+  flex-shrink: 0;
+}
+@keyframes sq-jump {
+  0%,  100% { transform: translateY(0)     scaleY(1)    scaleX(1);    }
+  38%        { transform: translateY(-26px) scaleY(1.07) scaleX(0.93); }
+  62%        { transform: translateY(-24px) scaleY(1.07) scaleX(0.93); }
+  85%        { transform: translateY(5px)   scaleY(0.87) scaleX(1.11); }
+}
+@keyframes sq-bubble-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05) translateY(-3px); }
+}
+</style>
+
 <!-- ── MISSILE CURSOR + UFO COLLISION ── -->
 <style>
 * { cursor: none !important; }
@@ -2438,11 +2547,11 @@ document.addEventListener('click', () => {
     /* Drop the alien after a short delay */
     setTimeout(() => dropAlien(x, y), 130);
 
-    /* UFO respawns after 5 s */
+    /* UFO respawns after 20 minutes */
     setTimeout(() => {
       ufo.style.visibility = 'visible';
       ufoAlive = true;
-    }, 5000);
+    }, 1200000);
   }
 
   /* ── ALIEN DROP ── */
