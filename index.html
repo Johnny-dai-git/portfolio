@@ -280,9 +280,9 @@ nav {
 /* ── SECTION SHELL ───────────────────────────────────────── */
 section {
   position: relative;
-  max-width: 1100px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 5rem 3rem;
 }
 
 .section-header {
@@ -371,7 +371,7 @@ section {
 /* ── PROJECTS ────────────────────────────────────────────── */
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
 }
 .proj-card {
@@ -553,7 +553,7 @@ section {
 .exp-bullets strong { color: var(--accent); font-weight: 600; }
 
 /* ── SKILLS ──────────────────────────────────────────────── */
-.skills-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.skills-section { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
 .skill-category {
   background: var(--surface);
   border: 1px solid var(--border2);
@@ -682,6 +682,10 @@ footer a:hover { color: var(--accent); }
   font-weight: 600;
 }
 
+@media (max-width: 1100px) {
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .skills-section{ grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
   .about-grid    { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
