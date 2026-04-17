@@ -874,183 +874,6 @@ footer a:hover { color: var(--accent); }
       </div>
 
 
-      <!-- ── 5 ALIENS PUSHING ETHERNET CABLE INTO SERVER ── -->
-      <div id="server-push-anim">
-        <svg viewBox="0 -48 700 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">
-          <defs>
-            <!-- Classic alien: head center (0,0); arms point right to (33,46) & (33,58) -->
-            <!-- When placed at translate(X,90): hands at abs y=136 & y=148              -->
-            <!-- Cable runs at y≈142-146 — exactly between the two hands = gripping!     -->
-            <g id="malien">
-              <!-- Antenna -->
-              <line x1="-3" y1="-26" x2="-8" y2="-42" stroke="#6aaa6a" stroke-width="3"/>
-              <circle cx="-8" cy="-48" r="7" fill="#60a5fa"/>
-              <circle cx="-8" cy="-48" r="3.5" fill="white" opacity="0.55"/>
-              <!-- Head -->
-              <ellipse cx="0" cy="0" rx="22" ry="27" fill="#8dbf8d"/>
-              <!-- Almond eyes -->
-              <ellipse cx="-11" cy="-9" rx="13" ry="9" fill="#0d0d0d" transform="rotate(-18,-11,-9)"/>
-              <ellipse cx="11" cy="-9" rx="13" ry="9" fill="#0d0d0d" transform="rotate(18,11,-9)"/>
-              <circle cx="-15" cy="-13" r="4" fill="white" opacity="0.75"/>
-              <circle cx="7"   cy="-13" r="4" fill="white" opacity="0.75"/>
-              <!-- Nose slits -->
-              <ellipse cx="-3" cy="4" rx="2.8" ry="2" fill="#6aaa6a"/>
-              <ellipse cx="3"  cy="4" rx="2.8" ry="2" fill="#6aaa6a"/>
-              <!-- Mouth -->
-              <path d="M-10,11 Q0,19 10,11" stroke="#4a9a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
-              <!-- Neck + Body -->
-              <rect x="-6" y="27" width="12" height="9" rx="3" fill="#8dbf8d"/>
-              <ellipse cx="0" cy="47" rx="14" ry="17" fill="#8dbf8d"/>
-              <!-- Arms pushing right — upper hand (33,46), lower hand (33,58) -->
-              <path d="M13,38 L33,46" stroke="#8dbf8d" stroke-width="7" fill="none" stroke-linecap="round"/>
-              <path d="M13,52 L33,58" stroke="#8dbf8d" stroke-width="7" fill="none" stroke-linecap="round"/>
-              <circle cx="33" cy="46" r="6" fill="#7ab87a"/>
-              <circle cx="33" cy="58" r="6" fill="#7ab87a"/>
-              <!-- Legs + Feet -->
-              <path d="M-7,64 L-11,84" stroke="#8dbf8d" stroke-width="7.5" fill="none" stroke-linecap="round"/>
-              <path d=" M7,64 L 11,84" stroke="#8dbf8d" stroke-width="7.5" fill="none" stroke-linecap="round"/>
-              <ellipse cx="-11" cy="87" rx="11" ry="5" fill="#6aaa6a" transform="rotate(-10,-11,87)"/>
-              <ellipse cx=" 11" cy="87" rx="11" ry="5" fill="#6aaa6a" transform="rotate( 10, 11,87)"/>
-            </g>
-          </defs>
-
-          <!-- ══ SERVER (static, right side) ══ -->
-          <rect x="555" y="20" width="138" height="138" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2.5"/>
-          <rect x="564" y="30"  width="120" height="14" rx="3" fill="#0f172a"/>
-          <rect x="564" y="48"  width="120" height="14" rx="3" fill="#0f172a"/>
-          <rect x="564" y="66"  width="120" height="14" rx="3" fill="#0f172a"/>
-          <rect x="564" y="84"  width="120" height="14" rx="3" fill="#0f172a"/>
-          <rect x="564" y="104" width="120" height="46" rx="3" fill="#0f172a"/>
-          <!-- Status LEDs -->
-          <circle cx="573" cy="37" r="5" fill="#22c55e">
-            <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="573" cy="55" r="5" fill="#3b82f6">
-            <animate attributeName="opacity" values="0.25;1;0.25" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="573" cy="73" r="5" fill="#a855f7">
-            <animate attributeName="opacity" values="0.8;0.25;0.8" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <!-- Ethernet port LED — lights up on cable insert -->
-          <circle cx="573" cy="91" r="5" fill="#f59e0b">
-            <animate attributeName="opacity"
-              values="0;0;0;1;1;0.4;0;0"
-              keyTimes="0;0.08;0.54;0.62;0.74;0.78;0.82;1"
-              dur="4s" repeatCount="indefinite"/>
-          </circle>
-          <!-- Ethernet port hole -->
-          <rect x="606" y="114" width="30" height="20" rx="3.5" fill="#334155" stroke="#64748b" stroke-width="1.8"/>
-          <rect x="610" y="117" width="22" height="6"  rx="1.5" fill="#0f172a"/>
-          <rect x="610" y="125" width="22" height="5"  rx="1.5" fill="#0f172a"/>
-          <!-- Connection burst flash -->
-          <circle cx="621" cy="124" r="0" fill="rgba(251,191,36,0.45)">
-            <animate attributeName="r"       values="0;0;0;38;0;0" keyTimes="0;0.08;0.60;0.67;0.72;1" dur="4s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0;0;0;1;0;0"  keyTimes="0;0.08;0.60;0.67;0.72;1" dur="4s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- ══ EMAIL ME POPUP (pops above server when cable inserted) ══ -->
-          <g>
-            <animateTransform attributeName="transform" type="translate"
-              values="0,14; 0,14; 0,14; 0,0; 0,0; 0,14; 0,14"
-              keyTimes="0;0.08;0.60;0.66;0.76;0.80;1"
-              dur="4s" repeatCount="indefinite"/>
-            <rect x="557" y="-42" width="154" height="50" rx="10" fill="#2563eb">
-              <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
-            </rect>
-            <polygon points="621,8 641,8 631,26" fill="#2563eb">
-              <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
-            </polygon>
-            <text x="634" y="-16" text-anchor="middle" fill="white"
-                  font-size="17" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" letter-spacing="0.3">
-              Email me! ✉
-              <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
-            </text>
-            <text x="634" y="-2" text-anchor="middle" fill="rgba(255,255,255,0.78)"
-                  font-size="12" font-family="'Inter',monospace">
-              yxd429@case.edu
-              <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
-            </text>
-          </g>
-
-          <!-- ══ PUSH GROUP: cable (drawn first=behind) + RJ45 + 5 aliens (on top) ══ -->
-          <g>
-            <animateTransform attributeName="transform" type="translate"
-              values="0,0; 0,0; 52,0; 52,0; 0,0"
-              keyTimes="0; 0.08; 0.56; 0.74; 1"
-              dur="4s" repeatCount="indefinite"
-              calcMode="spline"
-              keySplines="0 0 1 1; 0.22 0 0.22 1; 0 0 1 1; 0.78 0 1 1"/>
-
-            <!-- ETHERNET CABLE — starts at x=10, runs through ALL alien grip zones to x=554 -->
-            <!-- At alien positions: cable y≈142-146, between upper hand y=136 & lower hand y=148 -->
-            <path d="M10,142 C200,146 400,146 554,142"
-                  stroke="#64748b" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M10,142 C200,146 400,146 554,142"
-                  stroke="rgba(255,255,255,0.18)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <path d="M10,142 C200,146 400,146 554,142"
-                  stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"
-                  stroke-dasharray="16 18"/>
-            <path d="M10,142 C200,146 400,146 554,142"
-                  stroke="#60a5fa" stroke-width="2" fill="none" stroke-linecap="round"
-                  stroke-dasharray="16 18" stroke-dashoffset="10"/>
-
-            <!-- RJ45 CONNECTOR at cable's right end (x=554–582) -->
-            <!-- After 52px push: x=606–634, slides into server port at x=606–636 -->
-            <!-- Cable stub entering connector body -->
-            <rect x="534" y="137" width="22" height="10" rx="2" fill="#64748b"/>
-            <!-- Connector body -->
-            <rect x="554" y="128" width="28" height="22" rx="4" fill="#c8d5e0" stroke="#94a3af" stroke-width="1.8"/>
-            <!-- Clip tab -->
-            <path d="M557,150 L567,158 L577,150" stroke="#8fa0b0" stroke-width="1.8" fill="#c8d5e0" stroke-linejoin="round"/>
-            <!-- 8 conductors at top edge (T568B order) -->
-            <line x1="557" y1="128" x2="557" y2="123" stroke="#d97706" stroke-width="2.8"/>
-            <line x1="560" y1="128" x2="560" y2="123" stroke="#fde68a" stroke-width="2.8"/>
-            <line x1="563" y1="128" x2="563" y2="123" stroke="#f97316" stroke-width="2.8"/>
-            <line x1="566" y1="128" x2="566" y2="123" stroke="#bbf7d0" stroke-width="2.8"/>
-            <line x1="569" y1="128" x2="569" y2="123" stroke="#3b82f6" stroke-width="2.8"/>
-            <line x1="572" y1="128" x2="572" y2="123" stroke="#bfdbfe" stroke-width="2.8"/>
-            <line x1="575" y1="128" x2="575" y2="123" stroke="#22c55e" stroke-width="2.8"/>
-            <line x1="578" y1="128" x2="578" y2="123" stroke="#e2e8f0" stroke-width="2.8"/>
-            <!-- Conductor window -->
-            <rect x="556" y="131" width="22" height="14" rx="2" fill="rgba(255,255,255,0.22)"/>
-
-            <!-- 5 ALIENS drawn AFTER cable (appear on top) -->
-            <!-- Each at translate(X, 90): upper hand at (X+33, 136), lower hand at (X+33, 148) -->
-            <!-- Cable y≈142-146 passes BETWEEN both hands — all aliens visibly grip the cable -->
-
-            <!-- Alien 5 (back, leftmost) — hands at x=71 -->
-            <g transform="translate(38,90)">
-              <animateTransform attributeName="transform" type="translate"
-                values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.00s" repeatCount="indefinite" additive="sum"/>
-              <use href="#malien"/>
-            </g>
-            <!-- Alien 4 — hands at x=131 -->
-            <g transform="translate(98,90)">
-              <animateTransform attributeName="transform" type="translate"
-                values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.12s" repeatCount="indefinite" additive="sum"/>
-              <use href="#malien"/>
-            </g>
-            <!-- Alien 3 — hands at x=191 -->
-            <g transform="translate(158,90)">
-              <animateTransform attributeName="transform" type="translate"
-                values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.24s" repeatCount="indefinite" additive="sum"/>
-              <use href="#malien"/>
-            </g>
-            <!-- Alien 2 — hands at x=251 -->
-            <g transform="translate(218,90)">
-              <animateTransform attributeName="transform" type="translate"
-                values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.36s" repeatCount="indefinite" additive="sum"/>
-              <use href="#malien"/>
-            </g>
-            <!-- Alien 1 (front) — hands at x=311, gripping near RJ45 -->
-            <g transform="translate(278,90)">
-              <animateTransform attributeName="transform" type="translate"
-                values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.48s" repeatCount="indefinite" additive="sum"/>
-              <use href="#malien"/>
-            </g>
-          </g>
-        </svg>
-      </div>
 
     </div>
     <div class="edu-cards fade-in">
@@ -1070,6 +893,186 @@ footer a:hover { color: var(--accent); }
         <div class="edu-school" data-i18n="about.edu.bs.school">Northeastern University</div>
       </div>
     </div>
+
+  <!-- ── 5 ALIENS PUSHING ETHERNET CABLE INTO SERVER ── -->
+  <div id="server-push-anim">
+
+    <svg viewBox="0 -48 700 206" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">
+      <defs>
+        <!-- Classic alien: head center (0,0); arms point right to (33,46) & (33,58) -->
+        <!-- When placed at translate(X,90): hands at abs y=136 & y=148              -->
+        <!-- Cable runs at y≈142-146 — exactly between the two hands = gripping!     -->
+        <g id="malien">
+          <!-- Antenna -->
+          <line x1="-3" y1="-26" x2="-8" y2="-42" stroke="#6aaa6a" stroke-width="3"/>
+          <circle cx="-8" cy="-48" r="7" fill="#60a5fa"/>
+          <circle cx="-8" cy="-48" r="3.5" fill="white" opacity="0.55"/>
+          <!-- Head -->
+          <ellipse cx="0" cy="0" rx="22" ry="27" fill="#8dbf8d"/>
+          <!-- Almond eyes -->
+          <ellipse cx="-11" cy="-9" rx="13" ry="9" fill="#0d0d0d" transform="rotate(-18,-11,-9)"/>
+          <ellipse cx="11" cy="-9" rx="13" ry="9" fill="#0d0d0d" transform="rotate(18,11,-9)"/>
+          <circle cx="-15" cy="-13" r="4" fill="white" opacity="0.75"/>
+          <circle cx="7"   cy="-13" r="4" fill="white" opacity="0.75"/>
+          <!-- Nose slits -->
+          <ellipse cx="-3" cy="4" rx="2.8" ry="2" fill="#6aaa6a"/>
+          <ellipse cx="3"  cy="4" rx="2.8" ry="2" fill="#6aaa6a"/>
+          <!-- Mouth -->
+          <path d="M-10,11 Q0,19 10,11" stroke="#4a9a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Neck + Body -->
+          <rect x="-6" y="27" width="12" height="9" rx="3" fill="#8dbf8d"/>
+          <ellipse cx="0" cy="47" rx="14" ry="17" fill="#8dbf8d"/>
+          <!-- Arms pushing right — upper hand (33,46), lower hand (33,58) -->
+          <path d="M13,38 L33,46" stroke="#8dbf8d" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M13,52 L33,58" stroke="#8dbf8d" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <circle cx="33" cy="46" r="6" fill="#7ab87a"/>
+          <circle cx="33" cy="58" r="6" fill="#7ab87a"/>
+          <!-- Legs + Feet -->
+          <path d="M-7,64 L-11,84" stroke="#8dbf8d" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+          <path d=" M7,64 L 11,84" stroke="#8dbf8d" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="-11" cy="87" rx="11" ry="5" fill="#6aaa6a" transform="rotate(-10,-11,87)"/>
+          <ellipse cx=" 11" cy="87" rx="11" ry="5" fill="#6aaa6a" transform="rotate( 10, 11,87)"/>
+        </g>
+      </defs>
+
+      <!-- ══ SERVER (static, right side) ══ -->
+      <rect x="555" y="20" width="138" height="138" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2.5"/>
+      <rect x="564" y="30"  width="120" height="14" rx="3" fill="#0f172a"/>
+      <rect x="564" y="48"  width="120" height="14" rx="3" fill="#0f172a"/>
+      <rect x="564" y="66"  width="120" height="14" rx="3" fill="#0f172a"/>
+      <rect x="564" y="84"  width="120" height="14" rx="3" fill="#0f172a"/>
+      <rect x="564" y="104" width="120" height="46" rx="3" fill="#0f172a"/>
+      <!-- Status LEDs -->
+      <circle cx="573" cy="37" r="5" fill="#22c55e">
+        <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="573" cy="55" r="5" fill="#3b82f6">
+        <animate attributeName="opacity" values="0.25;1;0.25" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="573" cy="73" r="5" fill="#a855f7">
+        <animate attributeName="opacity" values="0.8;0.25;0.8" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Ethernet port LED — lights up on cable insert -->
+      <circle cx="573" cy="91" r="5" fill="#f59e0b">
+        <animate attributeName="opacity"
+          values="0;0;0;1;1;0.4;0;0"
+          keyTimes="0;0.08;0.54;0.62;0.74;0.78;0.82;1"
+          dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Ethernet port hole -->
+      <rect x="606" y="114" width="30" height="20" rx="3.5" fill="#334155" stroke="#64748b" stroke-width="1.8"/>
+      <rect x="610" y="117" width="22" height="6"  rx="1.5" fill="#0f172a"/>
+      <rect x="610" y="125" width="22" height="5"  rx="1.5" fill="#0f172a"/>
+      <!-- Connection burst flash -->
+      <circle cx="621" cy="124" r="0" fill="rgba(251,191,36,0.45)">
+        <animate attributeName="r"       values="0;0;0;38;0;0" keyTimes="0;0.08;0.60;0.67;0.72;1" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0;0;1;0;0"  keyTimes="0;0.08;0.60;0.67;0.72;1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+
+      <!-- ══ EMAIL ME POPUP (pops above server when cable inserted) ══ -->
+      <g>
+        <animateTransform attributeName="transform" type="translate"
+          values="0,14; 0,14; 0,14; 0,0; 0,0; 0,14; 0,14"
+          keyTimes="0;0.08;0.60;0.66;0.76;0.80;1"
+          dur="4s" repeatCount="indefinite"/>
+        <rect x="557" y="-42" width="154" height="50" rx="10" fill="#2563eb">
+          <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
+        </rect>
+        <polygon points="621,8 641,8 631,26" fill="#2563eb">
+          <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
+        </polygon>
+        <text x="634" y="-16" text-anchor="middle" fill="white"
+              font-size="17" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" letter-spacing="0.3">
+          Email me! ✉
+          <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
+        </text>
+        <text x="634" y="-2" text-anchor="middle" fill="rgba(255,255,255,0.78)"
+              font-size="12" font-family="'Inter',monospace">
+          yxd429@case.edu
+          <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.08;0.60;0.66;0.76;0.80;1" dur="4s" repeatCount="indefinite"/>
+        </text>
+      </g>
+
+      <!-- ══ PUSH GROUP: cable (drawn first=behind) + RJ45 + 5 aliens (on top) ══ -->
+      <g>
+        <animateTransform attributeName="transform" type="translate"
+          values="0,0; 0,0; 52,0; 52,0; 0,0"
+          keyTimes="0; 0.08; 0.56; 0.74; 1"
+          dur="4s" repeatCount="indefinite"
+          calcMode="spline"
+          keySplines="0 0 1 1; 0.22 0 0.22 1; 0 0 1 1; 0.78 0 1 1"/>
+
+        <!-- ETHERNET CABLE — starts at x=10, runs through ALL alien grip zones to x=554 -->
+        <!-- At alien positions: cable y≈142-146, between upper hand y=136 & lower hand y=148 -->
+        <path d="M10,142 C200,146 400,146 554,142"
+              stroke="#64748b" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M10,142 C200,146 400,146 554,142"
+              stroke="rgba(255,255,255,0.18)" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M10,142 C200,146 400,146 554,142"
+              stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"
+              stroke-dasharray="16 18"/>
+        <path d="M10,142 C200,146 400,146 554,142"
+              stroke="#60a5fa" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-dasharray="16 18" stroke-dashoffset="10"/>
+
+        <!-- RJ45 CONNECTOR at cable's right end (x=554–582) -->
+        <!-- After 52px push: x=606–634, slides into server port at x=606–636 -->
+        <!-- Cable stub entering connector body -->
+        <rect x="534" y="137" width="22" height="10" rx="2" fill="#64748b"/>
+        <!-- Connector body -->
+        <rect x="554" y="128" width="28" height="22" rx="4" fill="#c8d5e0" stroke="#94a3af" stroke-width="1.8"/>
+        <!-- Clip tab -->
+        <path d="M557,150 L567,158 L577,150" stroke="#8fa0b0" stroke-width="1.8" fill="#c8d5e0" stroke-linejoin="round"/>
+        <!-- 8 conductors at top edge (T568B order) -->
+        <line x1="557" y1="128" x2="557" y2="123" stroke="#d97706" stroke-width="2.8"/>
+        <line x1="560" y1="128" x2="560" y2="123" stroke="#fde68a" stroke-width="2.8"/>
+        <line x1="563" y1="128" x2="563" y2="123" stroke="#f97316" stroke-width="2.8"/>
+        <line x1="566" y1="128" x2="566" y2="123" stroke="#bbf7d0" stroke-width="2.8"/>
+        <line x1="569" y1="128" x2="569" y2="123" stroke="#3b82f6" stroke-width="2.8"/>
+        <line x1="572" y1="128" x2="572" y2="123" stroke="#bfdbfe" stroke-width="2.8"/>
+        <line x1="575" y1="128" x2="575" y2="123" stroke="#22c55e" stroke-width="2.8"/>
+        <line x1="578" y1="128" x2="578" y2="123" stroke="#e2e8f0" stroke-width="2.8"/>
+        <!-- Conductor window -->
+        <rect x="556" y="131" width="22" height="14" rx="2" fill="rgba(255,255,255,0.22)"/>
+
+        <!-- 5 ALIENS drawn AFTER cable (appear on top) -->
+        <!-- Each at translate(X, 90): upper hand at (X+33, 136), lower hand at (X+33, 148) -->
+        <!-- Cable y≈142-146 passes BETWEEN both hands — all aliens visibly grip the cable -->
+
+        <!-- Alien 5 (back, leftmost) — hands at x=71 -->
+        <g transform="translate(38,90)">
+          <animateTransform attributeName="transform" type="translate"
+            values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.00s" repeatCount="indefinite" additive="sum"/>
+          <use href="#malien"/>
+        </g>
+        <!-- Alien 4 — hands at x=131 -->
+        <g transform="translate(98,90)">
+          <animateTransform attributeName="transform" type="translate"
+            values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.12s" repeatCount="indefinite" additive="sum"/>
+          <use href="#malien"/>
+        </g>
+        <!-- Alien 3 — hands at x=191 -->
+        <g transform="translate(158,90)">
+          <animateTransform attributeName="transform" type="translate"
+            values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.24s" repeatCount="indefinite" additive="sum"/>
+          <use href="#malien"/>
+        </g>
+        <!-- Alien 2 — hands at x=251 -->
+        <g transform="translate(218,90)">
+          <animateTransform attributeName="transform" type="translate"
+            values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.36s" repeatCount="indefinite" additive="sum"/>
+          <use href="#malien"/>
+        </g>
+        <!-- Alien 1 (front) — hands at x=311, gripping near RJ45 -->
+        <g transform="translate(278,90)">
+          <animateTransform attributeName="transform" type="translate"
+            values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.48s" repeatCount="indefinite" additive="sum"/>
+          <use href="#malien"/>
+        </g>
+      </g>
+    </svg>
+
+  </div>
   </div>
 </section>
 
@@ -2495,8 +2498,9 @@ document.addEventListener('click', () => {
 <!-- ── SERVER PUSH ANIMATION STYLES ── -->
 <style>
 #server-push-anim {
+  grid-column: 1 / -1;
   width: 100%;
-  margin-top: 1.8rem;
+  margin-top: 0.5rem;
   line-height: 0;
   overflow: visible;
 }
