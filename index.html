@@ -1748,6 +1748,21 @@ function setLang(lang) {
     el.dataset.en = orig;
     el.textContent = badgeMap ? (badgeMap[orig] || orig) : orig;
   });
+  // Project link buttons (Paper / Code / Under Review)
+  const btnMap = {
+    zh_hans: { '📄 Paper': '📄 论文', '💻 Code': '💻 代码', '🔄 Under Review': '🔄 审阅中' },
+    zh_hant: { '📄 Paper': '📄 論文', '💻 Code': '💻 程式碼', '🔄 Under Review': '🔄 審閱中' },
+    en:      { '📄 论文': '📄 Paper', '💻 代码': '💻 Code', '🔄 审阅中': '🔄 Under Review',
+               '📄 論文': '📄 Paper', '💻 程式碼': '💻 Code', '🔄 審閱中': '🔄 Under Review' },
+  };
+  document.querySelectorAll('.proj-link-btn').forEach(el => {
+    if (!el.dataset.enBtn) el.dataset.enBtn = el.textContent.trim();
+    const map = lang === 'en'
+      ? btnMap.en
+      : lang === 'zh_hans' ? btnMap.zh_hans : btnMap.zh_hant;
+    const orig = lang === 'en' ? el.textContent.trim() : el.dataset.enBtn;
+    el.textContent = map[orig] || (lang === 'en' ? el.dataset.enBtn : orig);
+  });
   // Nav button label
   const labels = { en: 'EN ▾', zh_hans: '简中 ▾', zh_hant: '繁中 ▾' };
   document.getElementById('langBtn').textContent = labels[lang];
