@@ -2511,7 +2511,7 @@ const W=740,H=470,MAX_UFOS=30;
 let state='entry',username='',score=0,timeLeft=60;
 let timerInterval=null,animFrame=null;
 let stars=[],shootingStars=[],ufos=[],explosions=[],flashes=[],floatingScores=[];
-let spawnTimer=0,lastScore=0;
+let spawnTimer=0,lastScore=0,prevT=0;
 const ms={x:370,y:78,vx:1.1,w:150,h:55,alpha:1,warpState:null,warpProgress:0,warpTimer:180};
 
 /* ── difficulty ── */
@@ -2549,15 +2549,15 @@ function drawStars(ctx){
     ctx.fill();
   });
 }
-function tickShootingStars(ctx,t){
-  if(Math.random()<.004&&shootingStars.length<2)
+function tickShootingStars(ctx,t,dt){
+  if(Math.random()<.004*dt&&shootingStars.length<2)
     shootingStars.push({x:Math.random()*W*.5,y:Math.random()*H*.3,vx:9+Math.random()*7,vy:4+Math.random()*4,a:1,len:70+Math.random()*60});
   shootingStars=shootingStars.filter(s=>{
     ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*(s.len/s.vx),s.y-s.vy*(s.len/s.vx));
     const g=ctx.createLinearGradient(s.x,s.y,s.x-s.len,s.y-(s.vy/s.vx)*s.len);
     g.addColorStop(0,`rgba(255,255,255,${s.a})`);g.addColorStop(1,'rgba(255,255,255,0)');
     ctx.strokeStyle=g;ctx.lineWidth=1.5;ctx.stroke();
-    s.x+=s.vx;s.y+=s.vy;s.a-=.025;return s.a>0&&s.x<W+50;
+    s.x+=s.vx*dt;s.y+=s.vy*dt;s.a-=.025*dt;return s.a>0&&s.x<W+50;
   });
 }
 
@@ -2743,14 +2743,14 @@ function boom(x,y,hue){
   explosions.push(ps);
   floatingScores.push({x,y,a:1,vy:-1.8,text:'+1'});
 }
-function drawExplosions(ctx){
+function drawExplosions(ctx,dt){
   explosions=explosions.filter(ps=>{
     let live=false;
     ps.forEach(p=>{
       if(p.a<=0)return;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill();
-      p.x+=p.vx;p.y+=p.vy;p.vy+=.14;p.a-=.032;p.r*=.96;live=true;
+      p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=.14*dt;p.a-=.032*dt;p.r*=Math.pow(.96,dt);live=true;
     });
     return live;
   });
@@ -2760,12 +2760,12 @@ function drawExplosions(ctx){
     ctx.fillStyle=fg;ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(f.x,f.y,f.r*.5,0,Math.PI*2);
     ctx.strokeStyle=`hsla(${f.hue},100%,85%,${f.a})`;ctx.lineWidth=2;ctx.stroke();
-    f.r+=5;f.a-=.09;return f.a>0;
+    f.r+=5*dt;f.a-=.09*dt;return f.a>0;
   });
   floatingScores=floatingScores.filter(s=>{
     ctx.fillStyle=`rgba(74,222,128,${s.a})`;ctx.font='bold 16px monospace';ctx.textAlign='center';
     ctx.fillText(s.text,s.x,s.y);
-    s.y+=s.vy;s.a-=.04;return s.a>0;
+    s.y+=s.vy*dt;s.a-=.04*dt;return s.a>0;
   });
 }
 
@@ -2791,6 +2791,7 @@ function loop(t){
   const cv=document.getElementById('ufo-canvas');
   if(!cv)return;
   const ctx=cv.getContext('2d');
+  const dt=prevT?Math.min((t-prevT)/(1000/60),3):1;prevT=t;
 
   // bg
   ctx.fillStyle='#010b18';ctx.fillRect(0,0,W,H);
@@ -2801,27 +2802,30 @@ function loop(t){
     ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   });
   drawStars(ctx);
-  tickShootingStars(ctx,t);
+  tickShootingStars(ctx,t,dt);
   drawPlanet(ctx);
 
   // mothership — clamp position so it never overshoots the boundary
-  ms.x+=ms.vx;
+  ms.x+=ms.vx*dt;
   if(ms.x>=W-90){ms.x=W-90;ms.vx=-Math.abs(ms.vx);}
   else if(ms.x<=90){ms.x=90;ms.vx=Math.abs(ms.vx);}
   // warp teleport: fade out → jump to random position → fade in
   if(ms.warpState===null){
-    if(--ms.warpTimer<=0){ms.warpState='out';ms.warpProgress=0;}
+    ms.warpTimer-=dt;
+    if(ms.warpTimer<=0){ms.warpState='out';ms.warpProgress=0;}
   }else if(ms.warpState==='out'){
-    ms.alpha=1-ms.warpProgress/20;ms.warpProgress++;
+    ms.warpProgress+=dt;
+    ms.alpha=Math.max(0,1-ms.warpProgress/20);
     if(ms.warpProgress>20){
       flashes.push({x:ms.x,y:ms.y,r:ms.w*.7,a:.85,hue:195});
       ms.x=110+Math.random()*(W-220);
       ms.vx=(Math.random()<.5?1:-1)*Math.abs(ms.vx);
       ms.warpState='in';ms.warpProgress=0;
-      ms.warpTimer=180+Math.floor(Math.random()*180); // 3–6s until next warp
+      ms.warpTimer=180+Math.random()*180; // 3–6s until next warp
     }
   }else if(ms.warpState==='in'){
-    ms.alpha=ms.warpProgress/20;ms.warpProgress++;
+    ms.warpProgress+=dt;
+    ms.alpha=Math.min(1,ms.warpProgress/20);
     if(ms.warpProgress>20){ms.alpha=1;ms.warpState=null;}
   }
   ctx.globalAlpha=ms.alpha;
@@ -2829,15 +2833,15 @@ function loop(t){
   ctx.globalAlpha=1;
 
   // spawn
-  spawnTimer++;
+  spawnTimer+=dt;
   if(spawnTimer>=spawnMs()&&ufos.length<MAX_UFOS){spawnUFO();spawnTimer=0;}
 
   // UFOs
   const sm=speedMult();
   ufos=ufos.filter(u=>u.alive);
   ufos.forEach(u=>{
-    u.wb+=u.wbS;
-    u.x+=u.vx+Math.sin(u.wb)*.5;u.y+=u.vy;
+    u.wb+=u.wbS*dt;
+    u.x+=(u.vx+Math.sin(u.wb)*.5)*dt;u.y+=u.vy*dt;
     if(u.x<u.r){u.x=u.r;u.vx=Math.abs(u.vx);}
     if(u.x>W-u.r){u.x=W-u.r;u.vx=-Math.abs(u.vx);}
     if(u.y>H+u.r){u.y=ms.y+ms.h/2+8;u.x=ms.x+(Math.random()-.5)*50;
@@ -2845,7 +2849,7 @@ function loop(t){
     if(u.y<0)u.vy=Math.abs(u.vy);
     drawUFO3D(ctx,u,t);
   });
-  drawExplosions(ctx);
+  drawExplosions(ctx,dt);
 
   // score watermark
   ctx.globalAlpha=.06;ctx.fillStyle='#38bdf8';
@@ -2895,7 +2899,7 @@ function startTimer(){
 /* ── lifecycle ── */
 function startGame(){
   clearInterval(timerInterval);cancelAnimationFrame(animFrame);
-  score=0;lastScore=0;ufos=[];explosions=[];flashes=[];floatingScores=[];shootingStars=[];spawnTimer=0;
+  score=0;lastScore=0;ufos=[];explosions=[];flashes=[];floatingScores=[];shootingStars=[];spawnTimer=0;prevT=0;
   ms.x=370;ms.vx=1.1;ms.alpha=1;ms.warpState=null;ms.warpProgress=0;ms.warpTimer=180;initStars();state='playing';
   ['ufo-entry','ufo-gameover'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('ufo-game').style.display='block';
