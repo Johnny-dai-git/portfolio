@@ -39,6 +39,16 @@ body {
   overflow-x: hidden;
 }
 
+/* ── CIRCUIT CANVAS (hero only) ─────────────────────────── */
+#circuit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0.38;
+  z-index: 2;
+}
+
 /* ── HERO SLIDESHOW ──────────────────────────────────────── */
 .hero-slides {
   position: absolute;
@@ -899,6 +909,8 @@ footer a:hover { color: var(--accent); }
   <!-- Slide indicators -->
   <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10;" id="slide-dots"></div>
 
+  <!-- Circuit board canvas on top -->
+  <canvas id="circuit-canvas"></canvas>
   <div class="hero-inner">
     <div class="hero-badge" data-i18n="hero.badge">PhD Candidate · Case Western Reserve University</div>
     <h1 class="hero-name"><span class="grad">Yuanjun Dai</span></h1>
@@ -1540,6 +1552,125 @@ footer a:hover { color: var(--accent); }
 
   setInterval(() => goTo((cur + 1) % slides.length), 4000);
 })();
+
+/* ── Circuit Board Animation ── */
+const canvas = document.getElementById('circuit-canvas');
+const ctx    = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width  = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const GRID = 40;
+const nodes = [];
+const traces = [];
+const pulses = [];
+
+// Build grid nodes
+function buildGrid() {
+  nodes.length = 0; traces.length = 0;
+  const cols = Math.ceil(W / GRID) + 1;
+  const rows = Math.ceil(H / GRID) + 1;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (Math.random() > 0.45) {
+        nodes.push({ x: c * GRID, y: r * GRID, type: Math.random() > 0.8 ? 'chip' : 'node' });
+      }
+    }
+  }
+  // Connect nearby nodes
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[j].x - nodes[i].x;
+      const dy = nodes[j].y - nodes[i].y;
+      if ((Math.abs(dx) === GRID && dy === 0) || (Math.abs(dy) === GRID && dx === 0)) {
+        if (Math.random() > 0.35) {
+          traces.push({ a: nodes[i], b: nodes[j] });
+        }
+      }
+    }
+  }
+}
+buildGrid();
+
+// Spawn data pulses
+function spawnPulse() {
+  if (traces.length === 0) return;
+  const t = traces[Math.floor(Math.random() * traces.length)];
+  const forward = Math.random() > 0.5;
+  pulses.push({
+    trace: t,
+    t: 0,
+    speed: 0.008 + Math.random() * 0.012,
+    forward,
+    color: Math.random() > 0.5 ? '#34d399' : '#60a5fa',
+    size: 2 + Math.random() * 2
+  });
+}
+
+setInterval(spawnPulse, 120);
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw traces
+  ctx.lineWidth = 0.8;
+  for (const tr of traces) {
+    ctx.strokeStyle = 'rgba(96,165,250,0.18)';
+    ctx.beginPath();
+    ctx.moveTo(tr.a.x, tr.a.y);
+    ctx.lineTo(tr.b.x, tr.b.y);
+    ctx.stroke();
+  }
+
+  // Draw nodes
+  for (const n of nodes) {
+    if (n.type === 'chip') {
+      ctx.strokeStyle = 'rgba(96,165,250,0.4)';
+      ctx.fillStyle   = 'rgba(96,165,250,0.06)';
+      ctx.lineWidth   = 1;
+      ctx.beginPath();
+      ctx.rect(n.x - 6, n.y - 6, 12, 12);
+      ctx.fill(); ctx.stroke();
+    } else {
+      ctx.fillStyle = 'rgba(96,165,250,0.35)';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Draw & update pulses
+  for (let i = pulses.length - 1; i >= 0; i--) {
+    const p = pulses[i];
+    p.t += p.speed;
+    if (p.t >= 1) { pulses.splice(i, 1); continue; }
+    const ta = p.forward ? p.trace.a : p.trace.b;
+    const tb = p.forward ? p.trace.b : p.trace.a;
+    const x = ta.x + (tb.x - ta.x) * p.t;
+    const y = ta.y + (tb.y - ta.y) * p.t;
+    // glow
+    const g = ctx.createRadialGradient(x, y, 0, x, y, p.size * 4);
+    g.addColorStop(0, p.color + 'cc');
+    g.addColorStop(1, p.color + '00');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, y, p.size * 4, 0, Math.PI * 2);
+    ctx.fill();
+    // dot
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(x, y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
 
 /* ── Scroll Fade-In ── */
 const observer = new IntersectionObserver(entries => {
