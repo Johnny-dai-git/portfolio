@@ -875,14 +875,14 @@ footer a:hover { color: var(--accent); }
 
       <!-- ── SCRAT SQUIRREL ── -->
       <div id="contact-squirrel">
-        <div class="sq-bubble"><span data-i18n="squirrel.say">⚡ Don't just scroll — email me!</span></div>
+        <div class="sq-bubble"><span data-i18n="squirrel.say">Email me! 📬</span></div>
         <div class="sq-body-wrap">
-          <svg viewBox="0 0 80 122" width="74" height="113" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="-6 0 106 122" width="80" height="116" xmlns="http://www.w3.org/2000/svg">
             <!-- Big bushy tail (Scrat's signature) -->
             <path d="M44,118 C74,104 82,73 76,44 C70,18 54,7 47,18 C42,28 46,46 43,59"
-                  stroke="#c07a1e" stroke-width="24" stroke-linecap="round" fill="none"/>
+                  stroke="#c07a1e" stroke-width="22" stroke-linecap="round" fill="none"/>
             <path d="M44,118 C70,104 76,75 70,48 C64,28 52,18 47,27 C43,36 46,48 43,59"
-                  stroke="#ebb34e" stroke-width="15" stroke-linecap="round" fill="none"/>
+                  stroke="#ebb34e" stroke-width="13" stroke-linecap="round" fill="none"/>
             <!-- Body -->
             <ellipse cx="34" cy="93" rx="15" ry="21" fill="#a06828"/>
             <!-- Left arm — waving via SVG animateTransform -->
@@ -1482,7 +1482,7 @@ const TRANSLATIONS = {
     'hero.title': 'Distributed ML Systems  ·  eBPF Observability  ·  LLM Deployment  ·  ML Security  ·  Cloud HPC',
     'hero.desc': 'Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.',
     'hero.btn.contact': 'Get in Touch',
-    'squirrel.say': "⚡ Don't just scroll — email me!",
+    'squirrel.say': 'Email me! 📬',
     'hero.btn.cv': 'Download CV',
     'hero.stat.pubs': 'Publications',
     'hero.stat.first': 'First-Author',
@@ -1582,7 +1582,7 @@ const TRANSLATIONS = {
     'hero.title': '分布式ML系统 · eBPF可观测性 · LLM部署 · ML安全 · 云HPC',
     'hero.desc': '构建和保护大规模AI基础设施 — 分布式训练系统、内核级可观测性、生产级LLM平台和ML安全研究，涉及64个A100 GPU和50+部署。',
     'hero.btn.contact': '联系我',
-    'squirrel.say': '⚡ 别犹豫，赶紧联系我！',
+    'squirrel.say': '联系我！📬',
     'hero.btn.cv': '下载简历',
     'hero.stat.pubs': '论文发表',
     'hero.stat.first': '第一作者',
@@ -1682,7 +1682,7 @@ const TRANSLATIONS = {
     'hero.title': '分散式ML系統 · eBPF可觀測性 · LLM部署 · ML安全 · 雲HPC',
     'hero.desc': '構建和保護大規模AI基礎設施 — 分散式訓練系統、內核級可觀測性、生產級LLM平台和ML安全研究，涉及64個A100 GPU和50+部署。',
     'hero.btn.contact': '聯絡我',
-    'squirrel.say': '⚡ 別猶豫，快來聯繫我！',
+    'squirrel.say': '聯絡我！📬',
     'hero.btn.cv': '下載履歷',
     'hero.stat.pubs': '論文發表',
     'hero.stat.first': '第一作者',
@@ -2420,7 +2420,7 @@ document.addEventListener('click', () => {
 
 <!-- ── MISSILE CURSOR + UFO COLLISION ── -->
 <style>
-* { cursor: none !important; }
+body.missile-mode * { cursor: none !important; }
 #missile-cursor {
   position: fixed;
   z-index: 10000;
@@ -2458,6 +2458,9 @@ document.addEventListener('click', () => {
   let mAngle = -45;
   let ufoAlive = true;
 
+  /* Start in missile mode (UFO is alive) */
+  document.body.classList.add('missile-mode');
+
   /* Hide cursor when it leaves / enters the window */
   document.addEventListener('mouseleave', () => m.style.opacity = '0');
   document.addEventListener('mouseenter', () => m.style.opacity = '1');
@@ -2488,6 +2491,10 @@ document.addEventListener('click', () => {
   function explodeUFO(x, y) {
     ufoAlive = false;
     ufo.style.visibility = 'hidden';
+
+    /* Restore normal cursor immediately */
+    document.body.classList.remove('missile-mode');
+    m.style.display = 'none';
 
     /* Missile briefly grows on hit */
     m.style.fontSize = '36px';
@@ -2547,11 +2554,14 @@ document.addEventListener('click', () => {
     /* Drop the alien after a short delay */
     setTimeout(() => dropAlien(x, y), 130);
 
-    /* UFO respawns after 20 minutes */
+    /* UFO respawns after 1 minute */
     setTimeout(() => {
       ufo.style.visibility = 'visible';
       ufoAlive = true;
-    }, 1200000);
+      /* Re-arm missile cursor */
+      m.style.display = '';
+      document.body.classList.add('missile-mode');
+    }, 60000);
   }
 
   /* ── ALIEN DROP ── */
