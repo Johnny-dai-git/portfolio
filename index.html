@@ -1158,7 +1158,7 @@ footer a:hover { color: var(--accent); }
   <circle cx="428" cy="135" r="4.5" fill="#22c55e" opacity="0">
     <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.393;0.407;0.857;1" dur="14s" repeatCount="indefinite"/>
   </circle>
-  <text x="492" y="162" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Parameter Server</text>
+  <text x="492" y="162" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace"><tspan id="svg-ps-label">Parameter Server</tspan></text>
   <!-- PS sync burst: fires when last gradient (V100) arrives at kt=0.393 -->
   <circle cx="418" cy="116" r="0" fill="#22c55e" opacity="0">
     <animate attributeName="r"       values="0;0;40;0;0"   keyTimes="0;0.393;0.422;0.457;1" dur="14s" repeatCount="indefinite"/>
@@ -1217,11 +1217,11 @@ footer a:hover { color: var(--accent); }
       <animate attributeName="opacity" values="0;0;0.7;0.7;0;0" keyTimes="0;0.393;0.429;0.750;0.786;1" dur="14s" repeatCount="indefinite"/>
     </line>
     <text x="493" y="-43" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="10" font-family="'Inter','Segoe UI',sans-serif" opacity="0">
-      &#x2713; Sync complete!
+      <tspan id="svg-sync-label">✓ Sync complete!</tspan>
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.393;0.429;0.750;0.786;1" dur="14s" repeatCount="indefinite"/>
     </text>
     <text x="493" y="-26" text-anchor="middle" fill="white" font-size="15" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" opacity="0">
-      Email me! &#x2709;
+      <tspan id="svg-email-label">Email me! ✉</tspan>
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.393;0.429;0.750;0.786;1" dur="14s" repeatCount="indefinite"/>
     </text>
     <text x="493" y="-13" text-anchor="middle" fill="rgba(255,255,255,0.78)" font-size="10" font-family="'Inter',monospace" opacity="0">
@@ -2386,6 +2386,19 @@ function setLang(lang) {
     const orig = lang === 'en' ? el.textContent.trim() : el.dataset.enBtn;
     el.textContent = map[orig] || (lang === 'en' ? el.dataset.enBtn : orig);
   });
+  // DML animation SVG labels
+  const svgLabels = {
+    en:      {ps:'Parameter Server', sync:'✓ Sync complete!',  email:'Email me! ✉'},
+    zh_hans: {ps:'参数服务器',          sync:'✓ 梯度同步完成！',    email:'联系我！✉'},
+    zh_hant: {ps:'參數伺服器',          sync:'✓ 梯度同步完成！',    email:'聯絡我！✉'},
+  };
+  const sl = svgLabels[lang] || svgLabels.en;
+  const psEl = document.getElementById('svg-ps-label');
+  const syncEl = document.getElementById('svg-sync-label');
+  const emailEl = document.getElementById('svg-email-label');
+  if(psEl)    psEl.textContent    = sl.ps;
+  if(syncEl)  syncEl.textContent  = sl.sync;
+  if(emailEl) emailEl.textContent = sl.email;
   // Nav button label
   const labels = { en: 'EN ▾', zh_hans: '简中 ▾', zh_hant: '繁中 ▾' };
   document.getElementById('langBtn').textContent = labels[lang];
