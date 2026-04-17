@@ -1646,16 +1646,109 @@ const TRANSLATIONS = {
 
 let currentLang = 'en';
 
+// ── TAG TRANSLATIONS ──────────────────────────────────────────
+const TAG_ZH_HANS = {
+  'Distributed ML':'分布式ML','Reinforcement Learning':'强化学习','PPO':'PPO','PyTorch DDP':'PyTorch DDP',
+  'BytePS':'BytePS','Batch Scheduling':'批次调度','A100 GPU':'A100 GPU','Model Training':'模型训练',
+  'Transport Protocol':'传输协议','NCCL':'NCCL','Gradient Prioritization':'梯度优先化',
+  'Kernel Bypass':'内核旁路','SACK':'SACK','Cross-Datacenter':'跨数据中心','ML Security':'ML安全',
+  'Side-Channel':'侧信道','MLaaS Security':'MLaaS安全','MXNet':'MXNet','Power Profiling':'功耗分析',
+  'Intel RAPL':'Intel RAPL','BSP / PS Arch':'BSP/PS架构','Model Reconstruction':'模型重构',
+  'eBPF':'eBPF','Network Telemetry':'网络遥测','In-Kernel':'内核内','Count-Min Sketch':'CMS草图',
+  'Atomic Operations':'原子操作','Retransmission Detection':'重传检测','Flow Reconstruction':'流重构',
+  'HashPipe Algorithm':'HashPipe算法','Top-K Tracking':'Top-K追踪','Per-PID Profiling':'按PID分析',
+  'In-Kernel Telemetry':'内核级遥测','DML Observability':'DML可观测','SDN':'SDN',
+  'DDoS Mitigation':'DDoS防御','Control-Plane Elasticity':'控制平面弹性','OvS Overlay':'OvS叠加',
+  'OpenFlow':'OpenFlow','Round-Robin Scheduling':'轮转调度','Large-Flow Migration':'大流迁移',
+  'ECMP Load Balancing':'ECMP负载均衡','LLM Inference':'LLM推理','vLLM / TensorRT-LLM':'vLLM/TRT-LLM',
+  'Continuous Batching':'连续批处理','NVIDIA Device Plugin':'NVIDIA设备插件',
+  'Prometheus / Grafana':'Prometheus/Grafana','DCGG GPU Telemetry':'GPU遥测',
+  'ArgoCD GitOps':'ArgoCD GitOps','LLM Fine-tuning':'LLM微调','NeMo / Megatron-LM':'NeMo/Megatron',
+  'Flash Attention':'Flash Attention','DeepSpeed ZeRO-3':'DeepSpeed ZeRO-3','MIMIC-IV':'MIMIC-IV',
+  'Clinical NLP':'临床NLP','Multi-label HCC Coding':'多标签HCC编码',
+  'LLM / NLP':'LLM / NLP','Power Side-Channel':'功耗侧信道','MXNet / BSP':'MXNet / BSP',
+  'BiLSTM':'BiLSTM','Ensemble Regression':'集成回归','Layer-Level Analysis':'层级分析',
+  'DNN Reverse Engineering':'DNN逆向工程','Microarchitecture':'微架构','Pipelined CPU':'流水线CPU',
+  'Hazard Resolution':'冒险处理','ASIC P&R':'ASIC布局布线','P2P Networking':'P2P网络',
+  'Socket Programming':'Socket编程','Multi-threading':'多线程','UDP / TCP':'UDP/TCP',
+  'Java':'Java','Zero-Trust NetworkPolicy':'零信任网络策略',
+  'Distributed Systems':'分布式系统','Security':'安全','ML / AI':'ML / AI',
+  'eBPF / Systems':'eBPF / 系统','SDN / Networking':'SDN / 网络',
+  'DCGM GPU Telemetry':'DCGM GPU遥测',
+};
+const TAG_ZH_HANT = {
+  'Distributed ML':'分散式ML','Reinforcement Learning':'強化學習','PPO':'PPO','PyTorch DDP':'PyTorch DDP',
+  'BytePS':'BytePS','Batch Scheduling':'批次調度','A100 GPU':'A100 GPU','Model Training':'模型訓練',
+  'Transport Protocol':'傳輸協議','NCCL':'NCCL','Gradient Prioritization':'梯度優先化',
+  'Kernel Bypass':'核心旁路','SACK':'SACK','Cross-Datacenter':'跨資料中心','ML Security':'ML安全',
+  'Side-Channel':'側信道','MLaaS Security':'MLaaS安全','MXNet':'MXNet','Power Profiling':'功耗分析',
+  'Intel RAPL':'Intel RAPL','BSP / PS Arch':'BSP/PS架構','Model Reconstruction':'模型重構',
+  'eBPF':'eBPF','Network Telemetry':'網路遙測','In-Kernel':'核心內','Count-Min Sketch':'CMS草圖',
+  'Atomic Operations':'原子操作','Retransmission Detection':'重傳檢測','Flow Reconstruction':'流重構',
+  'HashPipe Algorithm':'HashPipe算法','Top-K Tracking':'Top-K追蹤','Per-PID Profiling':'按PID分析',
+  'In-Kernel Telemetry':'核心級遙測','DML Observability':'DML可觀測','SDN':'SDN',
+  'DDoS Mitigation':'DDoS防禦','Control-Plane Elasticity':'控制平面彈性','OvS Overlay':'OvS疊加',
+  'OpenFlow':'OpenFlow','Round-Robin Scheduling':'輪轉調度','Large-Flow Migration':'大流遷移',
+  'ECMP Load Balancing':'ECMP負載均衡','LLM Inference':'LLM推論','vLLM / TensorRT-LLM':'vLLM/TRT-LLM',
+  'Continuous Batching':'連續批次處理','NVIDIA Device Plugin':'NVIDIA裝置插件',
+  'Prometheus / Grafana':'Prometheus/Grafana','ArgoCD GitOps':'ArgoCD GitOps',
+  'LLM Fine-tuning':'LLM微調','NeMo / Megatron-LM':'NeMo/Megatron',
+  'Flash Attention':'Flash Attention','DeepSpeed ZeRO-3':'DeepSpeed ZeRO-3','MIMIC-IV':'MIMIC-IV',
+  'Clinical NLP':'臨床NLP','Multi-label HCC Coding':'多標籤HCC編碼',
+  'LLM / NLP':'LLM / NLP','Power Side-Channel':'功耗側信道','MXNet / BSP':'MXNet / BSP',
+  'BiLSTM':'BiLSTM','Ensemble Regression':'集成迴歸','Layer-Level Analysis':'層級分析',
+  'DNN Reverse Engineering':'DNN逆向工程','Microarchitecture':'微架構','Pipelined CPU':'流水線CPU',
+  'Hazard Resolution':'冒險處理','ASIC P&R':'ASIC佈局佈線','P2P Networking':'P2P網路',
+  'Socket Programming':'Socket程式設計','Multi-threading':'多執行緒','UDP / TCP':'UDP/TCP',
+  'Java':'Java','Zero-Trust NetworkPolicy':'零信任網路策略',
+  'Distributed Systems':'分散式系統','Security':'安全','ML / AI':'ML / AI',
+  'eBPF / Systems':'eBPF / 系統','SDN / Networking':'SDN / 網路',
+  'DCGM GPU Telemetry':'DCGM GPU遙測',
+};
+
+// Badge text translations
+const BADGE_ZH_HANS = {
+  'Accepted':'已录用','Under Review':'审阅中','Under Review · ACM TOPS':'审阅中 · ACM TOPS',
+};
+const BADGE_ZH_HANT = {
+  'Accepted':'已錄用','Under Review':'審閱中','Under Review · ACM TOPS':'審閱中 · ACM TOPS',
+};
+
+// Store original English text on first load
+document.querySelectorAll('.tag').forEach(el => {
+  if (!el.dataset.en) el.dataset.en = el.textContent.trim();
+});
+document.querySelectorAll('.pub-venue-badge').forEach(el => {
+  if (!el.dataset.en) el.dataset.en = el.textContent.trim();
+});
+
 function setLang(lang) {
   currentLang = lang;
+  // Text-only elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (TRANSLATIONS[lang][key]) el.textContent = TRANSLATIONS[lang][key];
+    const key = el.getAttribute('data-i18n');
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) el.textContent = TRANSLATIONS[lang][key];
   });
+  // HTML elements
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.dataset.i18nHtml;
-    if (TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key];
+    const key = el.getAttribute('data-i18n-html');
+    if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key];
   });
+  // Tags
+  const tagMap = lang === 'zh_hans' ? TAG_ZH_HANS : lang === 'zh_hant' ? TAG_ZH_HANT : null;
+  document.querySelectorAll('.tag').forEach(el => {
+    const orig = el.dataset.en || el.textContent.trim();
+    el.dataset.en = orig;
+    el.textContent = tagMap ? (tagMap[orig] || orig) : orig;
+  });
+  // Publication badges
+  const badgeMap = lang === 'zh_hans' ? BADGE_ZH_HANS : lang === 'zh_hant' ? BADGE_ZH_HANT : null;
+  document.querySelectorAll('.pub-venue-badge').forEach(el => {
+    const orig = el.dataset.en || el.textContent.trim();
+    el.dataset.en = orig;
+    el.textContent = badgeMap ? (badgeMap[orig] || orig) : orig;
+  });
+  // Nav button label
   const labels = { en: 'EN ▾', zh_hans: '简中 ▾', zh_hant: '繁中 ▾' };
   document.getElementById('langBtn').textContent = labels[lang];
   document.querySelectorAll('.lang-option').forEach(o => {
