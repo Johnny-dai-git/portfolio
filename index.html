@@ -313,7 +313,8 @@ section {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  column-gap: 3rem;
+  row-gap: 0;
   align-items: start;
 }
 .about-text p {
@@ -1003,68 +1004,68 @@ footer a:hover { color: var(--accent); }
           keySplines="0 0 1 1; 0.22 0 0.22 1; 0 0 1 1; 0.78 0 1 1"/>
 
         <!-- ETHERNET CABLE — starts at x=10, runs through ALL alien grip zones to x=554 -->
-        <!-- At alien positions: cable y≈142-146, between upper hand y=136 & lower hand y=148 -->
-        <path d="M10,142 C200,146 400,146 554,142"
+        <!-- Alien hands at abs y=120 & y=128; cable at y=124 = server port center -->
+        <path d="M10,124 C200,128 400,128 554,124"
               stroke="#64748b" stroke-width="12" fill="none" stroke-linecap="round"/>
-        <path d="M10,142 C200,146 400,146 554,142"
+        <path d="M10,124 C200,128 400,128 554,124"
               stroke="rgba(255,255,255,0.18)" stroke-width="4" fill="none" stroke-linecap="round"/>
-        <path d="M10,142 C200,146 400,146 554,142"
+        <path d="M10,124 C200,128 400,128 554,124"
               stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"
               stroke-dasharray="16 18"/>
-        <path d="M10,142 C200,146 400,146 554,142"
+        <path d="M10,124 C200,128 400,128 554,124"
               stroke="#60a5fa" stroke-width="2" fill="none" stroke-linecap="round"
               stroke-dasharray="16 18" stroke-dashoffset="10"/>
 
         <!-- RJ45 CONNECTOR at cable's right end (x=554–582) -->
         <!-- After 52px push: x=606–634, slides into server port at x=606–636 -->
         <!-- Cable stub entering connector body -->
-        <rect x="534" y="137" width="22" height="10" rx="2" fill="#64748b"/>
+        <rect x="534" y="119" width="22" height="10" rx="2" fill="#64748b"/>
         <!-- Connector body -->
-        <rect x="554" y="128" width="28" height="22" rx="4" fill="#c8d5e0" stroke="#94a3af" stroke-width="1.8"/>
+        <rect x="554" y="112" width="28" height="22" rx="4" fill="#c8d5e0" stroke="#94a3af" stroke-width="1.8"/>
         <!-- Clip tab -->
-        <path d="M557,150 L567,158 L577,150" stroke="#8fa0b0" stroke-width="1.8" fill="#c8d5e0" stroke-linejoin="round"/>
+        <path d="M557,134 L567,142 L577,134" stroke="#8fa0b0" stroke-width="1.8" fill="#c8d5e0" stroke-linejoin="round"/>
         <!-- 8 conductors at top edge (T568B order) -->
-        <line x1="557" y1="128" x2="557" y2="123" stroke="#d97706" stroke-width="2.8"/>
-        <line x1="560" y1="128" x2="560" y2="123" stroke="#fde68a" stroke-width="2.8"/>
-        <line x1="563" y1="128" x2="563" y2="123" stroke="#f97316" stroke-width="2.8"/>
-        <line x1="566" y1="128" x2="566" y2="123" stroke="#bbf7d0" stroke-width="2.8"/>
-        <line x1="569" y1="128" x2="569" y2="123" stroke="#3b82f6" stroke-width="2.8"/>
-        <line x1="572" y1="128" x2="572" y2="123" stroke="#bfdbfe" stroke-width="2.8"/>
-        <line x1="575" y1="128" x2="575" y2="123" stroke="#22c55e" stroke-width="2.8"/>
-        <line x1="578" y1="128" x2="578" y2="123" stroke="#e2e8f0" stroke-width="2.8"/>
+        <line x1="557" y1="112" x2="557" y2="107" stroke="#d97706" stroke-width="2.8"/>
+        <line x1="560" y1="112" x2="560" y2="107" stroke="#fde68a" stroke-width="2.8"/>
+        <line x1="563" y1="112" x2="563" y2="107" stroke="#f97316" stroke-width="2.8"/>
+        <line x1="566" y1="112" x2="566" y2="107" stroke="#bbf7d0" stroke-width="2.8"/>
+        <line x1="569" y1="112" x2="569" y2="107" stroke="#3b82f6" stroke-width="2.8"/>
+        <line x1="572" y1="112" x2="572" y2="107" stroke="#bfdbfe" stroke-width="2.8"/>
+        <line x1="575" y1="112" x2="575" y2="107" stroke="#22c55e" stroke-width="2.8"/>
+        <line x1="578" y1="112" x2="578" y2="107" stroke="#e2e8f0" stroke-width="2.8"/>
         <!-- Conductor window -->
-        <rect x="556" y="131" width="22" height="14" rx="2" fill="rgba(255,255,255,0.22)"/>
+        <rect x="556" y="115" width="22" height="14" rx="2" fill="rgba(255,255,255,0.22)"/>
 
         <!-- 5 ALIENS drawn AFTER cable (appear on top) -->
         <!-- Each at translate(X, 90): upper hand at (X+33, 136), lower hand at (X+33, 148) -->
         <!-- Cable y≈142-146 passes BETWEEN both hands — all aliens visibly grip the cable -->
 
         <!-- Alien 5 (back, leftmost) — hands at x=71 -->
-        <g transform="translate(38,108) scale(0.65)">
+        <g transform="translate(38,90) scale(0.65)">
           <animateTransform attributeName="transform" type="translate"
             values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.00s" repeatCount="indefinite" additive="sum"/>
           <use href="#malien"/>
         </g>
         <!-- Alien 4 — hands at x=131 -->
-        <g transform="translate(98,108) scale(0.65)">
+        <g transform="translate(98,90) scale(0.65)">
           <animateTransform attributeName="transform" type="translate"
             values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.12s" repeatCount="indefinite" additive="sum"/>
           <use href="#malien"/>
         </g>
         <!-- Alien 3 — hands at x=191 -->
-        <g transform="translate(158,108) scale(0.65)">
+        <g transform="translate(158,90) scale(0.65)">
           <animateTransform attributeName="transform" type="translate"
             values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.24s" repeatCount="indefinite" additive="sum"/>
           <use href="#malien"/>
         </g>
         <!-- Alien 2 — hands at x=251 -->
-        <g transform="translate(218,108) scale(0.65)">
+        <g transform="translate(218,90) scale(0.65)">
           <animateTransform attributeName="transform" type="translate"
             values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.36s" repeatCount="indefinite" additive="sum"/>
           <use href="#malien"/>
         </g>
         <!-- Alien 1 (front) — hands at x=311, gripping near RJ45 -->
-        <g transform="translate(278,108) scale(0.65)">
+        <g transform="translate(278,90) scale(0.65)">
           <animateTransform attributeName="transform" type="translate"
             values="0,0;0,4;0,0" keyTimes="0;0.5;1" dur="0.65s" begin="0.48s" repeatCount="indefinite" additive="sum"/>
           <use href="#malien"/>
@@ -2500,7 +2501,7 @@ document.addEventListener('click', () => {
 #server-push-anim {
   grid-column: 1 / -1;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: -4rem;
   line-height: 0;
   overflow: visible;
 }
