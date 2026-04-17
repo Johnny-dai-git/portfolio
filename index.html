@@ -1106,10 +1106,10 @@ footer a:hover { color: var(--accent); }
   <text x="280" y="92" text-anchor="middle" fill="#22d3ee" font-size="9" font-family="monospace" font-weight="700">Switch</text>
   <text x="280" y="103" text-anchor="middle" fill="#475569" font-size="7.5" font-family="monospace">InfiniBand</text>
 
-  <!-- Switch aggregation burst (t≈3.7s, kt=0.264) -->
+  <!-- Switch aggregation burst (last packet V100 arrives t=3.8s, kt=0.271) -->
   <circle cx="280" cy="98" r="0" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0">
-    <animate attributeName="r"       values="0;0;0;36;54;0;0" keyTimes="0;0.250;0.264;0.279;0.307;0.329;1" dur="14s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0;0.9;0.1;0;0" keyTimes="0;0.250;0.264;0.279;0.307;0.329;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="r"       values="0;0;0;36;54;0;0" keyTimes="0;0.264;0.279;0.293;0.321;0.343;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0;0.9;0.1;0;0" keyTimes="0;0.264;0.279;0.293;0.321;0.343;1" dur="14s" repeatCount="indefinite"/>
   </circle>
 
   <!-- ══ PARAMETER SERVER ══ -->
@@ -1124,56 +1124,56 @@ footer a:hover { color: var(--accent); }
   <circle cx="507" cy="98" r="4" fill="#a855f7"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/></circle>
   <!-- Sync LED red→green -->
   <circle cx="507" cy="112" r="4.5" fill="#ef4444">
-    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.500;0.514;0.893;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.536;0.550;0.929;1" dur="14s" repeatCount="indefinite"/>
   </circle>
   <circle cx="507" cy="112" r="4.5" fill="#22c55e" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.500;0.514;0.893;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.536;0.550;0.929;1" dur="14s" repeatCount="indefinite"/>
   </circle>
   <text x="563" y="148" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Parameter Server</text>
   <!-- PS arrival burst -->
   <circle cx="488" cy="98" r="0" fill="#22c55e" opacity="0">
-    <animate attributeName="r"       values="0;0;40;0;0"   keyTimes="0;0.500;0.529;0.564;1" dur="14s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.4;0;0"  keyTimes="0;0.500;0.529;0.564;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="r"       values="0;0;40;0;0"   keyTimes="0;0.536;0.564;0.600;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0.4;0;0"  keyTimes="0;0.536;0.564;0.600;1" dur="14s" repeatCount="indefinite"/>
   </circle>
 
   <!-- ══ GRADIENT PACKETS  Heterogeneous nodes → Switch ══ -->
-  <!-- A100 (blue): depart t=0.0s(kt=0.000) arrive t=2.5s(kt=0.179) -->
+  <!-- A100 (blue): 2nd fastest — depart t=0.5s(kt=0.036) arrive t=2.8s(kt=0.200) -->
   <circle r="7" fill="#3b82f6" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="1;1;0;0"         keyTimes="0;0.179;0.214;1"      dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.036;0.200;0.236;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;1;1" keyTimes="0;0.179;1"
+      keyPoints="0;0;1;1" keyTimes="0;0.036;0.200;1"
       path="M 88,29 C 162,29 200,78 235,78"/>
   </circle>
 
-  <!-- V100 (emerald): depart t=0.3s(kt=0.021) arrive t=2.8s(kt=0.200) -->
+  <!-- V100 (emerald): slowest — depart t=2.0s(kt=0.143) arrive t=3.8s(kt=0.271) -->
   <circle r="7" fill="#10b981" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.021;0.200;0.236;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.143;0.271;0.307;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.021;0.200;1"
+      keyPoints="0;0;1;1" keyTimes="0;0.143;0.271;1"
       path="M 88,75 C 183,75 220,92 235,92"/>
   </circle>
 
-  <!-- H100 (violet): depart t=0.6s(kt=0.043) arrive t=3.1s(kt=0.221) -->
+  <!-- H100 (violet): FASTEST — depart t=0.0s(kt=0.000) arrive t=2.5s(kt=0.179) -->
   <circle r="7" fill="#8b5cf6" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.043;0.221;0.257;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;1;0;0"         keyTimes="0;0.179;0.214;1"       dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.043;0.221;1"
+      keyPoints="0;1;1" keyTimes="0;0.179;1"
       path="M 88,121 C 183,121 220,106 235,106"/>
   </circle>
 
-  <!-- A10G (orange): depart t=0.9s(kt=0.064) arrive t=3.4s(kt=0.243) -->
+  <!-- A10G (orange): 3rd — depart t=1.2s(kt=0.086) arrive t=3.2s(kt=0.229) -->
   <circle r="7" fill="#f97316" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.064;0.243;0.279;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.086;0.229;0.264;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.064;0.243;1"
+      keyPoints="0;0;1;1" keyTimes="0;0.086;0.229;1"
       path="M 88,167 C 162,167 200,120 235,120"/>
   </circle>
 
-  <!-- ══ AGGREGATED PACKET  Switch → PS  (depart t=4.0s kt=0.286, arrive t=7.0s kt=0.500) ══ -->
+  <!-- ══ AGGREGATED PACKET  Switch → PS  (depart t=4.5s kt=0.321, arrive t=7.5s kt=0.536) ══ -->
   <circle r="11" fill="white" opacity="0" filter="url(#dml-glow-lg)">
-    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.279;0.286;0.500;0.536;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.307;0.321;0.536;0.571;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;0;1;1;1" keyTimes="0;0.279;0.286;0.500;0.536;1"
+      keyPoints="0;0;0;1;1;1" keyTimes="0;0.307;0.321;0.536;0.571;1"
       path="M 325,98 L 488,98"/>
   </circle>
 
@@ -1181,25 +1181,25 @@ footer a:hover { color: var(--accent); }
   <g>
     <animateTransform attributeName="transform" type="translate"
       values="0,16; 0,16; 0,0; 0,0; 0,16; 0,16"
-      keyTimes="0;0.500;0.536;0.857;0.893;1"
+      keyTimes="0;0.536;0.571;0.857;0.893;1"
       dur="14s" repeatCount="indefinite"/>
     <rect x="487" y="-62" width="153" height="52" rx="10" fill="#6366f1" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </rect>
     <line x1="563" y1="-10" x2="563" y2="57" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2" opacity="0">
-      <animate attributeName="opacity" values="0;0;0.7;0.7;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;0.7;0.7;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </line>
     <text x="563" y="-43" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="10" font-family="'Inter','Segoe UI',sans-serif" opacity="0">
       &#x2713; Sync complete!
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
     <text x="563" y="-26" text-anchor="middle" fill="white" font-size="15" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" opacity="0">
       Email me! &#x2709;
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
     <text x="563" y="-13" text-anchor="middle" fill="rgba(255,255,255,0.78)" font-size="10" font-family="'Inter',monospace" opacity="0">
       yxd429@case.edu
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
   </g>
 </svg>
