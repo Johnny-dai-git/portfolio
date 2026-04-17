@@ -609,6 +609,79 @@ footer a:hover { color: var(--accent); }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
+/* ── LANGUAGE SWITCHER ───────────────────────────────────────── */
+.lang-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.15);
+  color: var(--text3);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.lang-btn:hover {
+  background: rgba(37,99,235,0.15);
+  border-color: rgba(37,99,235,0.3);
+  color: var(--accent);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+  min-width: 140px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s;
+  z-index: 200;
+}
+
+.lang-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text2);
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.lang-option:hover {
+  background: var(--bg2);
+  color: var(--accent);
+}
+
+.lang-option.active {
+  background: var(--bg);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .about-grid    { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
@@ -620,6 +693,7 @@ footer a:hover { color: var(--accent); }
   nav { padding: 0 1rem; }
   .nav-links { gap: 1rem; }
   .nav-links a { font-size: 0.82rem; }
+  .lang-btn { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
 }
 </style>
 </head>
@@ -629,12 +703,20 @@ footer a:hover { color: var(--accent); }
 <nav>
   <div class="nav-logo">jd<span>.</span>dev</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Papers</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about" data-i18n="nav.about">About</a></li>
+    <li><a href="#research" data-i18n="nav.research">Research</a></li>
+    <li><a href="#publications" data-i18n="nav.papers">Papers</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
   </ul>
+  <div class="lang-switcher" id="langSwitcher">
+    <button class="lang-btn" id="langBtn">EN ▾</button>
+    <div class="lang-dropdown" id="langDropdown">
+      <div class="lang-option active" data-lang="en">English</div>
+      <div class="lang-option" data-lang="zh_hans">简体中文</div>
+      <div class="lang-option" data-lang="zh_hant">繁體中文</div>
+    </div>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -670,34 +752,34 @@ footer a:hover { color: var(--accent); }
   <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10;" id="slide-dots"></div>
 
   <div class="hero-inner">
-    <div class="hero-badge">PhD Candidate · Case Western Reserve University</div>
+    <div class="hero-badge" data-i18n="hero.badge">PhD Candidate · Case Western Reserve University</div>
     <h1 class="hero-name"><span class="grad">Yuanjun Dai</span></h1>
-    <p class="hero-title">Distributed ML Systems &nbsp;·&nbsp; eBPF Observability &nbsp;·&nbsp; LLM Deployment &nbsp;·&nbsp; ML Security &nbsp;·&nbsp; Cloud HPC</p>
-    <p class="hero-desc">
+    <p class="hero-title" data-i18n="hero.title">Distributed ML Systems &nbsp;·&nbsp; eBPF Observability &nbsp;·&nbsp; LLM Deployment &nbsp;·&nbsp; ML Security &nbsp;·&nbsp; Cloud HPC</p>
+    <p class="hero-desc" data-i18n="hero.desc">
       Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.
     </p>
     <div class="hero-links">
       <a href="mailto:yxd429@case.edu" class="btn btn-primary">
         <svg width="13" height="13" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-        Get in Touch
+        <span data-i18n="hero.btn.contact">Get in Touch</span>
       </a>
       <a href="https://github.com/Johnny-dai-git" target="_blank" class="btn btn-outline">
         <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
+        <span>GitHub</span>
       </a>
       <a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank" class="btn btn-outline">
         <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
-        Google Scholar
+        <span>Google Scholar</span>
       </a>
       <a href="resumes/Yuanjun_Dai_Resume.pdf?v=3" target="_blank" class="btn btn-outline">
         <svg width="13" height="13" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
-        Download CV
+        <span data-i18n="hero.btn.cv">Download CV</span>
       </a>
     </div>
     <div class="hero-stats" style="margin-top:4rem;">
-      <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Publications</div></div>
-      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">First-Author</div></div>
-      <div class="stat-item"><div class="stat-num">64</div><div class="stat-label">A100 GPUs</div></div>
+      <div class="stat-item"><div class="stat-num">8</div><div class="stat-label" data-i18n="hero.stat.pubs">Publications</div></div>
+      <div class="stat-item"><div class="stat-num">7</div><div class="stat-label" data-i18n="hero.stat.first">First-Author</div></div>
+      <div class="stat-item"><div class="stat-num">64</div><div class="stat-label" data-i18n="hero.stat.gpus">A100 GPUs</div></div>
     </div>
   </div>
 </div>
@@ -706,40 +788,40 @@ footer a:hover { color: var(--accent); }
 <section id="about">
   <div class="section-header fade-in">
     <span class="section-num">01</span>
-    <h2 class="section-title">About</h2>
+    <h2 class="section-title" data-i18n="about.title">About</h2>
     <div class="section-line"></div>
   </div>
   <div class="about-grid">
     <div class="about-text fade-in">
-      <p>I'm a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University,
+      <p data-i18n="about.p1">I'm a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University,
       specializing in AI infrastructure, distributed ML systems, and eBPF-based observability.
       My research sits at the intersection of systems software and machine learning — building
       the low-level infrastructure that makes large-scale AI training and inference efficient.</p>
-      <p>I've authored <strong>8 papers (7 first-author)</strong>: <strong>5 published</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm, with 3 more under review (incl. ACM TOPS). Before my PhD, I worked in industry at
+      <p data-i18n="about.p2">I've authored <strong>8 papers (7 first-author)</strong>: <strong>5 published</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm, with 3 more under review (incl. ACM TOPS). Before my PhD, I worked in industry at
       <strong>Cisco</strong>, <strong>Broadcom</strong>, <strong>Midea Group</strong>, and
       <strong>Xiaomi</strong>, spanning low-level systems engineering (NPU/ASIC, HPC) to product ownership and consumer product launch.</p>
       <div class="about-contact">
-        <div class="contact-item"><div class="contact-icon">📍</div>Cleveland, OH</div>
+        <div class="contact-item"><div class="contact-icon">📍</div><span data-i18n="about.location">Cleveland, OH</span></div>
         <div class="contact-item"><div class="contact-icon">✉️</div><a href="mailto:yxd429@case.edu">yxd429@case.edu</a></div>
-        <div class="contact-item"><div class="contact-icon">📞</div>216-269-2394</div>
+        <div class="contact-item"><div class="contact-icon">📞</div><span>216-269-2394</span></div>
         <div class="contact-item"><div class="contact-icon">🐙</div><a href="https://github.com/Johnny-dai-git" target="_blank">github.com/Johnny-dai-git</a></div>
       </div>
     </div>
     <div class="edu-cards fade-in">
       <div class="edu-card">
-        <div class="edu-degree">Ph.D. in Computer Science</div>
-        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;">AI Infrastructure</div>
-        <div class="edu-school">Case Western Reserve University</div>
-        <div class="edu-date">08/2019 – Present</div>
+        <div class="edu-degree" data-i18n="about.edu.phd.degree">Ph.D. in Computer Science</div>
+        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;" data-i18n="about.edu.phd.field">AI Infrastructure</div>
+        <div class="edu-school" data-i18n="about.edu.phd.school">Case Western Reserve University</div>
+        <div class="edu-date" data-i18n="about.edu.phd.date">08/2019 – Present</div>
       </div>
       <div class="edu-card" style="border-left-color:var(--teal);">
-        <div class="edu-degree">M.S. in Electrical and Computer Engineering</div>
-        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;">Computer Microarchitecture</div>
-        <div class="edu-school">University of Pittsburgh</div>
+        <div class="edu-degree" data-i18n="about.edu.ms.degree">M.S. in Electrical and Computer Engineering</div>
+        <div style="font-size: 0.92rem;color:var(--text3);margin-top:2px;" data-i18n="about.edu.ms.field">Computer Microarchitecture</div>
+        <div class="edu-school" data-i18n="about.edu.ms.school">University of Pittsburgh</div>
       </div>
       <div class="edu-card" style="border-left-color:var(--green);">
-        <div class="edu-degree">B.S. in Electrical Engineering</div>
-        <div class="edu-school">Northeastern University</div>
+        <div class="edu-degree" data-i18n="about.edu.bs.degree">B.S. in Electrical Engineering</div>
+        <div class="edu-school" data-i18n="about.edu.bs.school">Northeastern University</div>
       </div>
     </div>
   </div>
@@ -749,11 +831,11 @@ footer a:hover { color: var(--accent); }
 <section id="research" style="background:var(--bg2);border-radius:24px;">
   <div class="section-header fade-in">
     <span class="section-num">02</span>
-    <h2 class="section-title">Research Projects</h2>
+    <h2 class="section-title" data-i18n="research.title">Research Projects</h2>
     <div class="section-line"></div>
   </div>
   <div class="tag-legend fade-in" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;align-items:center;">
-    <span style="font-size:0.78rem;color:#64748b;font-weight:600;margin-right:0.25rem;">Tag categories:</span>
+    <span style="font-size:0.78rem;color:#64748b;font-weight:600;margin-right:0.25rem;" data-i18n="research.taglegend">Tag categories:</span>
     <span class="tag tag-ml">ML / AI</span>
     <span class="tag tag-dist">Distributed Systems</span>
     <span class="tag tag-llm">LLM / NLP</span>
@@ -765,8 +847,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-ml">Reinforcement Learning</span><span class="tag tag-ml">PPO</span><span class="tag tag-dist">PyTorch DDP</span><span class="tag tag-dist">BytePS</span><span class="tag tag-llm">Batch Scheduling</span><span class="tag tag-llm">A100 GPU</span><span class="tag tag-dist">Model Training</span></div>
-      <div class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</div>
-      <div class="proj-desc">System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.</div>
+      <div class="proj-name" data-i18n="research.proj1.name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</div>
+      <div class="proj-desc" data-i18n="research.proj1.desc">System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.</div>
       <div class="proj-links">
         <a href="https://arxiv.org/abs/2510.08522" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/DML-via-RL" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -775,8 +857,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-dist">Model Training</span><span class="tag tag-ml">Transport Protocol</span><span class="tag tag-dist">NCCL</span><span class="tag tag-ml">Gradient Prioritization</span><span class="tag tag-ebpf">Kernel Bypass</span><span class="tag tag-ml">SACK</span><span class="tag tag-dist">Cross-Datacenter</span></div>
-      <div class="proj-name">PRISM – Priority-Aware Transport for Distributed ML Training</div>
-      <div class="proj-desc">Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.</div>
+      <div class="proj-name" data-i18n="research.proj2.name">PRISM – Priority-Aware Transport for Distributed ML Training</div>
+      <div class="proj-desc" data-i18n="research.proj2.desc">Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <span class="proj-link-btn link-review">🔄 Under Review</span>
@@ -785,8 +867,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Side-Channel</span><span class="tag tag-sec">MLaaS Security</span><span class="tag tag-dist">MXNet</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ebpf">Intel RAPL</span><span class="tag tag-dist">BSP / PS Arch</span><span class="tag tag-ml">Model Reconstruction</span></div>
-      <div class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
-      <div class="proj-desc">Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.</div>
+      <div class="proj-name" data-i18n="research.proj3.name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
+      <div class="proj-desc" data-i18n="research.proj3.desc">Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.</div>
       <div class="proj-links">
         <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -795,8 +877,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-dist">Network Telemetry</span><span class="tag tag-ebpf">In-Kernel</span><span class="tag tag-ml">Count-Min Sketch</span><span class="tag tag-ebpf">Atomic Operations</span><span class="tag tag-dist">Retransmission Detection</span><span class="tag tag-dist">Flow Reconstruction</span></div>
-      <div class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</div>
-      <div class="proj-desc">In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.</div>
+      <div class="proj-name" data-i18n="research.proj4.name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</div>
+      <div class="proj-desc" data-i18n="research.proj4.desc">In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Psketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -805,8 +887,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-ebpf">HashPipe Algorithm</span><span class="tag tag-ebpf">Top-K Tracking</span><span class="tag tag-ebpf">Per-PID Profiling</span><span class="tag tag-dist">In-Kernel Telemetry</span><span class="tag tag-ml">DML Observability</span></div>
-      <div class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</div>
-      <div class="proj-desc">Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe's <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.</div>
+      <div class="proj-name" data-i18n="research.proj5.name">High-Resolution eBPF System Resource Profiling for DML Workloads</div>
+      <div class="proj-desc" data-i18n="research.proj5.desc">Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe's <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -815,8 +897,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sdn">SDN</span><span class="tag tag-sec">DDoS Mitigation</span><span class="tag tag-dist">Control-Plane Elasticity</span><span class="tag tag-sdn">OvS Overlay</span><span class="tag tag-sdn">OpenFlow</span><span class="tag tag-dist">Round-Robin Scheduling</span><span class="tag tag-dist">Large-Flow Migration</span><span class="tag tag-ml">ECMP Load Balancing</span></div>
-      <div class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</div>
-      <div class="proj-desc">Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.</div>
+      <div class="proj-name" data-i18n="research.proj6.name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</div>
+      <div class="proj-desc" data-i18n="research.proj6.desc">Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.</div>
       <div class="proj-links">
         <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
         <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
@@ -825,8 +907,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-llm">LLM Inference</span><span class="tag tag-llm">vLLM / TensorRT-LLM</span><span class="tag tag-llm">Continuous Batching</span><span class="tag tag-dist">NVIDIA Device Plugin</span><span class="tag tag-dist">ArgoCD GitOps</span><span class="tag tag-ml">DCGM GPU Telemetry</span><span class="tag tag-sec">Zero-Trust NetworkPolicy</span><span class="tag tag-ml">Prometheus / Grafana</span></div>
-      <div class="proj-name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</div>
-      <div class="proj-desc">K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.</div>
+      <div class="proj-name" data-i18n="research.proj7.name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</div>
+      <div class="proj-desc" data-i18n="research.proj7.desc">K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.</div>
       <div class="proj-links">
         <a href="https://github.com/Johnny-dai-git/llm-deployment" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
@@ -834,8 +916,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-dist">DeepSpeed ZeRO-3</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
-      <div class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
-      <div class="proj-desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
+      <div class="proj-name" data-i18n="research.proj8.name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
+      <div class="proj-desc" data-i18n="research.proj8.desc">Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT's self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -843,8 +925,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
-      <div class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
-      <div class="proj-desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM's ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
+      <div class="proj-name" data-i18n="research.proj9.name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
+      <div class="proj-desc" data-i18n="research.proj9.desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM's ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -852,8 +934,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ml">Microarchitecture</span><span class="tag tag-ml">Pipelined CPU</span><span class="tag tag-ml">Hazard Resolution</span><span class="tag tag-ml">ASIC P&amp;R</span></div>
-      <div class="proj-name">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
-      <div class="proj-desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
+      <div class="proj-name" data-i18n="research.proj10.name">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
+      <div class="proj-desc" data-i18n="research.proj10.desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
       <div class="proj-links">
         <a href="https://github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
@@ -861,8 +943,8 @@ footer a:hover { color: var(--accent); }
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-dist">Distributed Systems</span><span class="tag tag-dist">P2P Networking</span><span class="tag tag-dist">Socket Programming</span><span class="tag tag-ml">Java</span><span class="tag tag-dist">Multi-threading</span><span class="tag tag-dist">UDP / TCP</span></div>
-      <div class="proj-name">P2P File Sharing System</div>
-      <div class="proj-desc">Gnutella-style decentralized P2P file sharing in Java: UDP Ping/Pong for peer discovery, flooding-based QUERY propagation with traceback routing for indirect responses, and TCP for reliable file transfer; multi-threaded architecture (UDP listener, TCP query/file listeners, CentralControl) with ConcurrentHashMap + ConcurrentLinkedQueue for thread-safe state; query deduplication prevents redundant flooding.</div>
+      <div class="proj-name" data-i18n="research.proj11.name">P2P File Sharing System</div>
+      <div class="proj-desc" data-i18n="research.proj11.desc">Gnutella-style decentralized P2P file sharing in Java: UDP Ping/Pong for peer discovery, flooding-based QUERY propagation with traceback routing for indirect responses, and TCP for reliable file transfer; multi-threaded architecture (UDP listener, TCP query/file listeners, CentralControl) with ConcurrentHashMap + ConcurrentLinkedQueue for thread-safe state; query deduplication prevents redundant flooding.</div>
       <div class="proj-links">
         <a href="https://github.com/Johnny-dai-git/P2P-File-Sharing-System" target="_blank" class="proj-link-btn link-code">💻 Code</a>
       </div>
@@ -875,21 +957,21 @@ footer a:hover { color: var(--accent); }
 <section id="publications">
   <div class="section-header fade-in">
     <span class="section-num">03</span>
-    <h2 class="section-title">Publications</h2>
+    <h2 class="section-title" data-i18n="pub.title">Publications</h2>
     <div class="section-line"></div>
   </div>
 
   <div class="pub-summary-card fade-in">
-    <div class="pub-stat"><div class="pub-stat-num">8</div><div class="pub-stat-label">Total Papers</div></div>
+    <div class="pub-stat"><div class="pub-stat-num">8</div><div class="pub-stat-label" data-i18n="pub.total">Total Papers</div></div>
     <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">7</div><div class="pub-stat-label">First-Author</div></div>
+    <div class="pub-stat"><div class="pub-stat-num">7</div><div class="pub-stat-label" data-i18n="pub.firstauthor">First-Author</div></div>
     <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">5</div><div class="pub-stat-label">Published</div></div>
+    <div class="pub-stat"><div class="pub-stat-num">5</div><div class="pub-stat-label" data-i18n="pub.published">Published</div></div>
     <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">3</div><div class="pub-stat-label">Under Review</div></div>
+    <div class="pub-stat"><div class="pub-stat-num">3</div><div class="pub-stat-label" data-i18n="pub.review">Under Review</div></div>
     <div class="pub-divider"></div>
     <div class="pub-venues">
-      <p>Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
+      <p data-i18n="pub.venues">Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
       </p>
     </div>
   </div>
@@ -936,7 +1018,7 @@ footer a:hover { color: var(--accent); }
 <section id="experience" style="background:var(--bg2);border-radius:24px;">
   <div class="section-header fade-in">
     <span class="section-num">04</span>
-    <h2 class="section-title">Work Experience</h2>
+    <h2 class="section-title" data-i18n="exp.title">Work Experience</h2>
     <div class="section-line"></div>
   </div>
   <div class="timeline">
@@ -944,14 +1026,14 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Research Assistant, AI Infrastructure &amp; ML Systems</div>
-          <div class="exp-date">08/2019 – Present</div>
+          <div class="exp-role" data-i18n="exp.ra.role">Research Assistant, AI Infrastructure &amp; ML Systems</div>
+          <div class="exp-date" data-i18n="exp.ra.date">08/2019 – Present</div>
         </div>
-        <div class="exp-org">Case Western Reserve University</div>
+        <div class="exp-org" data-i18n="exp.ra.org">Case Western Reserve University</div>
         <ul class="exp-bullets">
-          <li>Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment</li>
-          <li><strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)</li>
-          <li>Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong></li>
+          <li data-i18n="exp.ra.bullet1">Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment</li>
+          <li data-i18n="exp.ra.bullet2"><strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)</li>
+          <li data-i18n="exp.ra.bullet3">Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong></li>
         </ul>
       </div>
     </div>
@@ -959,13 +1041,13 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Technical Product Manager</div>
-          <div class="exp-date">07/2018 – 01/2019</div>
+          <div class="exp-role" data-i18n="exp.xiaomi_tpm.role">Technical Product Manager</div>
+          <div class="exp-date" data-i18n="exp.xiaomi_tpm.date">07/2018 – 01/2019</div>
         </div>
-        <div class="exp-org">Xiaomi</div>
+        <div class="exp-org" data-i18n="exp.xiaomi_tpm.org">Xiaomi</div>
         <ul class="exp-bullets">
-          <li>Market-facing PM role: conducted competitive analysis and user research to define product requirements for a smart IoT appliance</li>
-          <li>Assessed technical feasibility and complexity of proposed features; delivered initial technical proposals covering architecture trade-offs and implementation risks to align engineering and business stakeholders</li>
+          <li data-i18n="exp.xiaomi_tpm.bullet1">Market-facing PM role: conducted competitive analysis and user research to define product requirements for a smart IoT appliance</li>
+          <li data-i18n="exp.xiaomi_tpm.bullet2">Assessed technical feasibility and complexity of proposed features; delivered initial technical proposals covering architecture trade-offs and implementation risks to align engineering and business stakeholders</li>
         </ul>
       </div>
     </div>
@@ -973,14 +1055,14 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Product Manager</div>
-          <div class="exp-date">09/2016 – 06/2018</div>
+          <div class="exp-role" data-i18n="exp.midea.role">Product Manager</div>
+          <div class="exp-date" data-i18n="exp.midea.date">09/2016 – 06/2018</div>
         </div>
-        <div class="exp-org">Midea Group</div>
+        <div class="exp-org" data-i18n="exp.midea.org">Midea Group</div>
         <ul class="exp-bullets">
-          <li>Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design</li>
-          <li>Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX — bridging product requirements and engineering execution</li>
-          <li>Product debuted at <strong>2018 AWE Show</strong> and won the <strong>Red Dot Design Award</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a></li>
+          <li data-i18n="exp.midea.bullet1">Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design</li>
+          <li data-i18n="exp.midea.bullet2">Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX — bridging product requirements and engineering execution</li>
+          <li data-i18n-html="exp.midea.bullet3">Product debuted at <strong>2018 AWE Show</strong> and won the <strong>Red Dot Design Award</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a></li>
         </ul>
       </div>
     </div>
@@ -988,13 +1070,13 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Software Engineer II</div>
-          <div class="exp-date">06/2015 – 08/2016</div>
+          <div class="exp-role" data-i18n="exp.cisco.role">Software Engineer II</div>
+          <div class="exp-date" data-i18n="exp.cisco.date">06/2015 – 08/2016</div>
         </div>
-        <div class="exp-org">Cisco Systems, Inc.</div>
+        <div class="exp-org" data-i18n="exp.cisco.org">Cisco Systems, Inc.</div>
         <ul class="exp-bullets">
-          <li>Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK</li>
-          <li>Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load</li>
+          <li data-i18n="exp.cisco.bullet1">Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK</li>
+          <li data-i18n="exp.cisco.bullet2">Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load</li>
         </ul>
       </div>
     </div>
@@ -1002,13 +1084,13 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Software Engineer Intern</div>
-          <div class="exp-date">10/2014 – 05/2015</div>
+          <div class="exp-role" data-i18n="exp.broadcom.role">Software Engineer Intern</div>
+          <div class="exp-date" data-i18n="exp.broadcom.date">10/2014 – 05/2015</div>
         </div>
-        <div class="exp-org">Broadcom (Emulex)</div>
+        <div class="exp-org" data-i18n="exp.broadcom.org">Broadcom (Emulex)</div>
         <ul class="exp-bullets">
-          <li>Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong></li>
-          <li>Ported Linux-only BladeEngine ASIC management CLI to Windows Server</li>
+          <li data-i18n="exp.broadcom.bullet1">Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong></li>
+          <li data-i18n="exp.broadcom.bullet2">Ported Linux-only BladeEngine ASIC management CLI to Windows Server</li>
         </ul>
       </div>
     </div>
@@ -1016,12 +1098,12 @@ footer a:hover { color: var(--accent); }
       <div class="timeline-dot"></div>
       <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-role">Engineer Intern</div>
-          <div class="exp-date">01/2014 – 04/2014</div>
+          <div class="exp-role" data-i18n="exp.tenova.role">Engineer Intern</div>
+          <div class="exp-date" data-i18n="exp.tenova.date">01/2014 – 04/2014</div>
         </div>
-        <div class="exp-org">Tenova I2S</div>
+        <div class="exp-org" data-i18n="exp.tenova.org">Tenova I2S</div>
         <ul class="exp-bullets">
-          <li>Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness</li>
+          <li data-i18n="exp.tenova.bullet1">Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness</li>
         </ul>
       </div>
     </div>
@@ -1032,19 +1114,19 @@ footer a:hover { color: var(--accent); }
 <section id="skills">
   <div class="section-header fade-in">
     <span class="section-num">05</span>
-    <h2 class="section-title">Skills</h2>
+    <h2 class="section-title" data-i18n="skills.title">Skills</h2>
     <div class="section-line"></div>
   </div>
   <div class="skills-section">
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">Languages</div>
+      <div class="skill-cat-label" data-i18n="skills.cat1">Languages</div>
       <div class="skill-tags">
         <span class="skill-tag">Python</span><span class="skill-tag">C/C++</span>
         <span class="skill-tag">Java</span><span class="skill-tag">Bash</span>
       </div>
     </div>
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">AI / ML</div>
+      <div class="skill-cat-label" data-i18n="skills.cat2">AI / ML</div>
       <div class="skill-tags">
         <span class="skill-tag">PyTorch DDP/FSDP</span><span class="skill-tag">TensorFlow</span>
         <span class="skill-tag">BytePS</span><span class="skill-tag">Megatron-LM</span>
@@ -1052,7 +1134,7 @@ footer a:hover { color: var(--accent); }
       </div>
     </div>
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">Infrastructure</div>
+      <div class="skill-cat-label" data-i18n="skills.cat3">Infrastructure</div>
       <div class="skill-tags">
         <span class="skill-tag">Kubernetes</span><span class="skill-tag">Docker</span>
         <span class="skill-tag">CI/CD</span><span class="skill-tag">ArgoCD</span><span class="skill-tag">Helm</span>
@@ -1061,7 +1143,7 @@ footer a:hover { color: var(--accent); }
       </div>
     </div>
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">Observability</div>
+      <div class="skill-cat-label" data-i18n="skills.cat4">Observability</div>
       <div class="skill-tags">
         <span class="skill-tag">eBPF</span><span class="skill-tag">Prometheus</span>
         <span class="skill-tag">Grafana</span><span class="skill-tag">DCGM Exporter</span>
@@ -1069,16 +1151,16 @@ footer a:hover { color: var(--accent); }
       </div>
     </div>
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">Cloud & HPC</div>
+      <div class="skill-cat-label" data-i18n="skills.cat5">Cloud & HPC</div>
       <div class="skill-tags">
-        
+
         <span class="skill-tag">Lambda Labs HPC</span><span class="skill-tag">NSF FABRIC</span><span class="skill-tag">CloudLab</span>
         <span class="skill-tag">SDN / OpenFlow</span><span class="skill-tag">Ryu</span>
         <span class="skill-tag">P4</span><span class="skill-tag">NPU/ASIC</span><span class="skill-tag">BCM SDK</span>
       </div>
     </div>
     <div class="skill-category fade-in">
-      <div class="skill-cat-label">Research Areas</div>
+      <div class="skill-cat-label" data-i18n="skills.cat6">Research Areas</div>
       <div class="skill-tags">
         <span class="skill-tag">Distributed ML</span><span class="skill-tag">ML Security</span>
         <span class="skill-tag">Side-Channel Analysis</span><span class="skill-tag">RL Scheduling</span>
@@ -1090,7 +1172,7 @@ footer a:hover { color: var(--accent); }
 
 <!-- ── FOOTER ── -->
 <footer>
-  <p>© 2025 Yuanjun Dai &nbsp;·&nbsp;
+  <p data-i18n="footer.copyright">© 2025 Yuanjun Dai &nbsp;·&nbsp;
     <a href="mailto:yxd429@case.edu">yxd429@case.edu</a> &nbsp;·&nbsp;
     <a href="https://github.com/Johnny-dai-git" target="_blank">GitHub</a> &nbsp;·&nbsp;
     <a href="https://scholar.google.com/citations?user=maCNFMAAAAAJ" target="_blank">Google Scholar</a>
@@ -1263,6 +1345,337 @@ const navObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.4 });
 sections.forEach(s => navObs.observe(s));
+
+/* ── LANGUAGE SWITCHER ── */
+const TRANSLATIONS = {
+  en: {
+    'nav.about': 'About',
+    'nav.research': 'Research',
+    'nav.papers': 'Papers',
+    'nav.experience': 'Experience',
+    'nav.skills': 'Skills',
+    'hero.badge': 'PhD Candidate · Case Western Reserve University',
+    'hero.title': 'Distributed ML Systems &nbsp;·&nbsp; eBPF Observability &nbsp;·&nbsp; LLM Deployment &nbsp;·&nbsp; ML Security &nbsp;·&nbsp; Cloud HPC',
+    'hero.desc': 'Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.',
+    'hero.btn.contact': 'Get in Touch',
+    'hero.btn.cv': 'Download CV',
+    'hero.stat.pubs': 'Publications',
+    'hero.stat.first': 'First-Author',
+    'hero.stat.gpus': 'A100 GPUs',
+    'about.title': 'About',
+    'about.p1': 'I\'m a <strong>PhD candidate in Computer Science</strong> at Case Western Reserve University, specializing in AI infrastructure, distributed ML systems, and eBPF-based observability. My research sits at the intersection of systems software and machine learning — building the low-level infrastructure that makes large-scale AI training and inference efficient.',
+    'about.p2': 'I\'ve authored <strong>8 papers (7 first-author)</strong>: <strong>5 published</strong> at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm, with 3 more under review (incl. ACM TOPS). Before my PhD, I worked in industry at <strong>Cisco</strong>, <strong>Broadcom</strong>, <strong>Midea Group</strong>, and <strong>Xiaomi</strong>, spanning low-level systems engineering (NPU/ASIC, HPC) to product ownership and consumer product launch.',
+    'about.location': 'Cleveland, OH',
+    'about.edu.phd.degree': 'Ph.D. in Computer Science',
+    'about.edu.phd.field': 'AI Infrastructure',
+    'about.edu.phd.school': 'Case Western Reserve University',
+    'about.edu.phd.date': '08/2019 – Present',
+    'about.edu.ms.degree': 'M.S. in Electrical and Computer Engineering',
+    'about.edu.ms.field': 'Computer Microarchitecture',
+    'about.edu.ms.school': 'University of Pittsburgh',
+    'about.edu.bs.degree': 'B.S. in Electrical Engineering',
+    'about.edu.bs.school': 'Northeastern University',
+    'research.title': 'Research Projects',
+    'research.taglegend': 'Tag categories:',
+    'research.proj1.name': 'DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML',
+    'research.proj1.desc': 'System-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous event-driven control; PPO-based centralized RL scheduler evaluated on both PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves <span class="proj-metric">46% training speedup</span> over the optimal fixed batch size strategy with improved model generalization, on up to <span class="proj-metric">64 A100 GPUs</span> at Ohio Supercomputer Center and Lambda Labs HPC.',
+    'research.proj2.name': 'PRISM – Priority-Aware Transport for Distributed ML Training',
+    'research.proj2.desc': 'Priority-based selective reliability transport between NCCL/Gloo and UDP; classifies gradients by magnitude — full retransmission for high-priority, bounded retries + local compensation for low-priority; dual congestion windows with adaptive window borrowing; GPU-accelerated TopK selection, SACK-based packet tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP under packet loss, on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at <span class="proj-metric">144-worker scale</span> on commodity infrastructure.',
+    'research.proj3.name': 'Training-Time Side-Channel Attacks on Distributed ML Systems',
+    'research.proj3.desc': 'Conducted in-depth analysis of MXNet BSP PS-architecture communication patterns via push/pull primitive instrumentation; modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic and Intel RAPL power side channels with outlier filtering and polynomial regression for energy profiling; achieved <span class="proj-metric">&gt;99% layer-type classification accuracy</span> and <span class="proj-metric">&lt;1.5% tensor-size reconstruction error</span> across ZFNet, AlexNet, and VGG variants — exposing actionable DNN architecture stealing surfaces in MLaaS co-location environments.',
+    'research.proj4.name': 'Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure',
+    'research.proj4.desc': 'In-kernel eBPF priority-aware sketch framework with multi-layer architecture: priority table (precise per-packet tracking) + heavy flow table + 3-layer Count-Min Sketch; sequence-number-based retransmission detection with configurable thresholds; atomic operations (<code>__sync_fetch_and_add</code>) for thread-safe concurrent updates; voting-based hash collision resolution and CMS minimum-value flow reconstruction; achieves <span class="proj-metric">96% Top-K accuracy, 100% priority-packet recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic replay.',
+    'research.proj5.name': 'High-Resolution eBPF System Resource Profiling for DML Workloads',
+    'research.proj5.desc': 'Kernel-level eBPF observability via dual HashPipe pipelines: memory probes on <span class="proj-metric">12 libc/kernel allocation APIs</span> (<code>malloc</code>, <code>free</code>, <code>munmap</code>) into <code>ptr2size</code> + <code>priority_vm</code> BPF maps; CPU via <code>sched_switch</code> tracepoint + <code>bpf_get_current_pid_tgid()</code>. HashPipe\'s <span class="proj-metric">O(1) per-event</span> cascading stages (vs O(N log N) sort-based Top-K) are physically unrolled via <code>#pragma unroll</code> for eBPF verifier compliance, with <code>atomic_fetch_and_add()</code> for concurrent-safe map updates; achieves <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop at ~11 ms latency with &gt;90% Top-K fidelity.',
+    'research.proj6.name': 'Scotch – Elastic SDN Overlay for Control-Plane Scalability',
+    'research.proj6.desc': 'Exploits the asymmetry between physical switches (high data-plane throughput, weak OFA CPUs) and commodity vSwitches (strong CPUs): new flows elastically tunneled to a fully connected vSwitch mesh when Packet-In rate signals congestion. Per-ingress-port queues with <strong>round-robin scheduling</strong> share controller service rate evenly; OpenFlow Group Table (ECMP) load-balances across vSwitches; three-level priority queue (admitted → large flow → ingress-port) governs precedence; <strong>Flow Info DB</strong> maps tunnel ID → physical switch for migrating stable large flows back to the physical network. Validated on a <span class="proj-metric">34-node GENI Clos topology</span>; <span class="proj-metric">reduced controller congestion by &gt;70%</span> with elastic scale-down when attacks subside.',
+    'research.proj7.name': 'Enterprise-Grade LLM Production Deployment Platform on Kubernetes',
+    'research.proj7.desc': 'K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference engines with ArgoCD GitOps, Prometheus/Grafana observability stack, and automated CI/CD pipelines across <span class="proj-metric">50+ Kubernetes deployments</span>.',
+    'research.proj8.name': 'Domain-Adapted LLMs for Clinical Risk Adjustment Coding',
+    'research.proj8.desc': 'Full-parameter fine-tuning of PubMedBERT (NeMo) and Qwen-7B (Megatron-LM) for multi-label HCC coding (115 codes) from EHR notes on MIMIC-IV; replaced BERT\'s self-attention module with Flash Attention (O(Ld) vs O(L²)) and applied DeepSpeed ZeRO Stage 3 + CPU offload for memory-efficient training on Lambda Labs A10 GPU; introduced Pros-Weight for class imbalance; significantly improved domain adaptation to clinical NLP, achieving <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="proj-metric">0.81/0.802</span>.',
+    'research.proj9.name': 'BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis',
+    'research.proj9.desc': 'Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM\'s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).',
+    'research.proj10.name': '16-bit MIPS-Like Pipelined CPU Design and Implementation',
+    'research.proj10.desc': 'End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).',
+    'research.proj11.name': 'P2P File Sharing System',
+    'research.proj11.desc': 'Gnutella-style decentralized P2P file sharing in Java: UDP Ping/Pong for peer discovery, flooding-based QUERY propagation with traceback routing for indirect responses, and TCP for reliable file transfer; multi-threaded architecture (UDP listener, TCP query/file listeners, CentralControl) with ConcurrentHashMap + ConcurrentLinkedQueue for thread-safe state; query deduplication prevents redundant flooding.',
+    'pub.title': 'Publications',
+    'pub.total': 'Total Papers',
+    'pub.firstauthor': 'First-Author',
+    'pub.published': 'Published',
+    'pub.review': 'Under Review',
+    'pub.venues': 'Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.',
+    'exp.title': 'Work Experience',
+    'exp.ra.role': 'Research Assistant, AI Infrastructure & ML Systems',
+    'exp.ra.org': 'Case Western Reserve University',
+    'exp.ra.date': '08/2019 – Present',
+    'exp.ra.bullet1': 'Research focuses on <strong>distributed ML systems</strong>, eBPF-based observability, ML security (side-channel attacks), and LLM inference deployment',
+    'exp.ra.bullet2': '<strong>8 papers total, 7 first-author</strong>; 5 published at IEEE, ACM, and Springer venues (ICNC, CCNC, TOIT, SecureComm); 3 under review (incl. ACM TOPS)',
+    'exp.ra.bullet3': 'Conducted large-scale experiments across NSF FABRIC, Lambda Labs HPC, and CloudLab on up to <strong>64 A100 GPUs</strong>',
+    'exp.xiaomi_tpm.role': 'Technical Product Manager',
+    'exp.xiaomi_tpm.org': 'Xiaomi',
+    'exp.xiaomi_tpm.date': '07/2018 – 01/2019',
+    'exp.xiaomi_tpm.bullet1': 'Market-facing PM role: conducted competitive analysis and user research to define product requirements for a smart IoT appliance',
+    'exp.xiaomi_tpm.bullet2': 'Assessed technical feasibility and complexity of proposed features; delivered initial technical proposals covering architecture trade-offs and implementation risks to align engineering and business stakeholders',
+    'exp.midea.role': 'Product Manager',
+    'exp.midea.org': 'Midea Group',
+    'exp.midea.date': '09/2016 – 06/2018',
+    'exp.midea.bullet1': 'Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design',
+    'exp.midea.bullet2': 'Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX — bridging product requirements and engineering execution',
+    'exp.midea.bullet3': 'Product debuted at <strong>2018 AWE Show</strong> and won the <strong>Red Dot Design Award</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a>',
+    'exp.cisco.role': 'Software Engineer II',
+    'exp.cisco.org': 'Cisco Systems, Inc.',
+    'exp.cisco.date': '06/2015 – 08/2016',
+    'exp.cisco.bullet1': 'Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK',
+    'exp.cisco.bullet2': 'Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load',
+    'exp.broadcom.role': 'Software Engineer Intern',
+    'exp.broadcom.org': 'Broadcom (Emulex)',
+    'exp.broadcom.date': '10/2014 – 05/2015',
+    'exp.broadcom.bullet1': 'Replaced polling-based acquisition with DMA + circular-buffer RTOS pipeline, <strong>reducing CPU load by 30%</strong>',
+    'exp.broadcom.bullet2': 'Ported Linux-only BladeEngine ASIC management CLI to Windows Server',
+    'exp.tenova.role': 'Engineer Intern',
+    'exp.tenova.org': 'Tenova I2S',
+    'exp.tenova.date': '01/2014 – 04/2014',
+    'exp.tenova.bullet1': 'Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, <strong>reducing CPU load by 42%</strong> and improving sampling rate and control-loop responsiveness',
+    'skills.title': 'Skills',
+    'skills.cat1': 'Languages',
+    'skills.cat2': 'AI / ML',
+    'skills.cat3': 'Infrastructure',
+    'skills.cat4': 'Observability',
+    'skills.cat5': 'Cloud & HPC',
+    'skills.cat6': 'Research Areas',
+    'footer.copyright': '© 2025 Yuanjun Dai'
+  },
+  zh_hans: {
+    'nav.about': '关于我',
+    'nav.research': '研究项目',
+    'nav.papers': '论文',
+    'nav.experience': '工作经历',
+    'nav.skills': '技能',
+    'hero.badge': '博士候选人 · 凯斯西储大学',
+    'hero.title': '分布式ML系统 &nbsp;·&nbsp; eBPF可观测性 &nbsp;·&nbsp; LLM部署 &nbsp;·&nbsp; ML安全 &nbsp;·&nbsp; 云HPC',
+    'hero.desc': '构建和保护大规模AI基础设施 — 分布式训练系统、内核级可观测性、生产级LLM平台和ML安全研究，涉及64个A100 GPU和50+部署。',
+    'hero.btn.contact': '联系我',
+    'hero.btn.cv': '下载简历',
+    'hero.stat.pubs': '论文发表',
+    'hero.stat.first': '第一作者',
+    'hero.stat.gpus': 'A100 GPU',
+    'about.title': '关于我',
+    'about.p1': '我是凯斯西储大学计算机科学<strong>博士候选人</strong>，专研AI基础设施、分布式ML系统和基于eBPF的可观测性。我的研究处于系统软件和机器学习的交叉点 — 构建使大规模AI训练和推理高效的底层基础设施。',
+    'about.p2': '我已著<strong>8篇论文（7篇第一作者）</strong>：<strong>5篇已发表</strong>于IEEE IPDPS、IEEE CCNC、IEEE ICNC、ACM TOIT和Springer SecureComm，3篇在审阅中（含ACM TOPS）。博士前，我在业界工作于<strong>思科</strong>、<strong>博通</strong>、<strong>美的集团</strong>和<strong>小米</strong>，跨越低级系统工程（NPU/ASIC、HPC）到产品管理和消费品产品发布。',
+    'about.location': '俄亥俄州克利夫兰',
+    'about.edu.phd.degree': '计算机科学博士',
+    'about.edu.phd.field': 'AI基础设施',
+    'about.edu.phd.school': '凯斯西储大学',
+    'about.edu.phd.date': '08/2019 – 至今',
+    'about.edu.ms.degree': '电气和计算机工程硕士',
+    'about.edu.ms.field': '计算机微架构',
+    'about.edu.ms.school': '匹兹堡大学',
+    'about.edu.bs.degree': '电气工程学士',
+    'about.edu.bs.school': '东北大学',
+    'research.title': '研究项目',
+    'research.taglegend': '标签分类：',
+    'research.proj1.name': 'DYNAMIX – 基于强化学习的自适应批量调度分布式ML',
+    'research.proj1.desc': '系统信号驱动的强化学习调度器（BytePS、PyTorch DDP、TensorFlow），采用异步事件驱动控制；PPO-based集中式强化学习调度器，在PS（BytePS）和环形AllReduce（PyTorch DDP）架构上评估；相比最优固定批量大小策略，实现<span class="proj-metric">46%训练加速</span>，模型泛化性能提升，在俄亥俄超算中心和Lambda Labs HPC上支持至<span class="proj-metric">64个A100 GPU</span>。',
+    'research.proj2.name': 'PRISM – 优先级感知的分布式ML训练传输协议',
+    'research.proj2.desc': '优先级-based选择可靠性传输（NCCL/Gloo和UDP之间）；按梯度幅值分类 — 高优先级进行完全重传，低优先级进行有界重试+本地补偿；双拥塞窗口，自适应窗口借用；GPU加速TopK选择、SACK-based包追踪、kernel-bypass（LibVMA）和GSO/GRO优化；在丢包条件下，CNN实现<span class="proj-metric">8-15%吞吐增益，LLM实现15-21%增益</span>（相比TCP），在32 GPU（OSC）和跨站点FABRIC测试床；在<span class="proj-metric">144-worker规模</span>商用基础设施上匹配NDP延迟。',
+    'research.proj3.name': '分布式ML系统的训练时侧信道攻击',
+    'research.proj3.desc': '对MXNet BSP PS架构通信模式的深入分析，通过push/pull原语仪器化；修改MXNet源代码进行真值收集（框架仪器化）；交叉关联网络流量和Intel RAPL功率侧信道，采用离群值过滤和多项式回归进行能耗分析；在ZFNet、AlexNet和VGG变体上实现<span class="proj-metric">&gt;99%层级分类准确率</span>和<span class="proj-metric">&lt;1.5%张量大小重构误差</span> — 在MLaaS共置环境中暴露可行的DNN架构窃取表面。',
+    'research.proj4.name': 'AI/DML基础设施的优先级感知eBPF网络流量遥测',
+    'research.proj4.desc': '内核级eBPF优先级感知草图框架，多层架构：优先级表（精确per-packet跟踪）+重流表+3层Count-Min Sketch；基于序列号的重传检测，可配置阈值；原子操作（<code>__sync_fetch_and_add</code>）用于线程安全并发更新；基于投票的哈希冲突解决和CMS最小值流重构；实现<span class="proj-metric">96% Top-K准确率、100% priority-packet召回率</span>和<span class="proj-metric">&lt;1.1%吞吐开销</span>（10 Gbps on FABRIC测试床，CAIDA 2019骨干流量重放）。',
+    'research.proj5.name': 'DML工作负载的高分辨率eBPF系统资源分析',
+    'research.proj5.desc': '通过双HashPipe管道的内核级eBPF可观测性：<span class="proj-metric">12个libc/kernel分配API</span>的内存探针（<code>malloc</code>、<code>free</code>、<code>munmap</code>）映射到<code>ptr2size</code>+<code>priority_vm</code> BPF maps；CPU通过<code>sched_switch</code> tracepoint+<code>bpf_get_current_pid_tgid()</code>。HashPipe的<span class="proj-metric">O(1) per-event</span>级联阶段（vs O(N log N) sort-based Top-K）通过<code>#pragma unroll</code>物理展开以符合eBPF验证器，使用<code>atomic_fetch_and_add()</code>进行并发安全map更新；相比top/htop实现<span class="proj-metric">10-14倍更细时间分辨率</span>，~11 ms延迟，&gt;90% Top-K保真度。',
+    'research.proj6.name': 'Scotch – 用于控制平面可扩展性的弹性SDN覆盖',
+    'research.proj6.desc': '利用物理交换机（高数据平面吞吐、弱OFA CPU）和商用vSwitch（强CPU）之间的不对称：当Packet-In速率指示拥塞时，新流弹性隧道到完全连接的vSwitch网格。Per-ingress-port队列采用<strong>轮转调度</strong>均匀分享控制器服务率；OpenFlow Group Table（ECMP）在vSwitch间负载均衡；三级优先级队列（已接纳→大流→ingress-port）管理优先级；<strong>Flow Info DB</strong>将隧道ID映射到物理交换机，用于将稳定大流迁移回物理网络。在<span class="proj-metric">34节点GENI Clos拓扑</span>验证；<span class="proj-metric">降低控制器拥塞&gt;70%</span>，攻击消退时可弹性缩放。',
+    'research.proj7.name': 'Kubernetes上的企业级LLM生产部署平台',
+    'research.proj7.desc': 'K8s微服务平台（Gateway/Router/Worker），支持vLLM和TensorRT-LLM推理引擎，采用ArgoCD GitOps、Prometheus/Grafana可观测栈和自动化CI/CD管道，跨越<span class="proj-metric">50+个Kubernetes部署</span>。',
+    'research.proj8.name': '临床风险调整编码的领域适配LLM',
+    'research.proj8.desc': 'PubMedBERT（NeMo）和Qwen-7B（Megatron-LM）的全参数fine-tuning，用于MIMIC-IV EHR笔记的多标签HCC编码（115个代码）；将BERT自注意力模块替换为Flash Attention（O(Ld) vs O(L²）），应用DeepSpeed ZeRO Stage 3+CPU offload，在Lambda Labs A10 GPU上进行内存高效训练；引入Pros-Weight处理类不平衡；显著改进临床NLP领域适配，实现<span class="proj-metric">macro-/micro-F1为0.775/0.742</span>和<span class="proj-metric">0.81/0.802</span>。',
+    'research.proj9.name': '基于BiLSTM的分布式ML分析侧信道建模',
+    'research.proj9.desc': '对MXNet BSP分布式训练的训练时黑盒攻击，通过两个无特权侧信道重构完整DNN架构：Intel RAPL PP0+DRAM功率（通过powercap/sysfs以50μs采样）和0-payload网络包序列（Seq_T）提取张量大小。Lookahead（滑动窗口SMA）+Lookbehind算法隔离前向传递；带通滤波分割各层。决策树（熵，97.7%，84K+FC/Conv段上10折CV）和BiLSTM分类层类型；top-5 MLP回归器的加权平均集合（权重∝1/验证误差）恢复Conv核维度和FC神经元数。DT/MLP相比BiLSTM的~92%（MAIA基线）实现<span class="proj-metric">&gt;97%层级分类准确率</span>；在20个DNN模型（LeNet到VGG/ResNet族）上验证。',
+    'research.proj10.name': '16位MIPS-like管道CPU设计与实现',
+    'research.proj10.desc': '端到端CPU设计：自定义16位MIPS-style ISA配Perl两遍汇编器；5级管道VHDL RTL，具有冒险检测、数据前递和2位分支预测器；在FPGA上综合&放置布线，行为/综合后/布线后验证；实现<span class="proj-metric">~3倍加速</span>（≈260 ps vs 780 ps关键路径）。',
+    'research.proj11.name': 'P2P文件共享系统',
+    'research.proj11.desc': 'Java中的Gnutella风格分布式P2P文件共享：UDP Ping/Pong进行peer发现，基于泛洪的QUERY传播，具有回溯路由用于间接响应，TCP用于可靠文件传输；多线程架构（UDP监听器、TCP查询/文件监听器、CentralControl），ConcurrentHashMap+ConcurrentLinkedQueue用于线程安全状态；查询去重防止冗余泛洪。',
+    'pub.title': '论文发表',
+    'pub.total': '总论文数',
+    'pub.firstauthor': '第一作者',
+    'pub.published': '已发表',
+    'pub.review': '审阅中',
+    'pub.venues': '发表于<strong>IEEE IPDPS、IEEE CCNC、IEEE ICNC、ACM TOIT、Springer SecureComm</strong>。',
+    'exp.title': '工作经历',
+    'exp.ra.role': '研究助理，AI基础设施与ML系统',
+    'exp.ra.org': '凯斯西储大学',
+    'exp.ra.date': '08/2019 – 至今',
+    'exp.ra.bullet1': '研究专注于<strong>分布式ML系统</strong>、基于eBPF的可观测性、ML安全（侧信道攻击）和LLM推理部署',
+    'exp.ra.bullet2': '<strong>共8篇论文，7篇第一作者</strong>；5篇发表于IEEE、ACM和Springer期刊（ICNC、CCNC、TOIT、SecureComm）；3篇审阅中（含ACM TOPS）',
+    'exp.ra.bullet3': '在NSF FABRIC、Lambda Labs HPC和CloudLab上进行大规模实验，至<strong>64个A100 GPU</strong>',
+    'exp.xiaomi_tpm.role': '技术产品经理',
+    'exp.xiaomi_tpm.org': '小米',
+    'exp.xiaomi_tpm.date': '07/2018 – 01/2019',
+    'exp.xiaomi_tpm.bullet1': '面向市场的PM角色：进行竞争分析和用户研究，为智能IoT电器定义产品需求',
+    'exp.xiaomi_tpm.bullet2': '评估建议功能的技术可行性和复杂性；交付涵盖架构权衡和实现风险的初步技术提案，以对齐工程和业务利益相关者',
+    'exp.midea.role': '产品经理',
+    'exp.midea.org': '美的集团',
+    'exp.midea.date': '09/2016 – 06/2018',
+    'exp.midea.bullet1': '担任<strong>Fun Oven II</strong>的技术PM，这是一个跨学科智能电器，涵盖数据收集、ML模型训练与部署、移动应用集成、云后端和烹饪算法设计',
+    'exp.midea.bullet2': '参与解决所有方面的技术挑战 — 从训练AI图像识别模型和在阿里云部署Docker服务，到定义烹饪曲线和应用UX — 桥接产品需求和工程执行',
+    'exp.midea.bullet3': '产品在<strong>2018 AWE展</strong>亮相并赢得<strong>红点设计奖</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a>',
+    'exp.cisco.role': '软件工程师II',
+    'exp.cisco.org': '思科系统公司',
+    'exp.cisco.date': '06/2015 – 08/2016',
+    'exp.cisco.bullet1': '使用博通BCM SDK为100 Gbps核心路由器（Azure、AWS、阿里云）开发NPU/ASIC功能',
+    'exp.cisco.bullet2': '贡献于QoS和ECMP模块，降低重负载下的转发延迟',
+    'exp.broadcom.role': '软件工程师实习生',
+    'exp.broadcom.org': '博通（Emulex）',
+    'exp.broadcom.date': '10/2014 – 05/2015',
+    'exp.broadcom.bullet1': '用DMA+循环缓冲RTOS管道替换基于轮询的采集，<strong>降低CPU负载30%</strong>',
+    'exp.broadcom.bullet2': '将仅Linux BladeEngine ASIC管理CLI移植到Windows Server',
+    'exp.tenova.role': '工程师实习生',
+    'exp.tenova.org': 'Tenova I2S',
+    'exp.tenova.date': '01/2014 – 04/2014',
+    'exp.tenova.bullet1': '使用DMA和循环缓冲重新架构RTOS数据采集管道，<strong>降低CPU负载42%</strong>，提高采样率和控制环路响应性',
+    'skills.title': '技能',
+    'skills.cat1': '编程语言',
+    'skills.cat2': 'AI/ML',
+    'skills.cat3': '基础设施',
+    'skills.cat4': '可观测性',
+    'skills.cat5': '云与HPC',
+    'skills.cat6': '研究领域',
+    'footer.copyright': '© 2025 Yuanjun Dai'
+  },
+  zh_hant: {
+    'nav.about': '關於我',
+    'nav.research': '研究項目',
+    'nav.papers': '論文',
+    'nav.experience': '工作經歷',
+    'nav.skills': '技能',
+    'hero.badge': '博士候選人 · 凱斯西儲大學',
+    'hero.title': '分散式ML系統 &nbsp;·&nbsp; eBPF可觀測性 &nbsp;·&nbsp; LLM部署 &nbsp;·&nbsp; ML安全 &nbsp;·&nbsp; 雲HPC',
+    'hero.desc': '構建和保護大規模AI基礎設施 — 分散式訓練系統、內核級可觀測性、生產級LLM平台和ML安全研究，涉及64個A100 GPU和50+部署。',
+    'hero.btn.contact': '聯絡我',
+    'hero.btn.cv': '下載履歷',
+    'hero.stat.pubs': '論文發表',
+    'hero.stat.first': '第一作者',
+    'hero.stat.gpus': 'A100 GPU',
+    'about.title': '關於我',
+    'about.p1': '我是凱斯西儲大學計算機科學<strong>博士候選人</strong>，專研AI基礎設施、分散式ML系統和基於eBPF的可觀測性。我的研究處於系統軟體和機器學習的交叉點 — 構建使大規模AI訓練和推理高效的底層基礎設施。',
+    'about.p2': '我已著<strong>8篇論文（7篇第一作者）</strong>：<strong>5篇已發表</strong>於IEEE IPDPS、IEEE CCNC、IEEE ICNC、ACM TOIT和Springer SecureComm，3篇在審閱中（含ACM TOPS）。博士前，我在業界工作於<strong>思科</strong>、<strong>博通</strong>、<strong>美的集團</strong>和<strong>小米</strong>，跨越低級系統工程（NPU/ASIC、HPC）到產品管理和消費品產品發布。',
+    'about.location': '俄亥俄州克利夫蘭',
+    'about.edu.phd.degree': '計算機科學博士',
+    'about.edu.phd.field': 'AI基礎設施',
+    'about.edu.phd.school': '凱斯西儲大學',
+    'about.edu.phd.date': '08/2019 – 至今',
+    'about.edu.ms.degree': '電氣和計算機工程碩士',
+    'about.edu.ms.field': '計算機微架構',
+    'about.edu.ms.school': '匹茲堡大學',
+    'about.edu.bs.degree': '電氣工程學士',
+    'about.edu.bs.school': '東北大學',
+    'research.title': '研究項目',
+    'research.taglegend': '標籤分類：',
+    'research.proj1.name': 'DYNAMIX – 基於強化學習的自適應批量調度分散ML',
+    'research.proj1.desc': '系統信號驅動的強化學習調度器（BytePS、PyTorch DDP、TensorFlow），採用非同步事件驅動控制；PPO-based集中式強化學習調度器，在PS（BytePS）和環形AllReduce（PyTorch DDP）架構上評估；相比最優固定批量大小策略，實現<span class="proj-metric">46%訓練加速</span>，模型泛化性能提升，在俄亥俄超算中心和Lambda Labs HPC上支持至<span class="proj-metric">64個A100 GPU</span>。',
+    'research.proj2.name': 'PRISM – 優先級感知的分散式ML訓練傳輸協定',
+    'research.proj2.desc': '優先級-based選擇可靠性傳輸（NCCL/Gloo和UDP之間）；按梯度幅值分類 — 高優先級進行完全重傳，低優先級進行有界重試+本地補償；雙擁塞視窗，自適應視窗借用；GPU加速TopK選擇、SACK-based包追蹤、kernel-bypass（LibVMA）和GSO/GRO優化；在丟包條件下，CNN實現<span class="proj-metric">8-15%吞吐增益，LLM實現15-21%增益</span>（相比TCP），在32 GPU（OSC）和跨站點FABRIC測試床；在<span class="proj-metric">144-worker規模</span>商用基礎設施上匹配NDP延遲。',
+    'research.proj3.name': '分散式ML系統的訓練時側信道攻擊',
+    'research.proj3.desc': '對MXNet BSP PS架構通信模式的深入分析，通過push/pull原語儀器化；修改MXNet源代碼進行真值收集（框架儀器化）；交叉關聯網路流量和Intel RAPL功率側信道，採用離群值過濾和多項式迴歸進行能耗分析；在ZFNet、AlexNet和VGG變體上實現<span class="proj-metric">&gt;99%層級分類準確率</span>和<span class="proj-metric">&lt;1.5%張量大小重構誤差</span> — 在MLaaS共置環境中暴露可行的DNN架構竊取表面。',
+    'research.proj4.name': 'AI/DML基礎設施的優先級感知eBPF網路流量遙測',
+    'research.proj4.desc': '內核級eBPF優先級感知草圖框架，多層架構：優先級表（精確per-packet追蹤）+重流表+3層Count-Min Sketch；基於序列號的重傳檢測，可配置閾值；原子操作（<code>__sync_fetch_and_add</code>）用於線程安全並發更新；基於投票的雜湊碰撞解決和CMS最小值流重構；實現<span class="proj-metric">96% Top-K準確率、100% priority-packet召回率</span>和<span class="proj-metric">&lt;1.1%吞吐開銷</span>（10 Gbps on FABRIC測試床，CAIDA 2019骨幹流量重放）。',
+    'research.proj5.name': 'DML工作負載的高分辨率eBPF系統資源分析',
+    'research.proj5.desc': '通過雙HashPipe管道的內核級eBPF可觀測性：<span class="proj-metric">12個libc/kernel分配API</span>的內存探針（<code>malloc</code>、<code>free</code>、<code>munmap</code>）映射到<code>ptr2size</code>+<code>priority_vm</code> BPF maps；CPU通過<code>sched_switch</code> tracepoint+<code>bpf_get_current_pid_tgid()</code>。HashPipe的<span class="proj-metric">O(1) per-event</span>級聯階段（vs O(N log N) sort-based Top-K）通過<code>#pragma unroll</code>物理展開以符合eBPF驗證器，使用<code>atomic_fetch_and_add()</code>進行並發安全map更新；相比top/htop實現<span class="proj-metric">10-14倍更細時間分辨率</span>，~11 ms延遲，&gt;90% Top-K保真度。',
+    'research.proj6.name': 'Scotch – 用於控制平面可擴展性的彈性SDN覆蓋',
+    'research.proj6.desc': '利用物理交換機（高數據平面吞吐、弱OFA CPU）和商用vSwitch（強CPU）之間的不對稱：當Packet-In速率指示擁塞時，新流彈性隧道到完全連接的vSwitch網格。Per-ingress-port隊列採用<strong>輪轉調度</strong>均勻分享控制器服務率；OpenFlow Group Table（ECMP）在vSwitch間負載均衡；三級優先級隊列（已接納→大流→ingress-port）管理優先級；<strong>Flow Info DB</strong>將隧道ID映射到物理交換機，用於將穩定大流遷移回物理網路。在<span class="proj-metric">34節點GENI Clos拓撲</span>驗證；<span class="proj-metric">降低控制器擁塞&gt;70%</span>，攻擊消退時可彈性縮放。',
+    'research.proj7.name': 'Kubernetes上的企業級LLM生產部署平台',
+    'research.proj7.desc': 'K8s微服務平台（Gateway/Router/Worker），支持vLLM和TensorRT-LLM推理引擎，採用ArgoCD GitOps、Prometheus/Grafana可觀測棧和自動化CI/CD管道，跨越<span class="proj-metric">50+個Kubernetes部署</span>。',
+    'research.proj8.name': '臨床風險調整編碼的領域適配LLM',
+    'research.proj8.desc': 'PubMedBERT（NeMo）和Qwen-7B（Megatron-LM）的全參數fine-tuning，用於MIMIC-IV EHR筆記的多標籤HCC編碼（115個代碼）；將BERT自注意力模組替換為Flash Attention（O(Ld) vs O(L²)），應用DeepSpeed ZeRO Stage 3+CPU offload，在Lambda Labs A10 GPU上進行內存高效訓練；引入Pros-Weight處理類不平衡；顯著改進臨床NLP領域適配，實現<span class="proj-metric">macro-/micro-F1為0.775/0.742</span>和<span class="proj-metric">0.81/0.802</span>。',
+    'research.proj9.name': '基於BiLSTM的分散式ML分析側信道建模',
+    'research.proj9.desc': '對MXNet BSP分散式訓練的訓練時黑盒攻擊，通過兩個無特權側信道重構完整DNN架構：Intel RAPL PP0+DRAM功率（通過powercap/sysfs以50μs採樣）和0-payload網路包序列（Seq_T）提取張量大小。Lookahead（滑動視窗SMA）+Lookbehind算法隔離前向傳遞；帶通濾波分割各層。決策樹（熵，97.7%，84K+FC/Conv段上10折CV）和BiLSTM分類層類型；top-5 MLP迴歸器的加權平均集合（權重∝1/驗證誤差）恢復Conv核維度和FC神經元數。DT/MLP相比BiLSTM的~92%（MAIA基線）實現<span class="proj-metric">&gt;97%層級分類準確率</span>；在20個DNN模型（LeNet到VGG/ResNet族）上驗證。',
+    'research.proj10.name': '16位MIPS-like管道CPU設計與實現',
+    'research.proj10.desc': '端到端CPU設計：自訂16位MIPS-style ISA配Perl兩遍匯編器；5級管道VHDL RTL，具有冒險檢測、數據前遞和2位分支預測器；在FPGA上綜合&放置佈線，行為/綜合後/佈線後驗證；實現<span class="proj-metric">~3倍加速</span>（≈260 ps vs 780 ps關鍵路徑）。',
+    'research.proj11.name': 'P2P文件共享系統',
+    'research.proj11.desc': 'Java中的Gnutella風格分散式P2P文件共享：UDP Ping/Pong進行peer發現，基於泛洪的QUERY傳播，具有回溯路由用於間接回應，TCP用於可靠文件傳輸；多線程架構（UDP監聽器、TCP查詢/文件監聽器、CentralControl），ConcurrentHashMap+ConcurrentLinkedQueue用於線程安全狀態；查詢去重防止冗餘泛洪。',
+    'pub.title': '論文發表',
+    'pub.total': '總論文數',
+    'pub.firstauthor': '第一作者',
+    'pub.published': '已發表',
+    'pub.review': '審閱中',
+    'pub.venues': '發表於<strong>IEEE IPDPS、IEEE CCNC、IEEE ICNC、ACM TOIT、Springer SecureComm</strong>。',
+    'exp.title': '工作經歷',
+    'exp.ra.role': '研究助理，AI基礎設施與ML系統',
+    'exp.ra.org': '凱斯西儲大學',
+    'exp.ra.date': '08/2019 – 至今',
+    'exp.ra.bullet1': '研究專注於<strong>分散式ML系統</strong>、基於eBPF的可觀測性、ML安全（側信道攻擊）和LLM推理部署',
+    'exp.ra.bullet2': '<strong>共8篇論文，7篇第一作者</strong>；5篇發表於IEEE、ACM和Springer期刊（ICNC、CCNC、TOIT、SecureComm）；3篇審閱中（含ACM TOPS）',
+    'exp.ra.bullet3': '在NSF FABRIC、Lambda Labs HPC和CloudLab上進行大規模實驗，至<strong>64個A100 GPU</strong>',
+    'exp.xiaomi_tpm.role': '技術產品經理',
+    'exp.xiaomi_tpm.org': '小米',
+    'exp.xiaomi_tpm.date': '07/2018 – 01/2019',
+    'exp.xiaomi_tpm.bullet1': '面向市場的PM角色：進行競爭分析和用戶研究，為智能IoT電器定義產品需求',
+    'exp.xiaomi_tpm.bullet2': '評估建議功能的技術可行性和複雜性；交付涵蓋架構權衡和實現風險的初步技術提案，以對齐工程和業務利益相關者',
+    'exp.midea.role': '產品經理',
+    'exp.midea.org': '美的集團',
+    'exp.midea.date': '09/2016 – 06/2018',
+    'exp.midea.bullet1': '擔任<strong>Fun Oven II</strong>的技術PM，這是一個跨學科智能電器，涵蓋數據收集、ML模型訓練與部署、移動應用集成、雲後端和烹飪算法設計',
+    'exp.midea.bullet2': '參與解決所有方面的技術挑戰 — 從訓練AI圖像識別模型和在阿里雲部署Docker服務，到定義烹飪曲線和應用UX — 橋接產品需求和工程執行',
+    'exp.midea.bullet3': '產品在<strong>2018 AWE展</strong>亮相並贏得<strong>紅點設計獎</strong> · <a href="https://www.red-dot.org/project/fun-22465" target="_blank" style="color:var(--accent2);">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" target="_blank" style="color:var(--accent2);">PR Newswire ↗</a>',
+    'exp.cisco.role': '軟件工程師II',
+    'exp.cisco.org': '思科系統公司',
+    'exp.cisco.date': '06/2015 – 08/2016',
+    'exp.cisco.bullet1': '使用博通BCM SDK為100 Gbps核心路由器（Azure、AWS、阿里雲）開發NPU/ASIC功能',
+    'exp.cisco.bullet2': '貢獻於QoS和ECMP模組，降低重負載下的轉發延遲',
+    'exp.broadcom.role': '軟件工程師實習生',
+    'exp.broadcom.org': '博通（Emulex）',
+    'exp.broadcom.date': '10/2014 – 05/2015',
+    'exp.broadcom.bullet1': '用DMA+迴圈緩衝RTOS管道替換基於輪詢的採集，<strong>降低CPU負載30%</strong>',
+    'exp.broadcom.bullet2': '將僅Linux BladeEngine ASIC管理CLI移植到Windows Server',
+    'exp.tenova.role': '工程師實習生',
+    'exp.tenova.org': 'Tenova I2S',
+    'exp.tenova.date': '01/2014 – 04/2014',
+    'exp.tenova.bullet1': '使用DMA和迴圈緩衝重新架構RTOS數據採集管道，<strong>降低CPU負載42%</strong>，提高採樣率和控制環路響應性',
+    'skills.title': '技能',
+    'skills.cat1': '編程語言',
+    'skills.cat2': 'AI/ML',
+    'skills.cat3': '基礎設施',
+    'skills.cat4': '可觀測性',
+    'skills.cat5': '雲與HPC',
+    'skills.cat6': '研究領域',
+    'footer.copyright': '© 2025 Yuanjun Dai'
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (TRANSLATIONS[lang][key]) el.textContent = TRANSLATIONS[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (TRANSLATIONS[lang][key]) el.innerHTML = TRANSLATIONS[lang][key];
+  });
+  const labels = { en: 'EN ▾', zh_hans: '简中 ▾', zh_hant: '繁中 ▾' };
+  document.getElementById('langBtn').textContent = labels[lang];
+  document.querySelectorAll('.lang-option').forEach(o => {
+    o.classList.toggle('active', o.dataset.lang === lang);
+  });
+}
+
+document.getElementById('langBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  document.getElementById('langDropdown').classList.toggle('open');
+});
+document.querySelectorAll('.lang-option').forEach(o => {
+  o.addEventListener('click', () => {
+    setLang(o.dataset.lang);
+    document.getElementById('langDropdown').classList.remove('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.getElementById('langDropdown').classList.remove('open');
+});
 </script>
 </body>
 </html>
