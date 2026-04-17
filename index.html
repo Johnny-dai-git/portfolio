@@ -702,8 +702,58 @@ footer a:hover { color: var(--accent); }
 }
 
 /* ─────────────────────────────────────────────────────────── */
-/* VISUAL EFFECTS CSS (6 EFFECTS)                             */
+/* VISUAL EFFECTS CSS                                         */
 /* ─────────────────────────────────────────────────────────── */
+
+/* ── EFFECT: SCROLL PROGRESS BAR ───────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #2563eb, #7c3aed, #0891b2);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(37,99,235,0.6);
+}
+
+/* ── EFFECT: GRADIENT BORDER ON CARD HOVER ─────────────────── */
+.proj-card, .edu-card, .exp-card, .skill-category, .pub-item {
+  position: relative;
+}
+.proj-card::before, .edu-card::before, .exp-card::before,
+.skill-category::before, .pub-item::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #2563eb, #7c3aed, #0891b2, #2563eb);
+  background-size: 300% 300%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  animation: gradientShift 3s ease infinite;
+}
+.proj-card:hover::before, .edu-card:hover::before, .exp-card:hover::before,
+.skill-category:hover::before, .pub-item:hover::before {
+  opacity: 1;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── EFFECT: STAGGERED SLIDE-IN ─────────────────────────────── */
+.slide-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.slide-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ── EFFECT 3: CARD POP-OUT ─────────────────────────────────── */
 .proj-card, .edu-card, .exp-card, .skill-category, .pub-item {
@@ -739,6 +789,7 @@ footer a:hover { color: var(--accent); }
 <body>
 
 <!-- ── NAV ── -->
+<div id="scroll-progress"></div>
 <nav>
   <div class="nav-logo"></div>
   <ul class="nav-links">
@@ -1946,7 +1997,65 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initAuroraBlobs();
   initParticleNetwork();
+  initScrollProgress();
+  initMouseParallax();
+  initStaggeredSlideIn();
 });
+
+// ── SCROLL PROGRESS BAR ───────────────────────────────────────
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.width = (scrollTop / scrollHeight * 100) + '%';
+  }, { passive: true });
+}
+
+// ── MOUSE PARALLAX ON HERO ────────────────────────────────────
+function initMouseParallax() {
+  const hero = document.getElementById('hero');
+  const heroInner = hero ? hero.querySelector('.hero-inner') : null;
+  const heroName = hero ? hero.querySelector('.hero-name') : null;
+  const heroBadge = hero ? hero.querySelector('.hero-badge') : null;
+  if (!heroInner) return;
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const dx = (e.clientX - rect.left - cx) / cx;
+    const dy = (e.clientY - rect.top  - cy) / cy;
+    heroInner.style.transform = `translate(${dx * 10}px, ${dy * 6}px)`;
+    if (heroName)  heroName.style.transform  = `translate(${dx * 16}px, ${dy * 10}px)`;
+    if (heroBadge) heroBadge.style.transform = `translate(${dx * 8}px,  ${dy * 5}px)`;
+  });
+  hero.addEventListener('mouseleave', () => {
+    heroInner.style.transform = '';
+    if (heroName)  heroName.style.transform  = '';
+    if (heroBadge) heroBadge.style.transform = '';
+  });
+}
+
+// ── STAGGERED SLIDE-IN ────────────────────────────────────────
+function initStaggeredSlideIn() {
+  // Add slide-in class to all cards
+  const selectors = '.proj-card, .edu-card, .exp-card, .skill-category, .pub-item, .section-header';
+  document.querySelectorAll(selectors).forEach((el, i) => {
+    el.classList.remove('fade-in');
+    el.classList.add('slide-in');
+    el.style.transitionDelay = (i % 6 * 0.08) + 's';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.slide-in').forEach(el => observer.observe(el));
+}
 
 let currentLang = 'en';
 
