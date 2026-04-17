@@ -2461,13 +2461,6 @@ document.addEventListener('click', () => {
 #ufo-gameover{display:none;flex-direction:column;align-items:center;gap:1.1rem;padding:2rem 1.5rem;min-height:340px;justify-content:center}
 #ufo-gameover h2{color:#fbbf24;font-size:2rem;margin:0;text-shadow:0 0 20px rgba(251,191,36,.4)}
 #ufo-final-score{color:#86efac;font-size:1.1rem;margin:0}
-#ufo-leaderboard{width:100%;max-width:400px}
-#ufo-leaderboard h4{color:#64748b;text-align:center;margin:0 0 .6rem;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
-.lb-row{display:flex;align-items:center;gap:.6rem;padding:.38rem .75rem;border-radius:7px;background:rgba(255,255,255,.03);margin-bottom:3px;font-size:.87rem}
-.lb-you{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25)}
-.lb-rank{width:28px;text-align:center}
-.lb-name{flex:1;color:#cbd5e1}
-.lb-score{color:#4ade80;font-weight:800;font-family:monospace}
 .ufo-btns{display:flex;gap:.8rem}
 .ufo-btns button{border-radius:9px;padding:.6rem 1.5rem;font-size:.95rem;cursor:pointer;font-weight:700;border:none;transition:all .2s}
 #ufo-again-btn{background:linear-gradient(135deg,#1d4ed8,#0284c7);color:#fff;box-shadow:0 0 16px rgba(56,189,248,.25)}
@@ -2496,7 +2489,6 @@ document.addEventListener('click', () => {
   <div id="ufo-gameover">
    <h2>⏱ Time's Up!</h2>
    <p id="ufo-final-score"></p>
-   <div id="ufo-leaderboard"></div>
    <div class="ufo-btns">
     <button id="ufo-again-btn">▶ Play Again</button>
     <button id="ufo-close-btn2">✕ Close</button>
@@ -2910,18 +2902,9 @@ function startGame(){
 }
 function endGame(){
   state='gameover';cancelAnimationFrame(animFrame);
-  const lb=JSON.parse(localStorage.getItem('ufo-lb')||'[]');
-  lb.push({name:username,score,date:new Date().toLocaleDateString()});
-  lb.sort((a,b)=>b.score-a.score);lb.splice(10);
-  localStorage.setItem('ufo-lb',JSON.stringify(lb));
   document.getElementById('ufo-game').style.display='none';
   document.getElementById('ufo-gameover').style.display='flex';
   document.getElementById('ufo-final-score').textContent=`${username}  —  ${score} UFOs destroyed!`;
-  document.getElementById('ufo-leaderboard').innerHTML='<h4>🏆 Top Pilots</h4>'+
-    lb.map((e,i)=>`<div class="lb-row${e.name===username&&e.score===score?' lb-you':''}">
-      <span class="lb-rank">${['🥇','🥈','🥉'][i]||'#'+(i+1)}</span>
-      <span class="lb-name">${e.name}</span>
-      <span class="lb-score">${e.score}</span></div>`).join('');
 }
 function closeModal(){
   clearInterval(timerInterval);cancelAnimationFrame(animFrame);state='entry';
