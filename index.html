@@ -711,11 +711,58 @@ footer a:hover { color: var(--accent); }
   font-weight: 600;
 }
 
+/* ── Hamburger button (hidden on desktop) ── */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  color: var(--text3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-hamburger:hover { color: var(--accent); border-color: var(--accent); }
+
 @media (max-width: 1100px) {
   .projects-grid { grid-template-columns: 1fr 1fr; }
   .skills-section{ grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  /* ── Nav ── */
+  nav { padding: 0 1rem; }
+  .nav-hamburger { display: block; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 58px; left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    gap: 0;
+    z-index: 200;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-bottom: 1px solid var(--border2); }
+  .nav-links li:last-child { border-bottom: none; }
+  .nav-links a { display: block; padding: 0.8rem 1.5rem; font-size: 0.92rem; }
+  .lang-switcher { margin-left: auto; margin-right: 0.6rem; }
+  .lang-btn { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
+
+  /* ── Sections ── */
+  section { padding: 3.5rem 1.25rem; }
+  #hero   { padding: 80px 1.25rem 3rem; }
+
+  /* ── Hero ── */
+  .hero-desc  { font-size: 1.05rem; }
+  .hero-stats { flex-direction: column; gap: 0; }
+
+  /* ── Grids ── */
   .about-grid    { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-section{ grid-template-columns: 1fr; }
@@ -723,11 +770,21 @@ footer a:hover { color: var(--accent); }
   .pub-summary-card { flex-direction: column; gap: 1.2rem; }
   .pub-divider   { display: none; }
   .pub-venues    { padding-left: 0; }
-  .hero-stats    { flex-direction: column; gap: 0; }
-  nav { padding: 0 1rem; }
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 0.82rem; }
-  .lang-btn { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
+
+  /* ── Experience cards ── */
+  .exp-header { flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+  .exp-date   { white-space: normal; }
+  .exp-card   { padding: 1.1rem 1.1rem; }
+}
+@media (max-width: 480px) {
+  section { padding: 2.5rem 1rem; }
+  #hero   { padding: 72px 1rem 2.5rem; }
+  .hero-badge { font-size: 0.82rem; padding: 0.4rem 0.9rem; }
+  .hero-desc  { font-size: 0.95rem; }
+  .btn        { font-size: 0.85rem; padding: 0.55rem 1rem; }
+  .section-title { font-size: 1.15rem; }
+  .exp-bullets li { font-size: 0.88rem; }
+  .proj-card { padding: 1.1rem; }
 }
 
 /* ─────────────────────────────────────────────────────────── */
@@ -796,13 +853,14 @@ footer a:hover { color: var(--accent); }
 <div id="scroll-progress"></div>
 <nav>
   <div class="nav-logo"></div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about" data-i18n="nav.about">About</a></li>
     <li><a href="#research" data-i18n="nav.research">Research</a></li>
     <li><a href="#publications" data-i18n="nav.papers">Papers</a></li>
     <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
     <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">☰</button>
   <div class="lang-switcher" id="langSwitcher">
     <span style="font-size:0.82rem;font-weight:600;color:var(--accent);margin-right:0.4rem;" data-i18n="nav.lang">选择语言</span>
     <button class="lang-btn" id="langBtn">EN ▾</button>
@@ -3191,7 +3249,39 @@ document.getElementById('ufo-again-btn').addEventListener('click',()=>{document.
 document.getElementById('ufo-close-btn2').addEventListener('click',closeModal);
 document.getElementById('ufo-modal').addEventListener('click',e=>{if(e.target===document.getElementById('ufo-modal'))closeModal();});
 document.getElementById('ufo-canvas').addEventListener('click',onCanvasClick);
+/* Touch support for mobile */
+document.getElementById('ufo-canvas').addEventListener('touchstart',e=>{
+  e.preventDefault();
+  const t=e.touches[0];
+  onCanvasClick({clientX:t.clientX,clientY:t.clientY});
+},{passive:false});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('ufo-modal').style.display==='flex')closeModal();});
+})();
+</script>
+
+<script>
+/* ── Hamburger nav ── */
+(function(){
+  const btn = document.getElementById('navHamburger');
+  const links = document.getElementById('navLinks');
+  if(!btn||!links) return;
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = links.classList.toggle('open');
+    btn.textContent = open ? '✕' : '☰';
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.textContent = '☰';
+    });
+  });
+  document.addEventListener('click', e => {
+    if(!links.contains(e.target) && e.target !== btn) {
+      links.classList.remove('open');
+      btn.textContent = '☰';
+    }
+  });
 })();
 </script>
 </body>
