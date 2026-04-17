@@ -2137,115 +2137,6 @@ function initAuroraBlobs() {
   });
 }
 
-// ── EFFECT 6: PARTICLE NETWORK ON ABOUT/RESEARCH BACKGROUND ──────────────────
-function initParticleNetwork() {
-  const aboutSection = document.getElementById('about');
-  if (!aboutSection) return;
-
-  // Create canvas
-  const canvas = document.createElement('canvas');
-  canvas.id = 'particle-canvas';
-  canvas.style.position = 'absolute';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-
-  // Insert as first child
-  aboutSection.insertBefore(canvas, aboutSection.firstChild);
-
-  // Ensure section content is above canvas
-  aboutSection.style.position = 'relative';
-  const sectionChildren = Array.from(aboutSection.children);
-  sectionChildren.slice(1).forEach(child => {
-    if (child !== canvas) {
-      child.style.position = child.style.position || 'relative';
-      child.style.zIndex = child.style.zIndex || '1';
-    }
-  });
-
-  const ctx = canvas.getContext('2d');
-  const particleCount = 60;
-  const connectionDistance = 120;
-  const particles = [];
-
-  // Particle class
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.radius = 2;
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      // Wrap around edges
-      if (this.x < 0) this.x = canvas.width;
-      if (this.x > canvas.width) this.x = 0;
-      if (this.y < 0) this.y = canvas.height;
-      if (this.y > canvas.height) this.y = 0;
-    }
-
-    draw() {
-      ctx.fillStyle = 'rgba(37, 99, 235, 0.4)';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  // Initialize particles
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  // Resize canvas
-  function resizeCanvas() {
-    canvas.width = aboutSection.offsetWidth;
-    canvas.height = aboutSection.offsetHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  // Animation loop
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Update and draw particles
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-
-    // Draw connections
-    ctx.strokeStyle = 'rgba(37, 99, 235, 0.15)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < connectionDistance) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-}
 
 // Initialize all effects on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -2254,7 +2145,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCard3DTilt();
   initParallax();
   initAuroraBlobs();
-  initParticleNetwork();
   initScrollProgress();
   initMouseParallax();
   initStaggeredSlideIn();
