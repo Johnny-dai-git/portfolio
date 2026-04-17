@@ -2788,8 +2788,10 @@ function loop(t){
   tickShootingStars(ctx,t);
   drawPlanet(ctx);
 
-  // mothership
-  ms.x+=ms.vx;if(ms.x>W-90||ms.x<90)ms.vx*=-1;
+  // mothership — clamp position so it never overshoots the boundary
+  ms.x+=ms.vx;
+  if(ms.x>=W-90){ms.x=W-90;ms.vx=-Math.abs(ms.vx);}
+  else if(ms.x<=90){ms.x=90;ms.vx=Math.abs(ms.vx);}
   drawMothership(ctx,t);
 
   // spawn
@@ -2858,6 +2860,7 @@ function startTimer(){
 
 /* ── lifecycle ── */
 function startGame(){
+  clearInterval(timerInterval);cancelAnimationFrame(animFrame);
   score=0;lastScore=0;ufos=[];explosions=[];flashes=[];floatingScores=[];shootingStars=[];spawnTimer=0;
   ms.x=370;ms.vx=1.1;initStars();state='playing';
   ['ufo-entry','ufo-gameover'].forEach(id=>document.getElementById(id).style.display='none');
