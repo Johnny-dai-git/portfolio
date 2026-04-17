@@ -999,7 +999,7 @@ footer a:hover { color: var(--accent); }
   <!-- ── DML: GPU CLUSTER → ALLREDUCE → PARAMETER SERVER ── -->
   <div id="server-push-anim">
 
-    <svg viewBox="0 -75 720 295" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">
+    <svg viewBox="0 -75 700 295" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">
   <defs>
     <filter id="dml-glow" x="-70%" y="-70%" width="240%" height="240%">
       <feGaussianBlur stdDeviation="3.5" result="blur"/>
@@ -1012,13 +1012,18 @@ footer a:hover { color: var(--accent); }
   </defs>
 
   <!-- ══ TOPOLOGY BACKGROUND PATHS ══ -->
-  <path d="M 104,32 C 175,32 218,92 264,92"   stroke="#1a2d4a" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-  <path d="M 104,88 C 190,88 230,105 264,105"  stroke="#0a2a1a" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-  <path d="M 104,144 C 190,144 228,118 264,118" stroke="#1a0f35" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-  <path d="M 104,200 C 175,200 218,131 264,131" stroke="#2a1000" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
-  <path d="M 356,116 L 508,116"                stroke="#1e293b" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+  <!-- GPU → ToR -->
+  <path d="M 104,32 C 135,32 152,42 168,42"   stroke="#1a2d4a" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 104,88 C 135,88 152,75 168,75"   stroke="#0a2a1a" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 104,144 C 135,144 152,152 168,152" stroke="#1a0f35" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 104,200 C 135,200 152,183 168,183" stroke="#2a1000" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <!-- ToR → Spine -->
+  <path d="M 220,58 C 255,58 272,105 292,105" stroke="#0a2a2a" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <path d="M 220,170 C 255,170 272,133 292,133" stroke="#0a2a2a" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
+  <!-- Spine → PS -->
+  <path d="M 344,116 L 418,116"               stroke="#1e1b40" stroke-width="1.4" fill="none" stroke-dasharray="4 3"/>
 
-  <!-- ══ A100 (blue) — box 96×44 ══ -->
+  <!-- ══ A100 (blue) ══ -->
   <rect x="8" y="10" width="96" height="44" rx="4" fill="#050e1f" stroke="#3b82f6" stroke-width="2"/>
   <rect x="13" y="14" width="38" height="22" rx="2" fill="#0f2040"/>
   <rect x="15" y="16" width="7" height="7" rx="1" fill="#3b82f6" opacity="0.8"/>
@@ -1048,7 +1053,7 @@ footer a:hover { color: var(--accent); }
   <circle cx="97" cy="73" r="4" fill="#22c55e"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
   <text x="56" y="106" text-anchor="middle" fill="#6ee7b7" font-size="12" font-family="monospace" font-weight="700">V100</text>
 
-  <!-- ══ H100 (violet) — 4×3 SM grid (more compute units) ══ -->
+  <!-- ══ H100 (violet) — 4×3 SM grid ══ -->
   <rect x="8" y="122" width="96" height="44" rx="4" fill="#0c0520" stroke="#8b5cf6" stroke-width="2"/>
   <rect x="13" y="126" width="38" height="28" rx="2" fill="#1a0a38"/>
   <rect x="15" y="128" width="5" height="5" rx="1" fill="#8b5cf6" opacity="0.85"/>
@@ -1085,122 +1090,171 @@ footer a:hover { color: var(--accent); }
   <circle cx="97" cy="185" r="4" fill="#22c55e"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
   <text x="56" y="218" text-anchor="middle" fill="#fed7aa" font-size="12" font-family="monospace" font-weight="700">A10G</text>
 
-  <!-- ══ NETWORK SWITCH (InfiniBand) ══ -->
-  <rect x="258" y="80" width="92" height="72" rx="5" fill="#06141a" stroke="#06b6d4" stroke-width="2"/>
+  <!-- ══ ToR SWITCH 1 (cyan — Tier 1) ══ -->
+  <rect x="168" y="28" width="52" height="62" rx="4" fill="#04131a" stroke="#22d3ee" stroke-width="1.8"/>
   <!-- Input ports (colored per source) -->
-  <rect x="258" y="87"  width="6" height="9" rx="1.5" fill="#3b82f6"/>
-  <rect x="258" y="100" width="6" height="9" rx="1.5" fill="#10b981"/>
-  <rect x="258" y="113" width="6" height="9" rx="1.5" fill="#8b5cf6"/>
-  <rect x="258" y="126" width="6" height="9" rx="1.5" fill="#f97316"/>
-  <!-- Uplink port -->
-  <rect x="344" y="107" width="6" height="18" rx="1.5" fill="#06b6d4"/>
+  <rect x="168" y="38" width="6" height="9" rx="1.5" fill="#3b82f6"/>
+  <rect x="168" y="71" width="6" height="9" rx="1.5" fill="#10b981"/>
+  <!-- Uplink port right -->
+  <rect x="214" y="51" width="6" height="14" rx="1.5" fill="#22d3ee"/>
   <!-- Internal routing -->
-  <line x1="264" y1="92"  x2="300" y2="116" stroke="#0a3a4a" stroke-width="1.2"/>
-  <line x1="264" y1="105" x2="300" y2="116" stroke="#0a3a4a" stroke-width="1.2"/>
-  <line x1="264" y1="118" x2="300" y2="116" stroke="#0a3a4a" stroke-width="1.2"/>
-  <line x1="264" y1="131" x2="300" y2="116" stroke="#0a3a4a" stroke-width="1.2"/>
-  <line x1="300" y1="116" x2="344" y2="116" stroke="#0a3a4a" stroke-width="1.5"/>
-  <!-- Activity LED -->
-  <circle cx="334" cy="86" r="3" fill="#06b6d4">
-    <animate attributeName="opacity" values="1;0.15;1" dur="0.65s" repeatCount="indefinite"/>
-  </circle>
-  <text x="304" y="111" text-anchor="middle" fill="#22d3ee" font-size="9" font-family="monospace" font-weight="700">Switch</text>
-  <text x="304" y="122" text-anchor="middle" fill="#475569" font-size="7.5" font-family="monospace">InfiniBand</text>
+  <line x1="174" y1="42"  x2="194" y2="59" stroke="#0a3040" stroke-width="1.2"/>
+  <line x1="174" y1="75"  x2="194" y2="59" stroke="#0a3040" stroke-width="1.2"/>
+  <line x1="194" y1="59"  x2="214" y2="58" stroke="#0a3040" stroke-width="1.5"/>
+  <circle cx="208" cy="34" r="2.8" fill="#22d3ee"><animate attributeName="opacity" values="1;0.2;1" dur="0.7s" repeatCount="indefinite"/></circle>
+  <text x="194" y="54" text-anchor="middle" fill="#67e8f9" font-size="7.5" font-family="monospace" font-weight="700">ToR 1</text>
+  <text x="194" y="82" text-anchor="middle" fill="#475569" font-size="6.5" font-family="monospace">400G</text>
 
-  <!-- Switch aggregation burst (last packet V100 arrives t=3.8s, kt=0.271) -->
-  <circle cx="300" cy="116" r="0" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0">
-    <animate attributeName="r"       values="0;0;0;38;56;0;0" keyTimes="0;0.264;0.279;0.293;0.321;0.343;1" dur="14s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0;0.9;0.1;0;0" keyTimes="0;0.264;0.279;0.293;0.321;0.343;1" dur="14s" repeatCount="indefinite"/>
+  <!-- ToR1 burst (V100 arrives last at t=3.5s, kt=0.250) -->
+  <circle cx="194" cy="59" r="0" fill="none" stroke="#22d3ee" stroke-width="1.8" opacity="0">
+    <animate attributeName="r"       values="0;0;0;28;42;0;0" keyTimes="0;0.243;0.250;0.264;0.293;0.314;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0;0.85;0.1;0;0" keyTimes="0;0.243;0.250;0.264;0.293;0.314;1" dur="14s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══ ToR SWITCH 2 (cyan — Tier 1) ══ -->
+  <rect x="168" y="140" width="52" height="62" rx="4" fill="#04131a" stroke="#22d3ee" stroke-width="1.8"/>
+  <rect x="168" y="149" width="6" height="9" rx="1.5" fill="#8b5cf6"/>
+  <rect x="168" y="181" width="6" height="9" rx="1.5" fill="#f97316"/>
+  <rect x="214" y="163" width="6" height="14" rx="1.5" fill="#22d3ee"/>
+  <line x1="174" y1="153" x2="194" y2="171" stroke="#0a3040" stroke-width="1.2"/>
+  <line x1="174" y1="185" x2="194" y2="171" stroke="#0a3040" stroke-width="1.2"/>
+  <line x1="194" y1="171" x2="214" y2="170" stroke="#0a3040" stroke-width="1.5"/>
+  <circle cx="208" cy="146" r="2.8" fill="#22d3ee"><animate attributeName="opacity" values="1;0.2;1" dur="0.55s" repeatCount="indefinite"/></circle>
+  <text x="194" y="166" text-anchor="middle" fill="#67e8f9" font-size="7.5" font-family="monospace" font-weight="700">ToR 2</text>
+  <text x="194" y="194" text-anchor="middle" fill="#475569" font-size="6.5" font-family="monospace">400G</text>
+
+  <!-- ToR2 burst (A10G arrives last at t=2.8s, kt=0.200) -->
+  <circle cx="194" cy="171" r="0" fill="none" stroke="#22d3ee" stroke-width="1.8" opacity="0">
+    <animate attributeName="r"       values="0;0;0;28;42;0;0" keyTimes="0;0.193;0.200;0.214;0.243;0.264;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0;0.85;0.1;0;0" keyTimes="0;0.193;0.200;0.214;0.243;0.264;1" dur="14s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══ SPINE SWITCH (purple — Tier 2, higher bandwidth) ══ -->
+  <rect x="292" y="86" width="52" height="60" rx="4" fill="#100820" stroke="#c084fc" stroke-width="1.8"/>
+  <!-- Input ports -->
+  <rect x="292" y="100" width="6" height="10" rx="1.5" fill="#22d3ee"/>
+  <rect x="292" y="126" width="6" height="10" rx="1.5" fill="#22d3ee"/>
+  <!-- Uplink port right -->
+  <rect x="338" y="108" width="6" height="16" rx="1.5" fill="#c084fc"/>
+  <!-- Internal routing -->
+  <line x1="298" y1="105" x2="318" y2="116" stroke="#200840" stroke-width="1.2"/>
+  <line x1="298" y1="131" x2="318" y2="116" stroke="#200840" stroke-width="1.2"/>
+  <line x1="318" y1="116" x2="338" y2="116" stroke="#200840" stroke-width="1.5"/>
+  <circle cx="332" cy="92" r="2.8" fill="#c084fc"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite"/></circle>
+  <text x="318" y="111" text-anchor="middle" fill="#e9d5ff" font-size="7.5" font-family="monospace" font-weight="700">Spine</text>
+  <text x="318" y="136" text-anchor="middle" fill="#475569" font-size="6.5" font-family="monospace">800G</text>
+
+  <!-- Spine burst (both ToR packets arrive at t=4.5s, kt=0.321) -->
+  <circle cx="318" cy="116" r="0" fill="none" stroke="#c084fc" stroke-width="1.8" opacity="0">
+    <animate attributeName="r"       values="0;0;0;32;48;0;0" keyTimes="0;0.314;0.321;0.335;0.364;0.386;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0;0.85;0.1;0;0" keyTimes="0;0.314;0.321;0.335;0.364;0.386;1" dur="14s" repeatCount="indefinite"/>
   </circle>
 
   <!-- ══ PARAMETER SERVER ══ -->
-  <rect x="508" y="80" width="148" height="72" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
-  <rect x="516" y="88"  width="132" height="10" rx="2" fill="#0f172a"/>
-  <rect x="516" y="102" width="132" height="10" rx="2" fill="#0f172a"/>
-  <rect x="516" y="116" width="132" height="10" rx="2" fill="#0f172a"/>
-  <rect x="516" y="130" width="132" height="10" rx="2" fill="#0f172a"/>
-  <circle cx="518" cy="93"  r="4" fill="#3b82f6"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.1s" repeatCount="indefinite"/></circle>
-  <circle cx="518" cy="107" r="4" fill="#f59e0b"><animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite"/></circle>
-  <circle cx="518" cy="121" r="4" fill="#a855f7"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/></circle>
-  <!-- Sync LED red → green -->
-  <circle cx="518" cy="135" r="4.5" fill="#ef4444">
-    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.536;0.550;0.929;1" dur="14s" repeatCount="indefinite"/>
+  <rect x="418" y="80" width="148" height="72" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="2"/>
+  <rect x="426" y="88"  width="132" height="10" rx="2" fill="#0f172a"/>
+  <rect x="426" y="102" width="132" height="10" rx="2" fill="#0f172a"/>
+  <rect x="426" y="116" width="132" height="10" rx="2" fill="#0f172a"/>
+  <rect x="426" y="130" width="132" height="10" rx="2" fill="#0f172a"/>
+  <circle cx="428" cy="93"  r="4" fill="#3b82f6"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.1s" repeatCount="indefinite"/></circle>
+  <circle cx="428" cy="107" r="4" fill="#f59e0b"><animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite"/></circle>
+  <circle cx="428" cy="121" r="4" fill="#a855f7"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/></circle>
+  <!-- Sync LED: red → green -->
+  <circle cx="428" cy="135" r="4.5" fill="#ef4444">
+    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.500;0.514;0.893;1" dur="14s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="518" cy="135" r="4.5" fill="#22c55e" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.536;0.550;0.929;1" dur="14s" repeatCount="indefinite"/>
+  <circle cx="428" cy="135" r="4.5" fill="#22c55e" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.500;0.514;0.893;1" dur="14s" repeatCount="indefinite"/>
   </circle>
-  <text x="582" y="162" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Parameter Server</text>
+  <text x="492" y="162" text-anchor="middle" fill="#475569" font-size="9" font-family="monospace">Parameter Server</text>
   <!-- PS arrival burst -->
-  <circle cx="508" cy="116" r="0" fill="#22c55e" opacity="0">
-    <animate attributeName="r"       values="0;0;42;0;0"   keyTimes="0;0.536;0.564;0.600;1" dur="14s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;0.4;0;0"  keyTimes="0;0.536;0.564;0.600;1" dur="14s" repeatCount="indefinite"/>
+  <circle cx="418" cy="116" r="0" fill="#22c55e" opacity="0">
+    <animate attributeName="r"       values="0;0;40;0;0"   keyTimes="0;0.500;0.529;0.564;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;0.4;0;0"  keyTimes="0;0.500;0.529;0.564;1" dur="14s" repeatCount="indefinite"/>
   </circle>
 
-  <!-- ══ GRADIENT PACKETS  (H100 fastest → A100 → A10G → V100 slowest) ══ -->
-
-  <!-- H100 (violet): FASTEST — depart t=0.0s(kt=0.000) arrive t=2.5s(kt=0.179) -->
+  <!-- ══ GPU → ToR PACKETS ══ -->
+  <!-- H100 (violet) FASTEST: depart t=0(kt=0) → ToR2 t=2.1s(kt=0.150) -->
   <circle r="8" fill="#8b5cf6" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="1;1;0;0"         keyTimes="0;0.179;0.214;1"       dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;1;0;0"         keyTimes="0;0.150;0.186;1"       dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;1;1" keyTimes="0;0.179;1"
-      path="M 104,144 C 190,144 228,118 264,118"/>
+      keyPoints="0;1;1" keyTimes="0;0.150;1"
+      path="M 104,144 C 135,144 152,152 168,152"/>
   </circle>
 
-  <!-- A100 (blue): 2nd — depart t=0.5s(kt=0.036) arrive t=2.8s(kt=0.200) -->
+  <!-- A100 (blue) 2nd: depart t=0.5s(kt=0.036) → ToR1 t=2.4s(kt=0.171) -->
   <circle r="8" fill="#3b82f6" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.036;0.200;0.236;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.036;0.171;0.207;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.036;0.200;1"
-      path="M 104,32 C 175,32 218,92 264,92"/>
+      keyPoints="0;0;1;1" keyTimes="0;0.036;0.171;1"
+      path="M 104,32 C 135,32 152,42 168,42"/>
   </circle>
 
-  <!-- A10G (orange): 3rd — depart t=1.2s(kt=0.086) arrive t=3.2s(kt=0.229) -->
+  <!-- A10G (orange) 3rd: depart t=1.2s(kt=0.086) → ToR2 t=2.8s(kt=0.200) -->
   <circle r="8" fill="#f97316" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.086;0.229;0.264;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.086;0.200;0.236;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.086;0.229;1"
-      path="M 104,200 C 175,200 218,131 264,131"/>
+      keyPoints="0;0;1;1" keyTimes="0;0.086;0.200;1"
+      path="M 104,200 C 135,200 152,183 168,183"/>
   </circle>
 
-  <!-- V100 (emerald): slowest — depart t=2.0s(kt=0.143) arrive t=3.8s(kt=0.271) -->
+  <!-- V100 (emerald) slowest: depart t=2.0s(kt=0.143) → ToR1 t=3.5s(kt=0.250) -->
   <circle r="8" fill="#10b981" opacity="0" filter="url(#dml-glow)">
-    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.143;0.271;0.307;1" dur="14s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;1;1;0;0"       keyTimes="0;0.143;0.250;0.286;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;1;1" keyTimes="0;0.143;0.271;1"
-      path="M 104,88 C 190,88 230,105 264,105"/>
+      keyPoints="0;0;1;1" keyTimes="0;0.143;0.250;1"
+      path="M 104,88 C 135,88 152,75 168,75"/>
   </circle>
 
-  <!-- ══ AGGREGATED PACKET  Switch → PS ══ -->
-  <circle r="12" fill="white" opacity="0" filter="url(#dml-glow-lg)">
-    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.307;0.321;0.536;0.571;1" dur="14s" repeatCount="indefinite"/>
+  <!-- ══ ToR → SPINE PACKETS (cyan, merged gradient) ══ -->
+  <!-- ToR2 → Spine: depart t=2.9s(kt=0.207) → Spine t=3.6s(kt=0.257) -->
+  <circle r="9" fill="#22d3ee" opacity="0" filter="url(#dml-glow)">
+    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.200;0.214;0.257;0.293;1" dur="14s" repeatCount="indefinite"/>
     <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
-      keyPoints="0;0;0;1;1;1" keyTimes="0;0.307;0.321;0.536;0.571;1"
-      path="M 356,116 L 508,116"/>
+      keyPoints="0;0;0;1;1;1" keyTimes="0;0.200;0.214;0.257;0.293;1"
+      path="M 220,170 C 255,170 272,133 292,133"/>
+  </circle>
+
+  <!-- ToR1 → Spine: depart t=3.6s(kt=0.257) → Spine t=4.5s(kt=0.321) -->
+  <circle r="9" fill="#22d3ee" opacity="0" filter="url(#dml-glow)">
+    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.250;0.264;0.321;0.357;1" dur="14s" repeatCount="indefinite"/>
+    <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+      keyPoints="0;0;0;1;1;1" keyTimes="0;0.250;0.264;0.321;0.357;1"
+      path="M 220,58 C 255,58 272,105 292,105"/>
+  </circle>
+
+  <!-- ══ SPINE → PS PACKET (white, fully aggregated) ══ -->
+  <!-- depart t=4.6s(kt=0.329) → PS t=7.0s(kt=0.500) -->
+  <circle r="12" fill="white" opacity="0" filter="url(#dml-glow-lg)">
+    <animate attributeName="opacity" values="0;0;1;1;0;0"     keyTimes="0;0.321;0.336;0.500;0.536;1" dur="14s" repeatCount="indefinite"/>
+    <animateMotion dur="14s" repeatCount="indefinite" calcMode="linear"
+      keyPoints="0;0;0;1;1;1" keyTimes="0;0.321;0.336;0.500;0.536;1"
+      path="M 344,116 L 418,116"/>
   </circle>
 
   <!-- ══ EMAIL ME POPUP ══ -->
   <g>
     <animateTransform attributeName="transform" type="translate"
       values="0,16; 0,16; 0,0; 0,0; 0,16; 0,16"
-      keyTimes="0;0.536;0.571;0.857;0.893;1"
+      keyTimes="0;0.500;0.536;0.857;0.893;1"
       dur="14s" repeatCount="indefinite"/>
-    <rect x="509" y="-62" width="152" height="52" rx="10" fill="#6366f1" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+    <rect x="417" y="-62" width="152" height="52" rx="10" fill="#6366f1" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </rect>
-    <line x1="585" y1="-10" x2="585" y2="80" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2" opacity="0">
-      <animate attributeName="opacity" values="0;0;0.7;0.7;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+    <line x1="493" y1="-10" x2="493" y2="80" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3 2" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.7;0.7;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </line>
-    <text x="585" y="-43" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="10" font-family="'Inter','Segoe UI',sans-serif" opacity="0">
+    <text x="493" y="-43" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="10" font-family="'Inter','Segoe UI',sans-serif" opacity="0">
       &#x2713; Sync complete!
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
-    <text x="585" y="-26" text-anchor="middle" fill="white" font-size="15" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" opacity="0">
+    <text x="493" y="-26" text-anchor="middle" fill="white" font-size="15" font-family="'Inter','Segoe UI',sans-serif" font-weight="700" opacity="0">
       Email me! &#x2709;
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
-    <text x="585" y="-13" text-anchor="middle" fill="rgba(255,255,255,0.78)" font-size="10" font-family="'Inter',monospace" opacity="0">
+    <text x="493" y="-13" text-anchor="middle" fill="rgba(255,255,255,0.78)" font-size="10" font-family="'Inter',monospace" opacity="0">
       yxd429@case.edu
-      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.536;0.571;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.536;0.857;0.893;1" dur="14s" repeatCount="indefinite"/>
     </text>
   </g>
 </svg>
