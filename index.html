@@ -480,7 +480,7 @@ section {
 .pub-venues p { font-size: 0.95rem; color: #bfdbfe; line-height: 1.75; }
 .pub-venues strong { color: #fff; }
 
-.pub-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.pub-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
 .pub-item {
   background: var(--surface);
   border: 1px solid var(--border2);
@@ -690,6 +690,7 @@ footer a:hover { color: var(--accent); }
   .about-grid    { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-section{ grid-template-columns: 1fr; }
+  .pub-list      { grid-template-columns: 1fr; }
   .pub-summary-card { flex-direction: column; gap: 1.2rem; }
   .pub-divider   { display: none; }
   .pub-venues    { padding-left: 0; }
