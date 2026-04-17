@@ -927,6 +927,136 @@ footer a:hover { color: var(--accent); }
             <ellipse cx="45" cy="114" rx="13" ry="5.5" fill="#7a5015" transform="rotate(10,45,114)"/>
           </svg>
         </div>
+
+        <!-- ── 5 SQUIRRELS PUSHING CABLE INTO SERVER ── -->
+        <div id="server-push-anim">
+          <svg viewBox="0 0 282 102" width="262" height="95" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+            <defs>
+              <!-- Mini Scrat squirrel, origin = head center at (0,0), arms pointing right -->
+              <g id="msq">
+                <!-- Bushy tail (curls up-left) -->
+                <path d="M-5,10 C-22,2 -22,-12 -13,-16 C-7,-18 -4,-11 -4,-4"
+                      stroke="#c07a1e" stroke-width="7" stroke-linecap="round" fill="none"/>
+                <path d="M-5,10 C-19,3 -19,-10 -11,-14 C-6,-16 -5,-9 -4,-3"
+                      stroke="#ebb34e" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <!-- Body -->
+                <ellipse cx="0" cy="15" rx="7" ry="9" fill="#a06828"/>
+                <!-- Head -->
+                <circle cx="0" cy="0" r="10" fill="#b87a2e"/>
+                <!-- Muzzle area -->
+                <ellipse cx="0" cy="5" rx="5.5" ry="4" fill="#d49040"/>
+                <!-- Big Scrat eyes -->
+                <circle cx="-4.5" cy="-4" r="4.5" fill="white"/>
+                <circle cx="4.5" cy="-4" r="4.5" fill="white"/>
+                <circle cx="-4.5" cy="-3" r="2.8" fill="#111"/>
+                <circle cx="4.5" cy="-3" r="2.8" fill="#111"/>
+                <circle cx="-3" cy="-5" r="1.3" fill="white"/>
+                <circle cx="6" cy="-5" r="1.3" fill="white"/>
+                <!-- Nose -->
+                <ellipse cx="0" cy="1" rx="2" ry="1.5" fill="#333"/>
+                <!-- Arms pushing right -->
+                <path d="M6,8 L17,13" stroke="#a06828" stroke-width="4" stroke-linecap="round"/>
+                <path d="M6,15 L17,18" stroke="#a06828" stroke-width="4" stroke-linecap="round"/>
+                <!-- Feet -->
+                <ellipse cx="-4" cy="24" rx="6" ry="2.5" fill="#7a5015" transform="rotate(-10,-4,24)"/>
+                <ellipse cx="4" cy="24" rx="6" ry="2.5" fill="#7a5015" transform="rotate(10,4,24)"/>
+              </g>
+            </defs>
+
+            <!-- ── SERVER (static, right side) ── -->
+            <rect x="230" y="14" width="50" height="80" rx="5" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+            <!-- Drive bay panels -->
+            <rect x="235" y="22" width="40" height="8"  rx="2" fill="#0f172a"/>
+            <rect x="235" y="34" width="40" height="8"  rx="2" fill="#0f172a"/>
+            <rect x="235" y="46" width="40" height="8"  rx="2" fill="#0f172a"/>
+            <rect x="235" y="58" width="40" height="24" rx="2" fill="#0f172a"/>
+            <!-- Status LEDs -->
+            <circle cx="241" cy="26" r="2.8" fill="#22c55e">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.7s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="241" cy="38" r="2.8" fill="#3b82f6">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Port LED — lights up when cable is fully inserted -->
+            <circle cx="241" cy="50" r="2.8" fill="#f59e0b">
+              <animate attributeName="opacity"
+                values="0;0;1;1;0;0"
+                keyTimes="0;0.53;0.60;0.72;0.76;1"
+                dur="3.6s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Ethernet port hole -->
+            <rect x="244" y="64" width="16" height="12" rx="2" fill="#334155" stroke="#64748b" stroke-width="1.2"/>
+            <rect x="246" y="65.5" width="12" height="3.5" rx="0.5" fill="#0f172a"/>
+            <rect x="246" y="71"   width="12" height="3"   rx="0.5" fill="#0f172a"/>
+            <!-- Connection flash glow -->
+            <circle cx="255" cy="70" r="0" fill="rgba(251,191,36,0.3)">
+              <animate attributeName="r"       values="0;0;20;0;0" keyTimes="0;0.57;0.64;0.70;1" dur="3.6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0;1;0;0"  keyTimes="0;0.57;0.64;0.70;1" dur="3.6s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- ── SQUIRREL PUSH GROUP (squirrels + RJ45 + droopy cable) ── -->
+            <g>
+              <!-- Push forward: 0 → 20px → back -->
+              <animateTransform attributeName="transform" type="translate"
+                values="0,0; 0,0; 20,0; 20,0; 0,0"
+                keyTimes="0; 0.10; 0.55; 0.73; 1"
+                dur="3.6s" repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0 0 1 1; 0.25 0 0.25 1; 0 0 1 1; 0.75 0 1 1"/>
+
+              <!-- Droopy ethernet cable (left end near RJ45, right end near server port) -->
+              <!-- At 0px translate: right end at x=230 (server left edge, 20px gap to port) -->
+              <!-- At 20px push:     right end at x=250 ≈ server port at x=252. Connected! -->
+              <path d="M130,75 C165,90 195,90 230,75"
+                    stroke="#fbbf24" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+              <!-- Cable sheath stripe (detail) -->
+              <path d="M130,75 C165,90 195,90 230,75"
+                    stroke="rgba(180,100,0,0.35)" stroke-width="1.5" fill="none"
+                    stroke-dasharray="6 5"/>
+
+              <!-- RJ45 connector (front of cable) -->
+              <rect x="116" y="70" width="15" height="11" rx="2" fill="#fbbf24" stroke="#d97706" stroke-width="1.2"/>
+              <rect x="118" y="71.5" width="11" height="3.5" rx="0.5" fill="#78350f"/>
+              <rect x="118" y="76.5" width="11" height="2.8" rx="0.5" fill="#78350f"/>
+
+              <!-- Squirrel 5 (back, leftmost) -->
+              <g transform="translate(13,68)">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0,0; 0,2.5; 0,0" keyTimes="0;0.5;1"
+                  dur="0.72s" begin="0.0s" repeatCount="indefinite" additive="sum"/>
+                <use href="#msq"/>
+              </g>
+              <!-- Squirrel 4 -->
+              <g transform="translate(41,68)">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0,0; 0,2.5; 0,0" keyTimes="0;0.5;1"
+                  dur="0.72s" begin="0.1s" repeatCount="indefinite" additive="sum"/>
+                <use href="#msq"/>
+              </g>
+              <!-- Squirrel 3 -->
+              <g transform="translate(69,68)">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0,0; 0,2.5; 0,0" keyTimes="0;0.5;1"
+                  dur="0.72s" begin="0.2s" repeatCount="indefinite" additive="sum"/>
+                <use href="#msq"/>
+              </g>
+              <!-- Squirrel 2 -->
+              <g transform="translate(97,68)">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0,0; 0,2.5; 0,0" keyTimes="0;0.5;1"
+                  dur="0.72s" begin="0.3s" repeatCount="indefinite" additive="sum"/>
+                <use href="#msq"/>
+              </g>
+              <!-- Squirrel 1 (front, hands on cable) -->
+              <g transform="translate(125,68)">
+                <animateTransform attributeName="transform" type="translate"
+                  values="0,0; 0,2.5; 0,0" keyTimes="0;0.5;1"
+                  dur="0.72s" begin="0.4s" repeatCount="indefinite" additive="sum"/>
+                <use href="#msq"/>
+              </g>
+            </g>
+          </svg>
+        </div>
       </div>
 
     </div>
@@ -2376,6 +2506,12 @@ document.addEventListener('click', () => {
   align-items: flex-end;
   gap: 1rem;
   margin-top: 1.8rem;
+  flex-wrap: wrap;
+}
+#server-push-anim {
+  flex-shrink: 0;
+  align-self: flex-end;
+  line-height: 0;
 }
 .sq-bubble {
   background: var(--card);
