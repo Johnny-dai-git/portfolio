@@ -717,32 +717,7 @@ footer a:hover { color: var(--accent); }
   box-shadow: 0 0 8px rgba(37,99,235,0.6);
 }
 
-/* ── EFFECT: GRADIENT BORDER ON CARD HOVER ─────────────────── */
-.proj-card, .edu-card, .exp-card, .skill-category, .pub-item {
-  position: relative;
-}
-.proj-card::before, .edu-card::before, .exp-card::before,
-.skill-category::before, .pub-item::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #2563eb, #7c3aed, #0891b2, #2563eb);
-  background-size: 300% 300%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-  animation: gradientShift 3s ease infinite;
-}
-.proj-card:hover::before, .edu-card:hover::before, .exp-card:hover::before,
-.skill-category:hover::before, .pub-item:hover::before {
-  opacity: 1;
-}
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+/* ── EFFECT: GRADIENT BORDER (removed per user request) ─────── */
 
 /* ── EFFECT: STAGGERED SLIDE-IN ─────────────────────────────── */
 .slide-in {
@@ -2197,6 +2172,141 @@ document.querySelectorAll('.lang-option').forEach(o => {
 document.addEventListener('click', () => {
   document.getElementById('langDropdown').classList.remove('open');
 });
+</script>
+
+<!-- ── UFO ── -->
+<div id="ufo" title="👽">
+  <svg width="72" height="44" viewBox="0 0 72 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- beam -->
+    <polygon points="28,30 44,30 52,44 20,44" fill="rgba(100,220,255,0.18)"/>
+    <!-- body -->
+    <ellipse cx="36" cy="24" rx="28" ry="10" fill="url(#bodyGrad)"/>
+    <!-- dome -->
+    <ellipse cx="36" cy="20" rx="14" ry="10" fill="url(#domeGrad)"/>
+    <!-- windows -->
+    <circle cx="29" cy="20" r="3" fill="rgba(255,255,255,0.55)"/>
+    <circle cx="36" cy="18" r="3.5" fill="rgba(255,255,255,0.65)"/>
+    <circle cx="43" cy="20" r="3" fill="rgba(255,255,255,0.55)"/>
+    <!-- rim lights -->
+    <circle cx="14" cy="26" r="2.2" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="22" cy="29" r="2" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="30" cy="31" r="2" fill="#34d399" opacity="0.9"/>
+    <circle cx="36" cy="32" r="2.2" fill="#60a5fa" opacity="0.9"/>
+    <circle cx="42" cy="31" r="2" fill="#f472b6" opacity="0.9"/>
+    <circle cx="50" cy="29" r="2" fill="#a78bfa" opacity="0.9"/>
+    <circle cx="58" cy="26" r="2.2" fill="#34d399" opacity="0.9"/>
+    <defs>
+      <radialGradient id="bodyGrad" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#94a3b8"/>
+        <stop offset="100%" stop-color="#334155"/>
+      </radialGradient>
+      <radialGradient id="domeGrad" cx="40%" cy="30%" r="70%">
+        <stop offset="0%" stop-color="#bfdbfe"/>
+        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.7"/>
+      </radialGradient>
+    </defs>
+  </svg>
+</div>
+
+<style>
+#ufo {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px rgba(96,165,250,0.7)) drop-shadow(0 0 24px rgba(96,165,250,0.3));
+  transition: filter 0.3s;
+  cursor: pointer;
+  pointer-events: auto;
+}
+#ufo:hover { filter: drop-shadow(0 0 18px rgba(167,139,250,0.9)) drop-shadow(0 0 40px rgba(167,139,250,0.5)); }
+@keyframes ufoWiggle { 0%,100%{transform:rotate(-3deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-4px)} }
+</style>
+
+<script>
+(function() {
+  const ufo = document.getElementById('ufo');
+  if (!ufo) return;
+
+  const W = () => window.innerWidth;
+  const H = () => window.innerHeight;
+
+  // Waypoints along the edges of the viewport
+  function makeWaypoints() {
+    return [
+      { x: W()*0.08,  y: H()*0.2  },
+      { x: W()*0.06,  y: H()*0.5  },
+      { x: W()*0.10,  y: H()*0.8  },
+      { x: W()*0.35,  y: H()*1.1  },
+      { x: W()*0.65,  y: H()*1.3  },
+      { x: W()*0.90,  y: H()*0.85 },
+      { x: W()*0.94,  y: H()*0.5  },
+      { x: W()*0.88,  y: H()*0.15 },
+      { x: W()*0.55,  y: H()*0.05 },
+      { x: W()*0.2,   y: H()*0.08 },
+    ];
+  }
+
+  let waypoints = makeWaypoints();
+  let idx = 0;
+  let pos = { x: waypoints[0].x, y: waypoints[0].y };
+  let vel = { x: 0, y: 0 };
+  let flipX = false;
+
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  // Lerp-based smooth movement
+  function animate() {
+    const target = waypoints[idx];
+    const dx = target.x - pos.x;
+    const dy = target.y - pos.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist < 6) {
+      idx = (idx + 1) % waypoints.length;
+    }
+
+    const speed = 1.4;
+    pos.x += (dx / Math.max(dist,1)) * Math.min(speed, dist);
+    pos.y += (dy / Math.max(dist,1)) * Math.min(speed, dist);
+
+    // Flip horizontally based on direction
+    if (dx < -2) flipX = true;
+    if (dx > 2)  flipX = false;
+
+    const scrollY = window.scrollY;
+    const screenX = pos.x - 36;
+    const screenY = pos.y - 22 - scrollY;
+
+    ufo.style.left = screenX + 'px';
+    ufo.style.top  = screenY + 'px';
+    ufo.style.transform = `scaleX(${flipX ? -1 : 1})`;
+
+    requestAnimationFrame(animate);
+  }
+
+  // Recalculate waypoints on scroll so UFO wanders the whole page
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    waypoints = makeWaypoints().map(p => ({ x: p.x, y: p.y + sy }));
+    lastScroll = sy;
+  }, { passive: true });
+
+  // Click: UFO zooms toward cursor then runs away
+  ufo.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cx = e.clientX + window.scrollX;
+    const cy = e.clientY + window.scrollY;
+    waypoints = [
+      { x: cx + (Math.random()-0.5)*W()*0.6, y: cy + (Math.random()-0.5)*H()*0.4 },
+      { x: W()*0.1 + Math.random()*W()*0.8, y: window.scrollY + Math.random()*H() },
+      ...makeWaypoints().map(p => ({ x: p.x, y: p.y + window.scrollY })),
+    ];
+    idx = 0;
+  });
+
+  animate();
+})();
 </script>
 </body>
 </html>
