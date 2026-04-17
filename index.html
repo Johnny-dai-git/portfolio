@@ -2716,409 +2716,490 @@ body.missile-mode * { cursor: none !important; }
   }
 })();
 </script>
-<!-- ── UFO SHOOTER GAME ── -->
+<!-- ── UFO SHOOTER GAME v2 ── -->
 <style>
-#ufo-modal {
-  display:none; position:fixed; inset:0; z-index:99999;
-  background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
-  align-items:center; justify-content:center;
-}
-#ufo-box {
-  position:relative; background:#020817;
-  border:1.5px solid rgba(34,197,94,0.4);
-  border-radius:18px; overflow:hidden;
-  box-shadow:0 0 60px rgba(34,197,94,0.2), 0 0 120px rgba(34,197,94,0.08);
-  width:min(720px,96vw);
-}
-/* ── Entry ── */
-#ufo-entry {
-  display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:1.2rem;
-  padding:3rem 2rem; min-height:320px;
-}
-#ufo-entry h2 { color:#4ade80; font-size:2rem; margin:0; letter-spacing:.05em; }
-#ufo-entry p  { color:#94a3b8; margin:0; text-align:center; line-height:1.7; }
-#ufo-username {
-  background:#0f172a; border:1.5px solid rgba(34,197,94,0.4);
-  border-radius:8px; padding:.65rem 1.1rem; color:#e2e8f0;
-  font-size:1rem; outline:none; width:220px; text-align:center;
-}
-#ufo-username:focus { border-color:#4ade80; }
-#ufo-start-btn {
-  background:#16a34a; color:#fff; border:none; border-radius:8px;
-  padding:.65rem 2rem; font-size:1rem; cursor:pointer; font-weight:600;
-  transition:background .2s;
-}
-#ufo-start-btn:hover { background:#22c55e; }
-/* ── Game ── */
-#ufo-game { display:none; position:relative; }
-#ufo-canvas { display:block; width:100%; cursor:crosshair; }
-#ufo-hud {
-  position:absolute; top:0; left:0; right:0;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:.5rem 1rem; pointer-events:none;
-  background:linear-gradient(to bottom,rgba(2,8,23,0.7),transparent);
-}
-#ufo-score-display { color:#4ade80; font-size:1.1rem; font-weight:700; font-family:monospace; }
-#ufo-timer-display {
-  color:#fbbf24; font-size:1.3rem; font-weight:800; font-family:monospace;
-  text-shadow:0 0 12px rgba(251,191,36,0.6);
-}
-#ufo-quit-btn {
-  pointer-events:all; background:rgba(239,68,68,0.2); border:1px solid rgba(239,68,68,0.4);
-  color:#fca5a5; border-radius:6px; padding:.25rem .7rem; cursor:pointer; font-size:.8rem;
-}
-#ufo-quit-btn:hover { background:rgba(239,68,68,0.4); }
-/* ── Game Over ── */
-#ufo-gameover {
-  display:none; flex-direction:column; align-items:center;
-  gap:1rem; padding:2rem 1.5rem; min-height:320px; justify-content:center;
-}
-#ufo-gameover h2 { color:#fbbf24; font-size:1.8rem; margin:0; }
-#ufo-final-score { color:#86efac; font-size:1.1rem; margin:0; }
-#ufo-leaderboard { width:100%; max-width:380px; }
-#ufo-leaderboard h4 { color:#94a3b8; text-align:center; margin:0 0 .6rem; font-size:.9rem; letter-spacing:.08em; }
-.lb-row {
-  display:flex; align-items:center; gap:.6rem;
-  padding:.35rem .7rem; border-radius:6px;
-  background:rgba(255,255,255,0.03); margin-bottom:3px;
-  font-size:.88rem;
-}
-.lb-you { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); }
-.lb-rank { width:28px; text-align:center; }
-.lb-name { flex:1; color:#cbd5e1; }
-.lb-score { color:#4ade80; font-weight:700; font-family:monospace; }
-.ufo-btns { display:flex; gap:.8rem; }
-.ufo-btns button {
-  border-radius:8px; padding:.6rem 1.4rem; font-size:.95rem; cursor:pointer; font-weight:600; border:none;
-}
-#ufo-again-btn  { background:#16a34a; color:#fff; }
-#ufo-again-btn:hover { background:#22c55e; }
-#ufo-close-btn2 { background:rgba(100,116,139,0.3); color:#94a3b8; border:1px solid rgba(100,116,139,0.4); }
-#ufo-close-btn2:hover { background:rgba(100,116,139,0.5); }
+#ufo-modal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center}
+#ufo-box{position:relative;background:#020817;border:1.5px solid rgba(99,179,237,.35);border-radius:20px;overflow:hidden;box-shadow:0 0 80px rgba(56,189,248,.15),0 0 0 1px rgba(56,189,248,.08);width:min(740px,96vw)}
+#ufo-entry{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.3rem;padding:3.5rem 2rem;min-height:340px}
+#ufo-entry h2{color:#38bdf8;font-size:2.2rem;margin:0;letter-spacing:.06em;text-shadow:0 0 30px rgba(56,189,248,.5)}
+#ufo-entry p{color:#94a3b8;margin:0;text-align:center;line-height:1.8;max-width:360px}
+#ufo-username{background:#0c1830;border:1.5px solid rgba(56,189,248,.35);border-radius:10px;padding:.7rem 1.2rem;color:#e2e8f0;font-size:1rem;outline:none;width:230px;text-align:center;transition:border-color .2s}
+#ufo-username:focus{border-color:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.12)}
+#ufo-start-btn{background:linear-gradient(135deg,#1d4ed8,#0284c7);color:#fff;border:none;border-radius:10px;padding:.7rem 2.2rem;font-size:1rem;cursor:pointer;font-weight:700;letter-spacing:.04em;box-shadow:0 0 20px rgba(56,189,248,.3);transition:all .2s}
+#ufo-start-btn:hover{background:linear-gradient(135deg,#2563eb,#0ea5e9);box-shadow:0 0 30px rgba(56,189,248,.5);transform:translateY(-1px)}
+#ufo-game{display:none;position:relative}
+#ufo-canvas{display:block;width:100%;cursor:crosshair}
+#ufo-hud{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:.55rem 1rem;background:linear-gradient(to bottom,rgba(2,8,23,.8),transparent);pointer-events:none}
+#ufo-score-display{color:#4ade80;font-size:1.15rem;font-weight:800;font-family:monospace;text-shadow:0 0 10px rgba(74,222,128,.4)}
+#ufo-level-display{color:#a78bfa;font-size:.85rem;font-weight:700;letter-spacing:.08em;text-shadow:0 0 8px rgba(167,139,250,.4)}
+#ufo-timer-display{color:#fbbf24;font-size:1.35rem;font-weight:900;font-family:monospace;text-shadow:0 0 14px rgba(251,191,36,.5)}
+#ufo-quit-btn{pointer-events:all;background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:#fca5a5;border-radius:6px;padding:.25rem .75rem;cursor:pointer;font-size:.8rem;transition:background .2s}
+#ufo-quit-btn:hover{background:rgba(239,68,68,.4)}
+#ufo-gameover{display:none;flex-direction:column;align-items:center;gap:1.1rem;padding:2rem 1.5rem;min-height:340px;justify-content:center}
+#ufo-gameover h2{color:#fbbf24;font-size:2rem;margin:0;text-shadow:0 0 20px rgba(251,191,36,.4)}
+#ufo-final-score{color:#86efac;font-size:1.1rem;margin:0}
+#ufo-leaderboard{width:100%;max-width:400px}
+#ufo-leaderboard h4{color:#64748b;text-align:center;margin:0 0 .6rem;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.lb-row{display:flex;align-items:center;gap:.6rem;padding:.38rem .75rem;border-radius:7px;background:rgba(255,255,255,.03);margin-bottom:3px;font-size:.87rem}
+.lb-you{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25)}
+.lb-rank{width:28px;text-align:center}
+.lb-name{flex:1;color:#cbd5e1}
+.lb-score{color:#4ade80;font-weight:800;font-family:monospace}
+.ufo-btns{display:flex;gap:.8rem}
+.ufo-btns button{border-radius:9px;padding:.6rem 1.5rem;font-size:.95rem;cursor:pointer;font-weight:700;border:none;transition:all .2s}
+#ufo-again-btn{background:linear-gradient(135deg,#1d4ed8,#0284c7);color:#fff;box-shadow:0 0 16px rgba(56,189,248,.25)}
+#ufo-again-btn:hover{box-shadow:0 0 24px rgba(56,189,248,.4);transform:translateY(-1px)}
+#ufo-close-btn2{background:rgba(100,116,139,.25);color:#94a3b8;border:1px solid rgba(100,116,139,.35)!important}
+#ufo-close-btn2:hover{background:rgba(100,116,139,.4)}
 </style>
 
 <div id="ufo-modal">
-  <div id="ufo-box">
-    <div id="ufo-entry">
-      <h2>🛸 UFO Blaster</h2>
-      <p>A UFO mothership is invading!<br>Click the UFOs to destroy them.<br>You have <strong style="color:#fbbf24">60 seconds</strong>.</p>
-      <input id="ufo-username" type="text" placeholder="Your name" maxlength="16" autocomplete="off"/>
-      <button id="ufo-start-btn">🚀 Start Game</button>
-    </div>
-    <div id="ufo-game">
-      <canvas id="ufo-canvas" width="720" height="460"></canvas>
-      <div id="ufo-hud">
-        <span id="ufo-score-display">Score: 0</span>
-        <span id="ufo-timer-display">60s</span>
-        <button id="ufo-quit-btn">✕ Quit</button>
-      </div>
-    </div>
-    <div id="ufo-gameover">
-      <h2>⏱ Time's Up!</h2>
-      <p id="ufo-final-score"></p>
-      <div id="ufo-leaderboard"></div>
-      <div class="ufo-btns">
-        <button id="ufo-again-btn">▶ Play Again</button>
-        <button id="ufo-close-btn2">✕ Close</button>
-      </div>
-    </div>
+ <div id="ufo-box">
+  <div id="ufo-entry">
+   <h2>🛸 UFO Blaster</h2>
+   <p>A mothership is launching an invasion!<br>Shoot down the UFOs before time runs out.<br><strong style="color:#fbbf24">60 seconds · max 30 UFOs · speed scales with score</strong></p>
+   <input id="ufo-username" type="text" placeholder="Enter your callsign" maxlength="16" autocomplete="off"/>
+   <button id="ufo-start-btn">🚀 Launch</button>
   </div>
+  <div id="ufo-game">
+   <canvas id="ufo-canvas" width="740" height="470"></canvas>
+   <div id="ufo-hud">
+    <span id="ufo-score-display">Score: 0</span>
+    <span id="ufo-level-display">LV 1</span>
+    <span id="ufo-timer-display">60s</span>
+    <button id="ufo-quit-btn">✕ Quit</button>
+   </div>
+  </div>
+  <div id="ufo-gameover">
+   <h2>⏱ Time's Up!</h2>
+   <p id="ufo-final-score"></p>
+   <div id="ufo-leaderboard"></div>
+   <div class="ufo-btns">
+    <button id="ufo-again-btn">▶ Play Again</button>
+    <button id="ufo-close-btn2">✕ Close</button>
+   </div>
+  </div>
+ </div>
 </div>
 
 <script>
 (function(){
-  const W=720, H=460, MAX_UFOS=30;
-  let state='entry', username='', score=0, timeLeft=60;
-  let timerInterval=null, animFrame=null;
-  let stars=[], ufos=[], explosions=[], clickFlashes=[];
-  let spawnTimer=0, spawnInterval=90;
-  const ms={x:360,y:72,vx:1.0,w:130,h:48};
+const W=740,H=470,MAX_UFOS=30;
+let state='entry',username='',score=0,timeLeft=60;
+let timerInterval=null,animFrame=null;
+let stars=[],shootingStars=[],ufos=[],explosions=[],flashes=[],floatingScores=[];
+let spawnTimer=0,lastScore=0;
+const ms={x:370,y:78,vx:1.1,w:150,h:55};
 
-  /* ── Stars ── */
-  function initStars(){
-    stars=[];
-    for(let i=0;i<200;i++) stars.push({
-      x:Math.random()*W, y:Math.random()*H,
-      r:Math.random()*1.4+.3,
-      a:Math.random()*.6+.4,
-      da:(Math.random()*.015+.003)*(Math.random()<.5?1:-1)
-    });
-  }
-  function drawStars(ctx){
-    stars.forEach(s=>{
-      s.a+=s.da; if(s.a>1||s.a<.2) s.da*=-1;
-      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${s.a})`; ctx.fill();
-    });
-  }
+/* ── difficulty ── */
+function lvl(){return Math.floor(score/5)+1;}
+function spawnMs(){return Math.max(16, 88-score*2.2);}
+function speedMult(){return 1+Math.min(score*0.045,2.8);}
 
-  /* ── Mothership ── */
-  function drawMothership(ctx,t){
-    const x=ms.x, y=ms.y;
-    // outer glow
-    let g=ctx.createRadialGradient(x,y,0,x,y,90);
-    g.addColorStop(0,'rgba(74,222,128,.18)'); g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,90,0,Math.PI*2); ctx.fill();
-    // body
-    ctx.beginPath(); ctx.ellipse(x,y+6,ms.w/2,ms.h/2,0,0,Math.PI*2);
-    g=ctx.createLinearGradient(x,y-20,x,y+28);
-    g.addColorStop(0,'#4ade80'); g.addColorStop(.5,'#16a34a'); g.addColorStop(1,'#14532d');
-    ctx.fillStyle=g; ctx.fill();
-    ctx.strokeStyle='rgba(134,239,172,.7)'; ctx.lineWidth=1.8; ctx.stroke();
-    // dome
-    ctx.beginPath(); ctx.ellipse(x,y-10,46,32,0,Math.PI,0);
-    g=ctx.createLinearGradient(x,y-42,x,y-10);
-    g.addColorStop(0,'rgba(224,242,254,.95)'); g.addColorStop(1,'rgba(56,189,248,.55)');
-    ctx.fillStyle=g; ctx.fill();
-    ctx.strokeStyle='rgba(125,211,252,.6)'; ctx.lineWidth=1; ctx.stroke();
-    // spinning rim lights
-    for(let i=0;i<8;i++){
-      const a=(i/8)*Math.PI*2+t*.0012;
-      const lx=x+Math.cos(a)*(ms.w/2-14), ly=y+7+Math.sin(a)*(ms.h/2-10)*.38;
-      ctx.beginPath(); ctx.arc(lx,ly,4.5,0,Math.PI*2);
-      const hue=(i*45+t*.08)%360;
-      ctx.fillStyle=`hsl(${hue},100%,68%)`; ctx.fill();
+/* ── stars ── */
+function initStars(){
+  stars=[];
+  for(let i=0;i<280;i++){
+    const cat=Math.random();
+    stars.push({x:Math.random()*W,y:Math.random()*H,
+      r:cat<.6?.5:cat<.88?1.1:cat<.97?1.8:2.8,
+      a:Math.random()*.5+.45,da:(Math.random()*.012+.003)*(Math.random()<.5?1:-1),
+      bright:cat>.97});
+  }
+  // galaxy cluster
+  for(let i=0;i<60;i++){
+    const cx=W*.78,cy=H*.22,spread=55;
+    stars.push({x:cx+(Math.random()-.5)*spread*2,y:cy+(Math.random()-.5)*spread,
+      r:.4,a:Math.random()*.4+.2,da:.002,bright:false,galaxy:true});
+  }
+}
+function drawStars(ctx){
+  stars.forEach(s=>{
+    s.a+=s.da; if(s.a>1||s.a<.18){s.da*=-1;}
+    if(s.bright){
+      const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*3);
+      g.addColorStop(0,`rgba(200,220,255,${s.a})`);g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2);ctx.fill();
     }
-    // beam when spawning
-    if(spawnTimer<18){
-      const ba=spawnTimer/18;
-      ctx.beginPath(); ctx.moveTo(x,y+ms.h/2);
-      ctx.lineTo(x-20*(1-ba),y+ms.h/2+60*ba);
-      ctx.lineTo(x+20*(1-ba),y+ms.h/2+60*ba);
-      ctx.closePath();
-      ctx.fillStyle=`rgba(74,222,128,${.35*(1-ba)})`; ctx.fill();
-    }
-  }
-
-  /* ── Small UFO ── */
-  function spawnUFO(){
-    if(ufos.length>=MAX_UFOS) return;
-    const a=Math.random()*Math.PI*2;
-    const spd=Math.random()*1.8+.7;
-    ufos.push({
-      x:ms.x+(Math.random()-0.5)*40,
-      y:ms.y+ms.h/2+10,
-      vx:Math.cos(a)*spd, vy:Math.sin(a)*spd*.5+.6,
-      r:16+Math.random()*10,
-      hue:120+Math.random()*80,
-      wb:Math.random()*Math.PI*2, wbS:.025+Math.random()*.02,
-      alive:true
-    });
-  }
-
-  function drawUFO(ctx,u,t){
-    const {x,y,r,hue}=u;
-    // glow
-    let g=ctx.createRadialGradient(x,y,0,x,y,r*2);
-    g.addColorStop(0,`hsla(${hue},80%,60%,.22)`); g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*2,0,Math.PI*2); ctx.fill();
-    // body
-    ctx.beginPath(); ctx.ellipse(x,y+2,r,r*.42,0,0,Math.PI*2);
-    g=ctx.createLinearGradient(x,y-r*.4,x,y+r*.6);
-    g.addColorStop(0,`hsl(${hue},80%,65%)`); g.addColorStop(1,`hsl(${hue},60%,35%)`);
-    ctx.fillStyle=g; ctx.fill();
-    ctx.strokeStyle=`hsla(${hue},90%,80%,.5)`; ctx.lineWidth=1; ctx.stroke();
-    // dome
-    ctx.beginPath(); ctx.ellipse(x,y-3,r*.5,r*.38,0,Math.PI,0);
-    ctx.fillStyle='rgba(186,230,253,.72)'; ctx.fill();
-    // lights
-    for(let i=0;i<3;i++){
-      const lx=x+(i-1)*r*.55;
-      ctx.beginPath(); ctx.arc(lx,y+3,2.5,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${(i*120+t*.15)%360},100%,72%)`; ctx.fill();
-    }
-  }
-
-  /* ── Explosions ── */
-  function boom(x,y,hue){
-    const ps=[];
-    for(let i=0;i<22;i++){
-      const a=Math.random()*Math.PI*2, spd=Math.random()*5+1.5;
-      ps.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-1.5,
-        r:Math.random()*5+2, a:1,
-        col:[`255,${150+Math.random()*100|0},30`,`30,255,${100+Math.random()*100|0}`,'255,255,200'][i%3]});
-    }
-    explosions.push(ps);
-  }
-  function drawExplosions(ctx){
-    explosions=explosions.filter(ps=>{
-      ps.forEach(p=>{
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=`rgba(${p.col},${p.a})`; ctx.fill();
-        p.x+=p.vx; p.y+=p.vy; p.vy+=.12; p.a-=.035; p.r*=.96;
-      });
-      ps=ps.filter(p=>p.a>0);
-      return ps.length>0;
-    });
-  }
-
-  /* ── Click flashes ── */
-  function drawFlashes(ctx){
-    clickFlashes=clickFlashes.filter(f=>{
-      ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-      ctx.strokeStyle=`rgba(251,191,36,${f.a})`; ctx.lineWidth=2; ctx.stroke();
-      f.r+=3; f.a-=.1;
-      return f.a>0;
-    });
-  }
-
-  /* ── Main loop ── */
-  function loop(t){
-    if(state!=='playing') return;
-    const cv=document.getElementById('ufo-canvas');
-    if(!cv) return;
-    const ctx=cv.getContext('2d');
-
-    // bg
-    ctx.fillStyle='#020817'; ctx.fillRect(0,0,W,H);
-    // nebulae
-    [[W*.25,H*.35,220,'60,10,120'],[W*.75,H*.65,180,'0,30,80'],[W*.5,H*.5,300,'0,15,40']].forEach(([nx,ny,nr,rgb])=>{
-      let g=ctx.createRadialGradient(nx,ny,0,nx,ny,nr);
-      g.addColorStop(0,`rgba(${rgb},.35)`); g.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
-    });
-    drawStars(ctx);
-
-    // planet decoration
-    ctx.beginPath(); ctx.arc(W-80,H-60,55,0,Math.PI*2);
-    let pg=ctx.createRadialGradient(W-90,H-70,5,W-80,H-60,55);
-    pg.addColorStop(0,'#1e3a5f'); pg.addColorStop(1,'#0c1a2e');
-    ctx.fillStyle=pg; ctx.fill();
-    ctx.strokeStyle='rgba(56,189,248,.2)'; ctx.lineWidth=1; ctx.stroke();
-    // ring
-    ctx.beginPath(); ctx.ellipse(W-80,H-60,80,14,-.3,0,Math.PI*2);
-    ctx.strokeStyle='rgba(56,189,248,.15)'; ctx.lineWidth=6; ctx.stroke();
-
-    // mothership
-    ms.x+=ms.vx;
-    if(ms.x>W-80||ms.x<80) ms.vx*=-1;
-    drawMothership(ctx,t);
-
-    // spawn
-    spawnTimer++;
-    const si=ufos.length<15?50:spawnInterval;
-    if(spawnTimer>=si){ spawnUFO(); spawnTimer=0; }
-
-    // UFOs
-    ufos=ufos.filter(u=>u.alive);
-    ufos.forEach(u=>{
-      u.wb+=u.wbS;
-      u.x+=u.vx+Math.sin(u.wb)*.4;
-      u.y+=u.vy;
-      if(u.x<u.r){u.x=u.r;u.vx=Math.abs(u.vx);}
-      if(u.x>W-u.r){u.x=W-u.r;u.vx=-Math.abs(u.vx);}
-      if(u.y>H+u.r){u.y=ms.y+ms.h/2+10;u.x=ms.x+(Math.random()-.5)*40;u.vy=Math.random()*.8+.5;}
-      if(u.y<0) u.vy=Math.abs(u.vy);
-      drawUFO(ctx,u,t);
-    });
-
-    drawExplosions(ctx);
-    drawFlashes(ctx);
-
-    // score watermark
-    ctx.fillStyle='rgba(74,222,128,.08)';
-    ctx.font='bold 80px monospace'; ctx.textAlign='center';
-    ctx.fillText(score,W/2,H/2+30);
-
-    animFrame=requestAnimationFrame(loop);
-  }
-
-  /* ── Click ── */
-  function onCanvasClick(e){
-    if(state!=='playing') return;
-    const cv=document.getElementById('ufo-canvas');
-    const rect=cv.getBoundingClientRect();
-    const sx=W/rect.width, sy=H/rect.height;
-    const cx=(e.clientX-rect.left)*sx, cy=(e.clientY-rect.top)*sy;
-    clickFlashes.push({x:cx,y:cy,r:8,a:1});
-    let hit=false;
-    ufos.forEach(u=>{
-      if(hit) return;
-      const d=Math.hypot(cx-u.x,cy-u.y);
-      if(d<u.r+10){ boom(u.x,u.y,u.hue); u.alive=false; score++;
-        document.getElementById('ufo-score-display').textContent='Score: '+score; hit=true; }
-    });
-  }
-
-  /* ── Timer ── */
-  function startTimer(){
-    timeLeft=60;
-    document.getElementById('ufo-timer-display').textContent='60s';
-    timerInterval=setInterval(()=>{
-      timeLeft--;
-      const el=document.getElementById('ufo-timer-display');
-      el.textContent=timeLeft+'s';
-      el.style.color=timeLeft<=10?'#f87171':'#fbbf24';
-      if(timeLeft<=0){clearInterval(timerInterval);endGame();}
-    },1000);
-  }
-
-  /* ── Start ── */
-  function startGame(){
-    score=0; ufos=[]; explosions=[]; clickFlashes=[]; spawnTimer=0;
-    ms.x=360; ms.vx=1.0;
-    initStars();
-    state='playing';
-    ['ufo-entry','ufo-gameover'].forEach(id=>document.getElementById(id).style.display='none');
-    document.getElementById('ufo-game').style.display='block';
-    document.getElementById('ufo-score-display').textContent='Score: 0';
-    document.getElementById('ufo-timer-display').style.color='#fbbf24';
-    startTimer();
-    animFrame=requestAnimationFrame(loop);
-  }
-
-  /* ── End ── */
-  function endGame(){
-    state='gameover';
-    cancelAnimationFrame(animFrame);
-    const lb=JSON.parse(localStorage.getItem('ufo-lb')||'[]');
-    lb.push({name:username,score,date:new Date().toLocaleDateString()});
-    lb.sort((a,b)=>b.score-a.score); lb.splice(10);
-    localStorage.setItem('ufo-lb',JSON.stringify(lb));
-    document.getElementById('ufo-game').style.display='none';
-    const go=document.getElementById('ufo-gameover');
-    go.style.display='flex';
-    document.getElementById('ufo-final-score').textContent=`${username}  —  ${score} UFOs destroyed!`;
-    document.getElementById('ufo-leaderboard').innerHTML=
-      '<h4>🏆 Leaderboard</h4>'+
-      lb.map((e,i)=>`<div class="lb-row${(e.name===username&&e.score===score)?' lb-you':''}">
-        <span class="lb-rank">${['🥇','🥈','🥉'][i]||'#'+(i+1)}</span>
-        <span class="lb-name">${e.name}</span>
-        <span class="lb-score">${e.score}</span></div>`).join('');
-  }
-
-  /* ── Close ── */
-  function closeModal(){
-    clearInterval(timerInterval); cancelAnimationFrame(animFrame);
-    state='entry';
-    document.getElementById('ufo-modal').style.display='none';
-    document.getElementById('ufo-game').style.display='none';
-    document.getElementById('ufo-gameover').style.display='none';
-    document.getElementById('ufo-entry').style.display='flex';
-  }
-
-  /* ── Bindings ── */
-  window.ufoGameOpen=function(){
-    document.getElementById('ufo-modal').style.display='flex';
-    document.getElementById('ufo-entry').style.display='flex';
-  };
-  document.getElementById('ufo-start-btn').addEventListener('click',()=>{
-    const v=document.getElementById('ufo-username').value.trim();
-    if(!v){document.getElementById('ufo-username').focus();return;}
-    username=v; startGame();
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=s.galaxy?`rgba(200,180,255,${s.a})`:`rgba(255,255,255,${s.a})`;
+    ctx.fill();
   });
-  document.getElementById('ufo-username').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('ufo-start-btn').click();});
-  document.getElementById('ufo-quit-btn').addEventListener('click',()=>{clearInterval(timerInterval);cancelAnimationFrame(animFrame);endGame();});
-  document.getElementById('ufo-again-btn').addEventListener('click',()=>{
-    document.getElementById('ufo-gameover').style.display='none';
-    document.getElementById('ufo-entry').style.display='flex';
-    state='entry';
+}
+function tickShootingStars(ctx,t){
+  if(Math.random()<.004&&shootingStars.length<2)
+    shootingStars.push({x:Math.random()*W*.5,y:Math.random()*H*.3,vx:9+Math.random()*7,vy:4+Math.random()*4,a:1,len:70+Math.random()*60});
+  shootingStars=shootingStars.filter(s=>{
+    ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(s.x-s.vx*(s.len/s.vx),s.y-s.vy*(s.len/s.vx));
+    const g=ctx.createLinearGradient(s.x,s.y,s.x-s.len,s.y-(s.vy/s.vx)*s.len);
+    g.addColorStop(0,`rgba(255,255,255,${s.a})`);g.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.strokeStyle=g;ctx.lineWidth=1.5;ctx.stroke();
+    s.x+=s.vx;s.y+=s.vy;s.a-=.025;return s.a>0&&s.x<W+50;
   });
-  document.getElementById('ufo-close-btn2').addEventListener('click',closeModal);
-  document.getElementById('ufo-modal').addEventListener('click',e=>{if(e.target===document.getElementById('ufo-modal'))closeModal();});
-  document.getElementById('ufo-canvas').addEventListener('click',onCanvasClick);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('ufo-modal').style.display==='flex')closeModal();});
+}
+
+/* ── planet ── */
+function drawPlanet(ctx){
+  const px=W-90,py=H-75,pr=62;
+  // atmosphere glow
+  const ag=ctx.createRadialGradient(px,py,pr*.7,px,py,pr*1.5);
+  ag.addColorStop(0,'rgba(56,100,200,.0)');ag.addColorStop(.6,'rgba(30,60,150,.12)');ag.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=ag;ctx.beginPath();ctx.arc(px,py,pr*1.5,0,Math.PI*2);ctx.fill();
+  // planet body
+  ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);
+  const pg=ctx.createRadialGradient(px-pr*.3,py-pr*.3,pr*.1,px,py,pr);
+  pg.addColorStop(0,'#2d5a8e');pg.addColorStop(.4,'#1a3a5c');pg.addColorStop(.75,'#0d1f35');pg.addColorStop(1,'#060d18');
+  ctx.fillStyle=pg;ctx.fill();
+  // cloud bands
+  ctx.save();ctx.clip();
+  [[H-90,8,'rgba(40,80,130,.35)'],[H-72,6,'rgba(50,100,160,.3)'],[H-56,5,'rgba(35,70,120,.25)']].forEach(([y2,h2,col])=>{
+    ctx.fillStyle=col;ctx.fillRect(px-pr,y2,pr*2,h2);
+  });
+  ctx.restore();
+  // limb darkening edge
+  ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);
+  const ld=ctx.createRadialGradient(px,py,pr*.55,px,py,pr);
+  ld.addColorStop(0,'rgba(0,0,0,0)');ld.addColorStop(1,'rgba(0,0,0,.55)');
+  ctx.fillStyle=ld;ctx.fill();
+  // specular highlight
+  ctx.beginPath();ctx.ellipse(px-pr*.28,py-pr*.3,pr*.32,pr*.18,-0.5,0,Math.PI*2);
+  const sh=ctx.createRadialGradient(px-pr*.28,py-pr*.3,0,px-pr*.28,py-pr*.3,pr*.32);
+  sh.addColorStop(0,'rgba(120,180,255,.45)');sh.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=sh;ctx.fill();
+  // ring
+  ctx.save();ctx.translate(px,py);ctx.rotate(-.35);
+  ctx.beginPath();ctx.ellipse(0,0,pr*1.55,pr*.28,0,0,Math.PI*2);
+  ctx.strokeStyle='rgba(80,140,220,.3)';ctx.lineWidth=8;ctx.stroke();
+  ctx.beginPath();ctx.ellipse(0,0,pr*1.72,pr*.32,0,0,Math.PI*2);
+  ctx.strokeStyle='rgba(60,110,190,.18)';ctx.lineWidth=5;ctx.stroke();
+  ctx.restore();
+}
+
+/* ── mothership ── */
+function drawMothership(ctx,t){
+  const x=ms.x,y=ms.y,W2=ms.w/2,H2=ms.h/2;
+  // energy rings
+  for(let i=0;i<2;i++){
+    const phase=t*.0015+i*Math.PI;
+    const ra=90+Math.sin(phase)*8;
+    const rg=ctx.createRadialGradient(x,y,ra*.3,x,y,ra);
+    rg.addColorStop(0,'rgba(0,0,0,0)');rg.addColorStop(.75,'rgba(56,189,248,.06)');rg.addColorStop(.9,`rgba(56,189,248,${.12+i*.04})`);rg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=rg;ctx.beginPath();ctx.arc(x,y,ra,0,Math.PI*2);ctx.fill();
+  }
+  // shadow under ship
+  ctx.beginPath();ctx.ellipse(x,y+H2+4,W2*.8,6,0,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,0,0,.35)';ctx.fill();
+  // lower hull darkening
+  ctx.beginPath();ctx.ellipse(x,y+H2*.3,W2,H2*.6,0,0,Math.PI*2);
+  ctx.fillStyle='rgba(10,20,40,.6)';ctx.fill();
+  // main hull
+  ctx.beginPath();ctx.ellipse(x,y+4,W2,H2,0,0,Math.PI*2);
+  const hg=ctx.createLinearGradient(x,y-H2,x,y+H2+8);
+  hg.addColorStop(0,'#93c5fd');hg.addColorStop(.2,'#38bdf8');hg.addColorStop(.5,'#0284c7');hg.addColorStop(.8,'#0c4a6e');hg.addColorStop(1,'#082f49');
+  ctx.fillStyle=hg;ctx.fill();
+  ctx.strokeStyle='rgba(147,197,253,.6)';ctx.lineWidth=2;ctx.stroke();
+  // hull panel lines
+  ctx.strokeStyle='rgba(0,0,0,.3)';ctx.lineWidth=1;
+  for(let i=-1;i<=1;i+=.5){
+    ctx.beginPath();ctx.ellipse(x,y+4,W2*.95,H2*.3,0,0,Math.PI*2);
+    ctx.stroke();
+  }
+  // specular stripe across top
+  ctx.beginPath();ctx.ellipse(x-W2*.1,y-H2*.15,W2*.75,H2*.22,-.05,0,Math.PI*2);
+  const ss=ctx.createLinearGradient(x-W2,y-H2*.3,x+W2*.3,y);
+  ss.addColorStop(0,'rgba(255,255,255,0)');ss.addColorStop(.35,'rgba(255,255,255,.28)');ss.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=ss;ctx.fill();
+  // dome
+  ctx.beginPath();ctx.ellipse(x,y-H2*.15,W2*.42,H2*.85,0,Math.PI,0);
+  const dg=ctx.createRadialGradient(x-W2*.1,y-H2*.6,W2*.05,x,y-H2*.3,W2*.5);
+  dg.addColorStop(0,'rgba(224,242,254,.95)');dg.addColorStop(.3,'rgba(125,211,252,.8)');dg.addColorStop(.7,'rgba(14,165,233,.6)');dg.addColorStop(1,'rgba(7,89,133,.45)');
+  ctx.fillStyle=dg;ctx.fill();
+  ctx.strokeStyle='rgba(186,230,253,.55)';ctx.lineWidth=1.5;ctx.stroke();
+  // dome reflection
+  ctx.beginPath();ctx.ellipse(x-W2*.12,y-H2*.65,W2*.18,H2*.12,-.4,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,.7)';ctx.fill();
+  // rim lights (10 lights)
+  for(let i=0;i<10;i++){
+    const a=(i/10)*Math.PI*2+t*.0018;
+    const lx=x+Math.cos(a)*(W2-.1),ly=y+4+Math.sin(a)*H2*.36;
+    const lhue=(i*36+t*.06)%360;
+    const lg2=ctx.createRadialGradient(lx,ly,0,lx,ly,6);
+    lg2.addColorStop(0,`hsla(${lhue},100%,85%,1)`);lg2.addColorStop(1,`hsla(${lhue},100%,60%,0)`);
+    ctx.fillStyle=lg2;ctx.beginPath();ctx.arc(lx,ly,6,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(lx,ly,2.5,0,Math.PI*2);ctx.fillStyle=`hsl(${lhue},100%,92%)`;ctx.fill();
+  }
+  // spawn beam
+  if(spawnTimer<22){
+    const p=1-spawnTimer/22;
+    const bg2=ctx.createLinearGradient(x,y+H2,x,y+H2+55*p+10);
+    bg2.addColorStop(0,`rgba(56,189,248,${p*.5})`);bg2.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();ctx.moveTo(x-18*p,y+H2);ctx.lineTo(x+18*p,y+H2);
+    ctx.lineTo(x+28,y+H2+55*p+10);ctx.lineTo(x-28,y+H2+55*p+10);
+    ctx.closePath();ctx.fillStyle=bg2;ctx.fill();
+  }
+}
+
+/* ── 3D small UFO ── */
+function drawUFO3D(ctx,u,t){
+  const{x,y,r,hue}=u;
+  // shadow on "ground" / behind
+  ctx.beginPath();ctx.ellipse(x,y+r*.65,r*.9,r*.2,0,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.fill();
+  // outer glow
+  const og=ctx.createRadialGradient(x,y,0,x,y,r*2.4);
+  og.addColorStop(0,`hsla(${hue},85%,60%,.22)`);og.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=og;ctx.beginPath();ctx.arc(x,y,r*2.4,0,Math.PI*2);ctx.fill();
+  // underside shadow disc (3D depth)
+  ctx.beginPath();ctx.ellipse(x,y+r*.05,r*.96,r*.36,0,0,Math.PI*2);
+  ctx.fillStyle=`hsla(${hue},35%,12%,.85)`;ctx.fill();
+  // main disc body
+  ctx.beginPath();ctx.ellipse(x,y-r*.04,r,r*.38,0,0,Math.PI*2);
+  const bg=ctx.createLinearGradient(x-r,y-r*.38,x+r*.4,y+r*.38);
+  bg.addColorStop(0,`hsl(${hue},65%,80%)`);
+  bg.addColorStop(.28,`hsl(${hue},75%,62%)`);
+  bg.addColorStop(.6,`hsl(${hue},70%,42%)`);
+  bg.addColorStop(1,`hsl(${hue},55%,22%)`);
+  ctx.fillStyle=bg;ctx.fill();
+  // rim stroke
+  ctx.strokeStyle=`hsla(${hue},90%,80%,.6)`;ctx.lineWidth=1.2;ctx.stroke();
+  // specular highlight band across top of disc
+  ctx.beginPath();ctx.ellipse(x-r*.08,y-r*.08,r*.72,r*.14,-.15,0,Math.PI*2);
+  const sh=ctx.createLinearGradient(x-r*.6,y-r*.2,x+r*.4,y);
+  sh.addColorStop(0,'rgba(255,255,255,0)');sh.addColorStop(.4,'rgba(255,255,255,.38)');sh.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=sh;ctx.fill();
+  // dome (3D glass sphere look)
+  ctx.beginPath();ctx.ellipse(x,y-r*.22,r*.5,r*.44,0,Math.PI,0);
+  const dg=ctx.createRadialGradient(x-r*.14,y-r*.52,r*.02,x,y-r*.28,r*.54);
+  dg.addColorStop(0,'rgba(220,242,255,.96)');
+  dg.addColorStop(.25,'rgba(147,214,255,.78)');
+  dg.addColorStop(.6,'rgba(56,150,230,.6)');
+  dg.addColorStop(1,'rgba(15,70,140,.38)');
+  ctx.fillStyle=dg;ctx.fill();
+  ctx.strokeStyle='rgba(190,230,255,.45)';ctx.lineWidth=.9;ctx.stroke();
+  // dome primary reflection blob
+  ctx.beginPath();ctx.ellipse(x-r*.16,y-r*.5,r*.16,r*.09,-.55,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,.88)';ctx.fill();
+  // dome secondary reflection
+  ctx.beginPath();ctx.ellipse(x+r*.08,y-r*.36,r*.06,r*.04,.3,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,.45)';ctx.fill();
+  // alien silhouette inside dome
+  ctx.beginPath();ctx.ellipse(x,y-r*.3,r*.1,r*.13,0,0,Math.PI*2);
+  ctx.fillStyle=`hsla(${(hue+130)%360},80%,65%,.55)`;ctx.fill();
+  // spinning rim lights
+  for(let i=0;i<5;i++){
+    const a=(i/5)*Math.PI*2+t*.0022;
+    const lx=x+Math.cos(a)*r*.88,ly=y-r*.04+Math.sin(a)*r*.34;
+    const lhue=(hue+i*60+t*.1)%360;
+    const lg=ctx.createRadialGradient(lx,ly,0,lx,ly,5);
+    lg.addColorStop(0,`hsla(${lhue},100%,82%,1)`);lg.addColorStop(1,`hsla(${lhue},100%,55%,0)`);
+    ctx.fillStyle=lg;ctx.beginPath();ctx.arc(lx,ly,5,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(lx,ly,2.2,0,Math.PI*2);ctx.fillStyle=`hsl(${lhue},100%,93%)`;ctx.fill();
+  }
+  // tractor beam (occasional)
+  const bPhase=Math.sin(t*.0025+u.phase*6.28);
+  if(bPhase>0.65){
+    const ba=(bPhase-.65)/.35;
+    const btg=ctx.createLinearGradient(x,y+r*.35,x,y+r*1.9);
+    btg.addColorStop(0,`hsla(${hue},100%,70%,${ba*.38})`);btg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();ctx.moveTo(x-r*.22,y+r*.35);ctx.lineTo(x+r*.22,y+r*.35);
+    ctx.lineTo(x+r*.65,y+r*1.9);ctx.lineTo(x-r*.65,y+r*1.9);
+    ctx.closePath();ctx.fillStyle=btg;ctx.fill();
+  }
+}
+
+/* ── explosion ── */
+function boom(x,y,hue){
+  const ps=[];
+  // screen flash ring
+  flashes.push({x,y,r:8,a:1,hue});
+  for(let i=0;i<28;i++){
+    const a=Math.random()*Math.PI*2,spd=Math.random()*6+2;
+    const cols=[`255,${130+Math.random()*120|0},20`,`${50+Math.random()*80|0},220,${100+Math.random()*80|0}`,'255,255,180'];
+    ps.push({x,y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd-2,r:Math.random()*6+2.5,a:1,col:cols[i%3]});
+  }
+  explosions.push(ps);
+  floatingScores.push({x,y,a:1,vy:-1.8,text:'+1'});
+}
+function drawExplosions(ctx){
+  explosions=explosions.filter(ps=>{
+    let live=false;
+    ps.forEach(p=>{
+      if(p.a<=0)return;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.col},${p.a})`;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;p.vy+=.14;p.a-=.032;p.r*=.96;live=true;
+    });
+    return live;
+  });
+  flashes=flashes.filter(f=>{
+    const fg=ctx.createRadialGradient(f.x,f.y,0,f.x,f.y,f.r);
+    fg.addColorStop(0,`hsla(${f.hue},100%,75%,${f.a*.7})`);fg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=fg;ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(f.x,f.y,f.r*.5,0,Math.PI*2);
+    ctx.strokeStyle=`hsla(${f.hue},100%,85%,${f.a})`;ctx.lineWidth=2;ctx.stroke();
+    f.r+=5;f.a-=.09;return f.a>0;
+  });
+  floatingScores=floatingScores.filter(s=>{
+    ctx.fillStyle=`rgba(74,222,128,${s.a})`;ctx.font='bold 16px monospace';ctx.textAlign='center';
+    ctx.fillText(s.text,s.x,s.y);
+    s.y+=s.vy;s.a-=.04;return s.a>0;
+  });
+}
+
+/* ── spawn ── */
+function spawnUFO(){
+  if(ufos.length>=MAX_UFOS)return;
+  const sm=speedMult();
+  const a=Math.random()*Math.PI*2;
+  const spd=(Math.random()*1.6+.8)*sm;
+  ufos.push({
+    x:ms.x+(Math.random()-.5)*50,y:ms.y+ms.h/2+8,
+    vx:Math.cos(a)*spd,vy:Math.sin(a)*spd*.5+.5*sm,
+    r:15+Math.random()*11,
+    hue:100+Math.random()*120,
+    wb:Math.random()*Math.PI*2,wbS:(.022+Math.random()*.02)*sm,
+    phase:Math.random(),alive:true
+  });
+}
+
+/* ── main loop ── */
+function loop(t){
+  if(state!=='playing')return;
+  const cv=document.getElementById('ufo-canvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+
+  // bg
+  ctx.fillStyle='#010b18';ctx.fillRect(0,0,W,H);
+  // nebulae layers
+  [[W*.2,H*.3,260,'20,5,60'],[W*.65,H*.6,220,'0,15,55'],[W*.5,H*.15,180,'0,25,45'],[W*.85,H*.4,150,'30,0,50']].forEach(([nx,ny,nr,rgb])=>{
+    const g=ctx.createRadialGradient(nx,ny,0,nx,ny,nr);
+    g.addColorStop(0,`rgba(${rgb},.42)`);g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  });
+  drawStars(ctx);
+  tickShootingStars(ctx,t);
+  drawPlanet(ctx);
+
+  // mothership
+  ms.x+=ms.vx;if(ms.x>W-90||ms.x<90)ms.vx*=-1;
+  drawMothership(ctx,t);
+
+  // spawn
+  spawnTimer++;
+  if(spawnTimer>=spawnMs()&&ufos.length<MAX_UFOS){spawnUFO();spawnTimer=0;}
+
+  // UFOs
+  const sm=speedMult();
+  ufos=ufos.filter(u=>u.alive);
+  ufos.forEach(u=>{
+    u.wb+=u.wbS;
+    u.x+=u.vx+Math.sin(u.wb)*.5;u.y+=u.vy;
+    if(u.x<u.r){u.x=u.r;u.vx=Math.abs(u.vx);}
+    if(u.x>W-u.r){u.x=W-u.r;u.vx=-Math.abs(u.vx);}
+    if(u.y>H+u.r){u.y=ms.y+ms.h/2+8;u.x=ms.x+(Math.random()-.5)*50;
+      u.vy=(Math.random()*.6+.4)*sm;}
+    if(u.y<0)u.vy=Math.abs(u.vy);
+    drawUFO3D(ctx,u,t);
+  });
+  drawExplosions(ctx);
+
+  // score watermark
+  ctx.globalAlpha=.06;ctx.fillStyle='#38bdf8';
+  ctx.font='bold 100px monospace';ctx.textAlign='center';
+  ctx.fillText(score,W/2,H/2+35);ctx.globalAlpha=1;
+
+  // level-up flash
+  if(score!==lastScore&&score%5===0&&score>0){
+    ctx.fillStyle='rgba(167,139,250,.18)';ctx.fillRect(0,0,W,H);
+  }
+  lastScore=score;
+
+  // update level display
+  document.getElementById('ufo-level-display').textContent=`LV ${lvl()}  ×${speedMult().toFixed(1)}`;
+
+  animFrame=requestAnimationFrame(loop);
+}
+
+/* ── click ── */
+function onCanvasClick(e){
+  if(state!=='playing')return;
+  const cv=document.getElementById('ufo-canvas');
+  const rect=cv.getBoundingClientRect();
+  const cx=(e.clientX-rect.left)*(W/rect.width),cy=(e.clientY-rect.top)*(H/rect.height);
+  let hit=false;
+  ufos.forEach(u=>{
+    if(hit||!u.alive)return;
+    if(Math.hypot(cx-u.x,cy-u.y)<u.r+12){boom(u.x,u.y,u.hue);u.alive=false;score++;
+      document.getElementById('ufo-score-display').textContent='Score: '+score;hit=true;}
+  });
+  // miss flash
+  if(!hit){flashes.push({x:cx,y:cy,r:5,a:.5,hue:0});}
+}
+
+/* ── timer ── */
+function startTimer(){
+  timeLeft=60;document.getElementById('ufo-timer-display').textContent='60s';
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    const el=document.getElementById('ufo-timer-display');
+    el.textContent=timeLeft+'s';
+    el.style.color=timeLeft<=10?'#f87171':timeLeft<=20?'#fb923c':'#fbbf24';
+    if(timeLeft<=0){clearInterval(timerInterval);endGame();}
+  },1000);
+}
+
+/* ── lifecycle ── */
+function startGame(){
+  score=0;lastScore=0;ufos=[];explosions=[];flashes=[];floatingScores=[];shootingStars=[];spawnTimer=0;
+  ms.x=370;ms.vx=1.1;initStars();state='playing';
+  ['ufo-entry','ufo-gameover'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('ufo-game').style.display='block';
+  document.getElementById('ufo-score-display').textContent='Score: 0';
+  document.getElementById('ufo-level-display').textContent='LV 1  ×1.0';
+  document.getElementById('ufo-timer-display').style.color='#fbbf24';
+  startTimer();animFrame=requestAnimationFrame(loop);
+}
+function endGame(){
+  state='gameover';cancelAnimationFrame(animFrame);
+  const lb=JSON.parse(localStorage.getItem('ufo-lb')||'[]');
+  lb.push({name:username,score,date:new Date().toLocaleDateString()});
+  lb.sort((a,b)=>b.score-a.score);lb.splice(10);
+  localStorage.setItem('ufo-lb',JSON.stringify(lb));
+  document.getElementById('ufo-game').style.display='none';
+  document.getElementById('ufo-gameover').style.display='flex';
+  document.getElementById('ufo-final-score').textContent=`${username}  —  ${score} UFOs destroyed!`;
+  document.getElementById('ufo-leaderboard').innerHTML='<h4>🏆 Top Pilots</h4>'+
+    lb.map((e,i)=>`<div class="lb-row${e.name===username&&e.score===score?' lb-you':''}">
+      <span class="lb-rank">${['🥇','🥈','🥉'][i]||'#'+(i+1)}</span>
+      <span class="lb-name">${e.name}</span>
+      <span class="lb-score">${e.score}</span></div>`).join('');
+}
+function closeModal(){
+  clearInterval(timerInterval);cancelAnimationFrame(animFrame);state='entry';
+  document.getElementById('ufo-modal').style.display='none';
+  document.getElementById('ufo-game').style.display='none';
+  document.getElementById('ufo-gameover').style.display='none';
+  document.getElementById('ufo-entry').style.display='flex';
+}
+
+/* ── bindings ── */
+window.ufoGameOpen=function(){
+  document.getElementById('ufo-modal').style.display='flex';
+  document.getElementById('ufo-entry').style.display='flex';
+};
+document.getElementById('ufo-start-btn').addEventListener('click',()=>{
+  const v=document.getElementById('ufo-username').value.trim();
+  if(!v){document.getElementById('ufo-username').focus();return;}
+  username=v;startGame();
+});
+document.getElementById('ufo-username').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('ufo-start-btn').click();});
+document.getElementById('ufo-quit-btn').addEventListener('click',()=>{clearInterval(timerInterval);cancelAnimationFrame(animFrame);endGame();});
+document.getElementById('ufo-again-btn').addEventListener('click',()=>{document.getElementById('ufo-gameover').style.display='none';document.getElementById('ufo-entry').style.display='flex';state='entry';});
+document.getElementById('ufo-close-btn2').addEventListener('click',closeModal);
+document.getElementById('ufo-modal').addEventListener('click',e=>{if(e.target===document.getElementById('ufo-modal'))closeModal();});
+document.getElementById('ufo-canvas').addEventListener('click',onCanvasClick);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('ufo-modal').style.display==='flex')closeModal();});
 })();
 </script>
 </body>
