@@ -313,6 +313,16 @@ pub_text = (
 h = draw_text(pub_text, ML, 8.8, color=DARK, width=CW)
 move(h + 6)
 
+# ── PATENTS ───────────────────────────────────────────────────────────────────
+section_header("Patents")
+patent_text = (
+    "CN 108594898 B \u2014 Oven Temperature Control Method, Device and Computer-Readable Storage Medium. "
+    "Issued: July 23, 2021. Assignee: Midea Group Co., Ltd. "
+    "Inventors: Shao Guangyuan, Dai Yuanjun, Zhu Jiele, Cheng Gang, Gong Jun."
+)
+h = draw_text(patent_text, ML, 8.8, color=DARK, width=CW)
+move(h + 6)
+
 # ── SKILLS ────────────────────────────────────────────────────────────────────
 section_header("Skills")
 
