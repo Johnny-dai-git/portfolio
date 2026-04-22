@@ -865,6 +865,7 @@ footer a:hover { color: var(--accent); }
     <li><a href="#research" data-i18n="nav.research">Research</a></li>
     <li><a href="#publications" data-i18n="nav.papers">Papers</a></li>
     <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+    <li><a href="#patents" data-i18n="nav.patents">Patents</a></li>
     <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
   </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">☰</button>
@@ -1518,10 +1519,37 @@ footer a:hover { color: var(--accent); }
   </div>
 </section>
 
+<!-- ── PATENTS ── -->
+<section id="patents">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <h2 class="section-title" data-i18n="patents.title">Patents</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="fade-in" style="max-width:860px;margin:0 auto;">
+    <div style="background:var(--card);border-radius:1rem;padding:1.6rem 2rem;border:1px solid var(--border);">
+      <div style="display:flex;align-items:flex-start;gap:1rem;">
+        <div style="font-size:1.8rem;">📜</div>
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:var(--fg);margin-bottom:0.3rem;" data-i18n="patents.p1.title">
+            Oven Temperature Control Method, Device and Computer-Readable Storage Medium
+          </div>
+          <div style="font-size:0.88rem;color:var(--accent);font-weight:600;margin-bottom:0.5rem;">
+            CN 108594898 B &nbsp;·&nbsp; <span data-i18n="patents.p1.issued">Issued July 23, 2021</span>
+          </div>
+          <div style="font-size:0.85rem;color:var(--muted);" data-i18n="patents.p1.assignee">
+            Assignee: Midea Group Co., Ltd. &nbsp;|&nbsp; Inventors: Shao Guangyuan, <strong>Dai Yuanjun</strong>, Zhu Jiele, Cheng Gang, Gong Jun
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── SKILLS ── -->
 <section id="skills">
   <div class="section-header fade-in">
-    <span class="section-num">05</span>
+    <span class="section-num">06</span>
     <h2 class="section-title" data-i18n="skills.title">Skills</h2>
     <div class="section-line"></div>
   </div>
@@ -1761,8 +1789,13 @@ const TRANSLATIONS = {
     'nav.research': 'Research',
     'nav.papers': 'Papers',
     'nav.experience': 'Experience',
+    'nav.patents': 'Patents',
     'nav.skills': 'Skills',
     'nav.lang': 'Language',
+    'patents.title': 'Patents',
+    'patents.p1.title': 'Oven Temperature Control Method, Device and Computer-Readable Storage Medium',
+    'patents.p1.issued': 'Issued July 23, 2021',
+    'patents.p1.assignee': 'Assignee: Midea Group Co., Ltd. | Inventors: Shao Guangyuan, <strong>Dai Yuanjun</strong>, Zhu Jiele, Cheng Gang, Gong Jun',
     'hero.badge': 'PhD Candidate · Case Western Reserve University',
     'hero.title': 'Systems researcher in DML',
     'hero.desc': 'Building and securing large-scale AI infrastructure — distributed training systems, in-kernel observability, production LLM platforms, and ML security research across 64 A100 GPUs and 50+ deployments.',
@@ -1863,7 +1896,12 @@ const TRANSLATIONS = {
     'nav.research': '研究项目',
     'nav.papers': '论文',
     'nav.experience': '工作经历',
+    'nav.patents': '专利',
     'nav.skills': '技能',
+    'patents.title': '专利',
+    'patents.p1.title': '烤箱温控方法、装置及计算机可读存储介质',
+    'patents.p1.issued': '授权日期：2021年7月23日',
+    'patents.p1.assignee': '专利权人：广东美的厨房电器制造有限公司 / 美的集团股份有限公司 | 发明人：邵光远、<strong>戴源君</strong>、朱洁乐、程刚、宫俊',
     'hero.badge': '博士候选人 · 凯斯西储大学',
     'hero.title': '分布式机器学习系统研究员',
     'hero.desc': '构建和保护大规模AI基础设施 — 分布式训练系统、内核级可观测性、生产级LLM平台和ML安全研究，涉及64个A100 GPU和50+部署。',
