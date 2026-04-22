@@ -185,9 +185,9 @@ move(h + 4)
 # ── EDUCATION ─────────────────────────────────────────────────────────────────
 section_header("Education")
 
-date_w = text_width("08/2019 – Present", 8.5)
+date_w = text_width("08/2019 \u2013 Sep. 2026 (exp.)", 8.5)
 draw_text("Ph.D. Candidate in Computer Science (AI Infrastructure)", ML, 9.5, bold=True, color=BLACK, width=CW - date_w - 4)
-draw_text_at("08/2019 – Present", ML + CW - date_w, y, 8.5, color=GRAY)
+draw_text_at("08/2019 \u2013 Sep. 2026 (exp.)", ML + CW - date_w, y, 8.5, color=GRAY)
 move(12)
 draw_text("Case Western Reserve University", ML, 8.5, color=GRAY)
 move(13)
