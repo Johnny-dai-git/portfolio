@@ -342,24 +342,24 @@
         <li>
           <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
           <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span><br>
-          Designed a PPO-based RL scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via custom eBPF probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size;
-          co-scales learning rate via Linear Scaling Rule; evaluated on Ring AllReduce (DDP) and Parameter Server (BytePS) across <span class="metric">8–64 A100 GPUs</span>;
+          Designed a <strong>PPO</strong>-based RL scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via custom <strong>eBPF</strong> probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size;
+          co-scales learning rate via <strong>Linear Scaling Rule</strong>; evaluated on <strong>Ring AllReduce (DDP)</strong> and <strong>Parameter Server (BytePS)</strong> across <span class="metric">8–64 A100 GPUs</span>;
           achieves <span class="metric">46% end-to-end training time reduction</span> and improved final model accuracy over fixed batch size baseline.
         </li>
 
         <li>
           <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span><br>
-          Designed a transport-layer library (NCCL/Gloo → UDP) hooking into PyTorch DDP's AllReduce at bucket-ready events;
-          classifies gradients by magnitude into high-priority (full SACK-based retransmission) and low-priority (local compensation via cached values);
-          supports kernel-bypass (LibVMA) and kernel-based (GSO/GRO) variants;
+          Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events;
+          classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values);
+          supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants;
           achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale.
         </li>
 
         <li>
           <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
-          Independently designed and built end-to-end a K8s microservices platform (Gateway / Router / Worker) with vLLM inference, ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD across <span class="metric">50+ deployments</span>.
+          Independently designed and built end-to-end a <strong>K8s</strong> microservices platform (Gateway / Router / Worker) with <strong>vLLM</strong> inference, <strong>ArgoCD</strong> GitOps, <strong>Prometheus/Grafana</strong> observability, and <strong>CI/CD</strong> across <span class="metric">50+ deployments</span>.
         </li>
 
         <li>
@@ -374,7 +374,7 @@
         <li>
           <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span><br>
-          Designed PSketch, the first in-kernel priority-aware sketch using eBPF; high-priority flows tracked via BPF_HASH (O(1)), low-priority via 3-layer Count-Min Sketch;
+          Designed PSketch, the first in-kernel priority-aware sketch using <strong>eBPF</strong>; high-priority flows tracked via <strong>BPF_HASH</strong> (O(1)), low-priority via <strong>3-layer Count-Min Sketch</strong>;
           voting-based collision resolution and atomic operations for thread-safe in-kernel updates;
           achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>, and &lt;1.1% throughput overhead at 10 Gbps.
         </li>
@@ -382,7 +382,7 @@
         <li>
           <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span><br>
-          Designed eHashPipe, a dual-pipeline eBPF framework: (1) HashPipe-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via sched_switch tracepoint;
+          Designed eHashPipe, a dual-pipeline <strong>eBPF</strong> framework: (1) <strong>HashPipe</strong>-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via <strong>sched_switch</strong> tracepoint;
           delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop, ~11ms latency, and &gt;90% Top-K fidelity.
         </li>
 
@@ -397,7 +397,7 @@
         <li>
           <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span><br>
-          Designed an OvS-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a vSwitch pool via Packet-In Edge messages; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths);
+          Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>Packet-In Edge</strong> messages; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths);
           achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology without hardware modification.
         </li>
 
