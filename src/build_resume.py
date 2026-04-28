@@ -160,10 +160,10 @@ move(h + 3)
 
 # Contact line
 contact1 = "216-269-2394   \u2022   yxd429@case.edu   \u2022   Cleveland, OH"
-h = draw_text(contact1, ML, 8.8, color=GRAY)
+h = draw_text(contact1, ML, 8.4, color=GRAY)
 move(h + 3)
-contact2 = "github.com/Johnny-dai-git   \u2022   johnny-dai-git.github.io/portfolio"
-h = draw_text(contact2, ML, 8.5, color=BLUE)
+contact2 = "github.com/Johnny-dai-git   \u2022   johnny-dai-git.github.io/portfolio   \u2022   linkedin.com/in/yuanjun-johnny-d-0b8107191"
+h = draw_text(contact2, ML, 7.2, color=BLUE)
 move(h + 2)
 
 # Thin rule under header
@@ -173,11 +173,10 @@ move(6)
 # ── SUMMARY ───────────────────────────────────────────────────────────────────
 section_header("Summary")
 summary = (
-    "AI Infrastructure Engineer and PhD Candidate at Case Western Reserve University, specializing in "
-    "distributed ML systems, eBPF-based observability, and large-scale LLM deployment. "
-    "Published 8 research papers (7 first-author) at IEEE, ACM, and Springer venues. "
-    "5+ years of industry experience at Cisco and Broadcom in high-performance networking "
-    "and systems optimization."
+    "AI Infrastructure Engineer and PhD Candidate at CWRU, specializing in distributed ML training systems, "
+    "LLM deployment, and eBPF-based observability. "
+    "8 research papers (7 first-author) at IEEE, ACM, and Springer; "
+    "5+ years of industry experience at Cisco, Broadcom, Midea, and Xiaomi."
 )
 h = draw_text(summary, ML, 8.8, color=DARK, width=CW)
 move(h + 4)
