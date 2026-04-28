@@ -370,16 +370,16 @@
       </div>
       <div class="entry-org">Case Western Reserve University</div>
       <p style="font-size:8.6pt; color:#1a1a1a; line-height:1.4; margin-bottom:5px;">
-        Research focus: optimization, observability, and security of distributed ML/LLM training and inference infrastructure.
+        Research focus: <strong>security, optimization, and observability</strong> of <strong>ML/LLM</strong> training and inference infrastructure.
       </p>
 
       <ul class="proj-list">
 
         <li>
-          <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
+          <span class="proj-name">DYNAMIX – Reinforcement Learning-Based Adaptive Batch Scheduling for Distributed ML</span>
           <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span>
           <ul class="sub-bullets">
-            <li>Designed a <strong>PPO</strong>-based RL scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via custom <strong>eBPF</strong> probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size</li>
+            <li>Designed a <strong>PPO</strong>-based <strong>Reinforcement Learning (RL)</strong> scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via custom <strong>eBPF</strong> probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size</li>
             <li>Co-scales learning rate via <strong>Linear Scaling Rule</strong>; evaluated on <strong>Ring AllReduce (DDP)</strong> and <strong>Parameter Server (BytePS)</strong></li>
             <li>Achieves <span class="metric">46% end-to-end training time reduction</span> across <span class="metric">8–64 A100 GPUs</span> with improved final model accuracy over fixed batch size baseline</li>
           </ul>
