@@ -181,6 +181,19 @@
   .proj-link:hover { text-decoration: underline; }
   a.proj-link { color: #3a6abf; }
 
+  ul.proj-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.proj-list > li {
+    margin-bottom: 10px;
+    line-height: 1.38;
+  }
+  ul.proj-list > li::before {
+    content: none;
+  }
+
   ul.sub-bullets {
     list-style: none;
     padding: 0;
@@ -195,10 +208,11 @@
     font-size: 8.4pt;
   }
   ul.sub-bullets li::before {
-    content: "–";
+    content: "•";
     position: absolute;
     left: 2px;
-    color: #555;
+    color: #1a1a1a;
+    font-size: 8pt;
   }
 
   .metric {
@@ -359,7 +373,7 @@
         Research focus: optimization, observability, and security of distributed ML/LLM training and inference infrastructure.
       </p>
 
-      <ul class="bullets">
+      <ul class="proj-list">
 
         <li>
           <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
