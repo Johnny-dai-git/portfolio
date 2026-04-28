@@ -425,9 +425,17 @@
         <li>
           <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
-          Fine-tuned PubMedBERT and Qwen-7B for HCC coding from EHR notes; achieved
-          <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="metric">0.81/0.802</span>
-          on MIMIC-IV with imbalance-aware training and per-label calibration.
+          Designed an end-to-end chronic disease code classifier (115 HCC codes) from unstructured EHR notes
+          on an extremely imbalanced multi-label dataset (MIMIC-V);
+          built a semi-supervised labeling pipeline using <strong>few-shot prompting with GPT-4o</strong>
+          (CMS definitions as context, domain expert verification) to construct training labels;
+          replaced standard self-attention with <strong>Fast Attention</strong> (O(Ld) vs O(L²))
+          to support longer clinical sequences;
+          applied <strong>inverse-frequency per-label positive weighting</strong> to counter severe class imbalance,
+          and independently tuned a <strong>decision threshold per label</strong> for calibration and interpretability;
+          fine-tuned <strong>PubMedBERT via NVIDIA NeMo</strong> and <strong>Qwen-7B via Megatron-LM + DeepSpeed</strong>
+          on Lambda Labs A100 GPUs;
+          achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and macro-AUC of 0.9362.
         </li>
 
 
