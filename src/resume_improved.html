@@ -342,104 +342,63 @@
         <li>
           <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
           <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span><br>
-          Designed a PPO-based centralized RL scheduler monitoring real-time hardware signals (CPU/memory usage,
-          network bandwidth, retransmission rate via custom eBPF probes) and statistical efficiency signals
-          (loss convergence rate, generalization performance) to dynamically adapt batch size;
-          co-scales learning rate proportionally (Linear Scaling Rule) to maintain training stability;
-          evaluated on CNN architectures across CIFAR-100 and similar benchmarks using both
-          Ring AllReduce (PyTorch DDP) and Parameter Server (BytePS) across
-          <span class="metric">8–64 A100 GPUs</span>; achieves
-          <span class="metric">46% end-to-end training time reduction</span> and
-          improved final model accuracy over fixed batch size baseline.
+          Designed a PPO-based RL scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via custom eBPF probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size;
+          co-scales learning rate via Linear Scaling Rule; evaluated on Ring AllReduce (DDP) and Parameter Server (BytePS) across <span class="metric">8–64 A100 GPUs</span>;
+          achieves <span class="metric">46% end-to-end training time reduction</span> and improved final model accuracy over fixed batch size baseline.
         </li>
 
         <li>
           <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span><br>
-          Designed PRISM, a transport-layer library (NCCL/Gloo → UDP) hooking into PyTorch DDP's AllReduce
-          at bucket-ready events to provide priority-based selective reliability without modifying training code;
-          classifies gradients by magnitude into high-priority (full SACK-based retransmission) and
-          low-priority (local compensation via cached values); supports kernel-bypass (LibVMA) and
-          kernel-based (GSO/GRO) variants; achieves
-          <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span>
-          over TCP under packet loss, matching NDP latency at 144-worker scale on commodity hardware.
+          Designed a transport-layer library (NCCL/Gloo → UDP) hooking into PyTorch DDP's AllReduce at bucket-ready events;
+          classifies gradients by magnitude into high-priority (full SACK-based retransmission) and low-priority (local compensation via cached values);
+          supports kernel-bypass (LibVMA) and kernel-based (GSO/GRO) variants;
+          achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale.
         </li>
 
         <li>
           <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
-          Independently designed and implemented end-to-end a K8s microservices platform (Gateway / Router / Worker)
-          supporting vLLM inference with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD automation across
-          <span class="metric">50+ Kubernetes deployments</span>.
+          Independently designed and built end-to-end a K8s microservices platform (Gateway / Router / Worker) with vLLM inference, ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD across <span class="metric">50+ deployments</span>.
         </li>
 
         <li>
           <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
-          Designed an end-to-end chronic disease code classifier (115 HCC codes) from unstructured EHR notes
-          on an extremely imbalanced multi-label dataset (MIMIC-V);
-          built a semi-supervised labeling pipeline using <strong>few-shot prompting with GPT-4o</strong>
-          (CMS definitions as context, domain expert verification) to construct training labels;
-          replaced standard self-attention with <strong>Fast Attention</strong> (O(Ld) vs O(L²))
-          to support longer clinical sequences;
-          applied <strong>inverse-frequency per-label positive weighting</strong> to counter severe class imbalance,
-          and independently tuned a <strong>decision threshold per label</strong> for calibration and interpretability;
-          fine-tuned <strong>PubMedBERT via NVIDIA NeMo</strong> and <strong>Qwen-7B via Megatron-LM + DeepSpeed</strong>
-          on Lambda Labs A100 GPUs;
+          Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V);
+          built semi-supervised labeling via few-shot GPT-4o prompting; applied Fast Attention (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning;
+          fine-tuned PubMedBERT (NVIDIA NeMo) and Qwen-7B (Megatron-LM + DeepSpeed) on Lambda Labs A100;
           achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and macro-AUC of 0.9362.
         </li>
 
         <li>
           <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span><br>
-          Designed and implemented PSketch, the first in-kernel priority-aware sketch data structure using eBPF;
-          high-priority flows tracked precisely via BPF_HASH priority table (O(1) lookup),
-          low-priority flows estimated via 3-layer Count-Min Sketch;
-          voting-based hash collision resolution and atomic operations for thread-safe in-kernel updates;
-          achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>,
-          and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic.
+          Designed PSketch, the first in-kernel priority-aware sketch using eBPF; high-priority flows tracked via BPF_HASH (O(1)), low-priority via 3-layer Count-Min Sketch;
+          voting-based collision resolution and atomic operations for thread-safe in-kernel updates;
+          achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>, and &lt;1.1% throughput overhead at 10 Gbps.
         </li>
 
         <li>
           <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span><br>
-          Designed eHashPipe, a dual-pipeline eBPF observability framework for DML workloads —
-          (1) a HashPipe-based memory profiler tracking Top-K memory-intensive processes via
-          cascading slot eviction with ptr2size deallocation tracking, and
-          (2) a per-thread CPU tracker hooking sched_switch tracepoint for thread-level CPU time
-          attribution aggregated per PID; atomic operations for thread-safe in-kernel updates;
-          delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop,
-          ~11ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.
+          Designed eHashPipe, a dual-pipeline eBPF framework: (1) HashPipe-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via sched_switch tracepoint;
+          delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop, ~11ms latency, and &gt;90% Top-K fidelity.
         </li>
 
         <li>
           <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
           <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
-          Developed deep understanding of DML computation and communication behavior in Parameter Server architecture
-          to expose MLaaS training-phase side-channel vulnerability;
-          (1) applied <strong>K-means clustering</strong> on push/pull network traffic to identify silent periods
-          (forward pass computation without communication);
-          (2) applied <strong>Fourier transform</strong> on Intel RAPL CPU and memory power signals for noise reduction,
-          extracting layer-by-layer energy consumption patterns;
-          (3) trained a <strong>Decision Tree classifier</strong> on energy features across Conv and FC layers
-          under varying parameter sizes for layer-type classification;
-          (4) built <strong>polynomial regression models</strong> on CPU energy profiles of activation functions
-          for activation function classification;
-          reconstructed complete target DNN architecture; achieves
-          <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
-          across ZFNet, AlexNet, and VGG.
+          Exposed MLaaS training-phase side-channel vulnerability via deep analysis of DML computation/communication behavior in Parameter Server architecture;
+          applied K-means clustering on push/pull traffic (silent period detection), Fourier transform on Intel RAPL for noise reduction, Decision Tree for layer-type classification, and polynomial regression for activation function profiling;
+          achieves <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span> across ZFNet, AlexNet, and VGG.
         </li>
 
         <li>
           <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span><br>
-          Designed Scotch, an Open vSwitch-based elastic overlay for SDN control-plane scalability under DDoS attacks —
-          when physical switch OFA capacity is saturated, tunnels new flows to a vSwitch pool
-          (CPU-based controllers with far higher throughput than hardware OFAs) via Packet-In Edge messages;
-          monitors and separates small DDoS flows (terminated at vSwitches) from large legitimate flows
-          (migrated back to physical paths); overlay automatically phases out when congestion clears;
-          achieves <span class="metric">&gt;70% controller congestion reduction</span>
-          on 34-node GENI Clos topology without modifying physical switch hardware.
+          Designed an OvS-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a vSwitch pool via Packet-In Edge messages; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths);
+          achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology without hardware modification.
         </li>
 
 
