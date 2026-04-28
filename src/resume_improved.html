@@ -366,8 +366,8 @@
           <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
           Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V);
-          built semi-supervised labeling via few-shot GPT-4o prompting; applied Fast Attention (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning;
-          fine-tuned PubMedBERT (NVIDIA NeMo) and Qwen-7B (Megatron-LM + DeepSpeed) on Lambda Labs A100;
+          built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning;
+          fine-tuned <strong>PubMedBERT</strong> (NVIDIA NeMo) and <strong>Qwen-7B</strong> (<strong>Megatron-LM + DeepSpeed</strong>) on Lambda Labs A100;
           achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and macro-AUC of 0.9362.
         </li>
 
@@ -390,7 +390,7 @@
           <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
           <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
           Exposed MLaaS training-phase side-channel vulnerability via deep analysis of DML computation/communication behavior in Parameter Server architecture;
-          applied K-means clustering on push/pull traffic (silent period detection), Fourier transform on Intel RAPL for noise reduction, Decision Tree for layer-type classification, and polynomial regression for activation function profiling;
+          applied <strong>K-means clustering</strong> on push/pull traffic (silent period detection), <strong>Fourier transform</strong> on <strong>Intel RAPL</strong> for noise reduction, <strong>Decision Tree</strong> for layer-type classification, and <strong>polynomial regression</strong> for activation function profiling;
           achieves <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span> across ZFNet, AlexNet, and VGG.
         </li>
 
