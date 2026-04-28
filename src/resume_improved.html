@@ -364,12 +364,13 @@
         <li>
           <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
           <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
-          Analyzed MXNet BSP PS-architecture communication patterns via push/pull instrumentation;
-          modified MXNet source code for ground-truth collection (framework instrumentation); cross-correlated network traffic
-          and Intel RAPL power side channels with outlier filtering and polynomial regression for
-          energy profiling; achieved <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
-          across ZFNet, AlexNet, and VGG variants — exposing DNN architecture stealing surfaces
-          in MLaaS co-location environments.
+          Designed and implemented a training-time side-channel attack framework targeting MLaaS DML environments;
+          exploited layer-level network communication regularity in MXNet BSP Parameter Server —
+          passively monitoring gradient push/pull traffic patterns to infer layer count and parameter sizes;
+          cross-correlated with Intel RAPL CPU power side channels (temporal and spatial correlation)
+          to eliminate noise and resolve ambiguous layer signatures; modified MXNet source for ground-truth collection;
+          achieved <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
+          across ZFNet, AlexNet, and VGG — without access to model internals or specialized hardware.
         </li>
 
         <li>
