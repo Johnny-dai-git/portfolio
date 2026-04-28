@@ -181,53 +181,6 @@ summary = (
 h = draw_text(summary, ML, 8.8, color=DARK, width=CW)
 move(h + 4)
 
-# ── SKILLS ────────────────────────────────────────────────────────────────────
-section_header("Skills")
-
-COL1 = ML
-ROW_H = 13
-LABEL_W = 115
-
-skills = [
-    ("Languages",         "Python, C/C++, Java, Bash"),
-    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM"),
-    ("Infrastructure",    "Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions"),
-    ("Observability",     "eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing"),
-    ("Cloud & Networks",  "Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
-    ("Research Areas",    "Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling"),
-]
-
-for label, value in skills:
-    ty = y
-    draw_text_at(label + ":", COL1, ty, 8.8, bold=True, color=BLACK, width=LABEL_W)
-    draw_text_at(value, COL1 + LABEL_W, ty, 8.8, color=DARK, width=CW - LABEL_W)
-    move(ROW_H)
-
-# ── INDUSTRY EXPERIENCE ───────────────────────────────────────────────────────
-section_header("Industry Experience")
-
-job_entry("Software Engineer II", "Cisco Systems, Inc.", "06/2015 – 08/2016")
-bullet("Developed NPU/ASIC features for a 100 Gbps core router serving hyperscalers (Azure, AWS, Alibaba Cloud) "
-       "using Broadcom BCM SDK; contributed to QoS and ECMP modules, reducing forwarding latency by ~10% under heavy load.")
-move(3)
-
-job_entry("Applied Research Engineer", "Midea Group", "09/2016 – 06/2018")
-bullet("Led ML model training and deployment for a smart appliance product; designed data pipeline, applied "
-       "transfer learning and ensemble techniques, and deployed scalable Docker-based services on Alibaba Cloud. "
-       "Product launched at 2018 AWE Show and won the Red Dot Design Award.")
-move(3)
-
-job_entry("Technical Product Manager", "Xiaomi", "07/2018 – 01/2019")
-bullet("Defined system-level architecture for an IoT-enabled smart appliance with PID-based temperature control "
-       "and cloud-connected app integration, translating product constraints into deployable system designs.")
-move(3)
-
-job_entry("Software Engineer Intern", "Broadcom (Emulex)", "10/2014 – 05/2015")
-bullet("Replaced polling-based data acquisition with a DMA + circular-buffer architecture in an RTOS pipeline, "
-       "reducing CPU load by 30% and improving sampling rate and control-loop responsiveness.")
-bullet("Ported a Linux-only management CLI for BladeEngine ASIC-based CNA hardware to Windows Server.")
-move(3)
-
 # ── EDUCATION ─────────────────────────────────────────────────────────────────
 section_header("Education")
 
@@ -304,61 +257,57 @@ move(2)
 surface.show_page()
 y = MT
 
-# ── RESEARCH EXPERIENCE ───────────────────────────────────────────────────────
-section_header("Research & Systems Engineering Experience")
+# ── INDUSTRY EXPERIENCE ───────────────────────────────────────────────────────
+section_header("Industry Experience")
 
-draw_text("Research Assistant, AI Infrastructure & ML Systems", ML, 9.5, bold=True, color=BLACK)
-move(12)
-draw_text("Case Western Reserve University", ML, 8.5, color=GRAY)
-move(12)
+job_entry("Software Engineer II", "Cisco Systems, Inc.", "06/2015 – 08/2016")
+bullet("Developed NPU/ASIC features for a 100 Gbps core router serving hyperscalers (Azure, AWS, Alibaba Cloud) "
+       "using Broadcom BCM SDK; contributed to QoS and ECMP modules, tuned forwarding pipelines, reducing "
+       "forwarding latency by ~10% under heavy load.")
+move(3)
 
-bullet("DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML  |  Paper / Code\n"
-       "PPO-based RL scheduler adapting batch size via real-time system signals; achieves 46% training speedup "
-       "on up to 64 A100 GPUs at Ohio Supercomputer Center and Lambda Labs HPC.")
-move(1)
+job_entry("Applied Research Engineer", "Midea Group", "09/2016 – 06/2018")
+bullet("Led ML model training and deployment for a smart appliance product; designed data pipeline, applied "
+       "transfer learning and ensemble techniques, and deployed scalable Docker-based services on Alibaba Cloud. "
+       "Product launched at 2018 AWE Show and won the Red Dot Design Award.")
+move(3)
 
-bullet("PRISM – Priority-Aware Transport for Distributed ML Training  |  Paper (Under Review)\n"
-       "Priority-based selective reliability transport; magnitude-based gradient classification with dual "
-       "congestion windows and kernel-bypass (LibVMA); achieves 8–21% throughput gain over TCP on 32 GPUs.")
-move(1)
+job_entry("Technical Product Manager", "Xiaomi", "07/2018 – 01/2019")
+bullet("Defined system-level architecture for an IoT-enabled smart appliance with PID-based temperature control "
+       "and cloud-connected app integration, translating product constraints into deployable system designs.")
+move(3)
 
-bullet("Training-Time Side-Channel Attacks on Distributed ML Systems  |  Paper / Code\n"
-       "Cross-correlated network traffic and Intel RAPL power side channels to reconstruct DNN architecture; "
-       "achieved >99% layer-type accuracy and <1.5% tensor-size error across ZFNet, AlexNet, VGG.")
-move(1)
+job_entry("Software Engineer Intern", "Broadcom (Emulex)", "10/2014 – 05/2015")
+bullet("Replaced polling-based data acquisition with a DMA + circular-buffer architecture in an RTOS pipeline, "
+       "reducing CPU load by 30% and improving sampling rate and control-loop responsiveness.")
+bullet("Ported a Linux-only management CLI for BladeEngine ASIC-based CNA hardware to Windows Server, "
+       "adapting system calls, threading models, and error handling.")
+move(3)
 
-bullet("Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure  |  Paper / Code\n"
-       "In-kernel eBPF priority-aware sketch framework; achieved 96% Top-K accuracy, 100% priority-packet recall, "
-       "and <1.1% throughput overhead at 10 Gbps on FABRIC testbed.")
-move(1)
+job_entry("Engineer Intern", "Tenova I2S", "01/2014 – 04/2014")
+bullet("Re-architected an RTOS data acquisition pipeline using DMA and circular buffers, "
+       "reducing CPU load by 42% and improving sampling rate and control-loop responsiveness.")
+move(3)
 
-bullet("High-Resolution eBPF System Resource Profiling for DML Workloads  |  Paper / Code\n"
-       "Per-PID eBPF profiler with in-kernel Top-K tracking; 10–14x finer temporal resolution than top/htop, "
-       "~11 ms latency, and >90% Top-K fidelity on commodity Linux servers.")
-move(1)
+# ── ADDITIONAL PROJECTS ───────────────────────────────────────────────────────
+section_header("Additional Systems Engineering Experience")
 
-bullet("Enterprise-Grade LLM Production Deployment Platform on Kubernetes  |  Code\n"
-       "K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM inference "
-       "with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD across 50+ deployments.")
-move(1)
-
-bullet("Scotch – Elastic SDN Overlay for Control-Plane Scalability  |  Paper / Code\n"
-       "Distributed control-plane overlay using OvS-based traffic offloading; reduced controller congestion "
-       "by >70% on a 34-node GENI Clos topology.")
-move(1)
-
-bullet("Domain-Adapted LLMs for Clinical Risk Adjustment Coding  |  Paper\n"
-       "Fine-tuned PubMedBERT and Qwen-7B for HCC coding; achieved macro-/micro-F1 of 0.775/0.742 "
-       "and 0.81/0.802 on MIMIC-IV with imbalance-aware training.")
-move(2)
+draw_text("16-bit MIPS-Like Pipelined CPU Design and Implementation", ML, 9.5, bold=True, color=BLACK)
+move(11)
+draw_text("github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation",
+          ML, 8.2, color=BLUE)
+move(11)
+bullet("Designed end-to-end pipelined CPU from custom ISA through RTL, synthesis, and layout; 5-stage pipeline "
+       "with hazard handling and branch prediction, achieving ~3x speedup over single-cycle design.")
+move(4)
 
 # ── PUBLICATIONS ──────────────────────────────────────────────────────────────
 section_header("Publications")
 pub_text = (
-    "8 research papers (7 first-author) in distributed ML systems, AI infrastructure, and ML security, "
+    "8 research papers (6 first-author) in distributed systems, ML systems, and AI infrastructure, "
     "published/accepted at IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, and Springer SecureComm; "
-    "3 manuscripts under review at ACM TOPS. "
-    "Full list: johnny-dai-git.github.io/portfolio"
+    "2 manuscripts under review at ACM TOPS. "
+    "Full list: scholar.google.com/citations?user=maCNFMAAAAJ"
 )
 h = draw_text(pub_text, ML, 8.8, color=DARK, width=CW)
 move(h + 6)
@@ -372,6 +321,29 @@ patent_text = (
 )
 h = draw_text(patent_text, ML, 8.8, color=DARK, width=CW)
 move(h + 6)
+
+# ── SKILLS ────────────────────────────────────────────────────────────────────
+section_header("Skills")
+
+COL1 = ML
+COL2 = ML + CW * 0.38
+ROW_H = 13
+LABEL_W = 115
+
+skills = [
+    ("Languages",         "Python, C/C++, Java, Bash"),
+    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM"),
+    ("Infrastructure",    "Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions"),
+    ("Observability",     "eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing"),
+    ("Cloud & Networks",  "Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
+    ("Research Areas",    "Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling"),
+]
+
+for label, value in skills:
+    ty = y
+    draw_text_at(label + ":", COL1, ty, 8.8, bold=True, color=BLACK, width=LABEL_W)
+    draw_text_at(value, COL1 + LABEL_W, ty, 8.8, color=DARK, width=CW - LABEL_W)
+    move(ROW_H)
 
 surface.finish()
 print(f"PDF written to: {OUTPUT}")

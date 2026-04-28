@@ -263,83 +263,6 @@
     </p>
   </div>
 
-  <!-- SKILLS -->
-  <div class="section">
-    <div class="section-title">Skills</div>
-    <div class="skills-grid">
-      <span class="skill-label">Languages</span>
-      <span class="skill-value">Python, C/C++, Java, Bash</span>
-
-      <span class="skill-label">AI / ML</span>
-      <span class="skill-value">PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM</span>
-
-      <span class="skill-label">Infrastructure</span>
-      <span class="skill-value">Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions</span>
-
-      <span class="skill-label">Observability</span>
-      <span class="skill-value">eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing</span>
-
-      <span class="skill-label">Cloud &amp; HPC</span>
-      <span class="skill-value">Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)</span>
-
-      <span class="skill-label">Research</span>
-      <span class="skill-value">Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling</span>
-    </div>
-  </div>
-
-  <!-- INDUSTRY EXPERIENCE -->
-  <div class="section">
-    <div class="section-title">Industry Experience</div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Software Engineer II</span>
-        <span class="entry-date">06/2015 – 08/2016</span>
-      </div>
-      <div class="entry-org">Cisco Systems, Inc.</div>
-      <ul class="bullets">
-        <li>Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK.</li>
-        <li>Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Applied Research Engineer</span>
-        <span class="entry-date">09/2016 – 06/2018</span>
-      </div>
-      <div class="entry-org">Midea Group</div>
-      <ul class="bullets">
-        <li>Led ML model training and deployment for <strong>Fun Oven II</strong>; designed data pipeline, applied transfer learning, and deployed Docker-based services on Alibaba Cloud.</li>
-        <li>Product debuted at <span class="metric">2018 AWE Show</span> and won the <span class="metric">Red Dot Design Award</span> · <a href="https://www.red-dot.org/project/fun-22465" style="color:#2563eb;">Red Dot ↗</a></li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Technical Product Manager</span>
-        <span class="entry-date">07/2018 – 01/2019</span>
-      </div>
-      <div class="entry-org">Xiaomi</div>
-      <ul class="bullets">
-        <li>Defined system-level architecture for an IoT-enabled smart appliance; translated product constraints into deployable system designs and aligned engineering and business stakeholders.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Software Engineer Intern</span>
-        <span class="entry-date">10/2014 – 05/2015</span>
-      </div>
-      <div class="entry-org">Broadcom (Emulex)</div>
-      <ul class="bullets">
-        <li>Replaced polling-based data acquisition with a DMA + circular-buffer architecture in an RTOS pipeline,
-          <span class="metric">reducing CPU load by 30%</span> and improving sampling rate and control-loop responsiveness.</li>
-        <li>Ported a Linux-only management CLI for BladeEngine ASIC-based CNA hardware to Windows Server.</li>
-      </ul>
-    </div>
-  </div>
-
   <!-- EDUCATION -->
   <div class="section">
     <div class="section-title">Education</div>
@@ -347,7 +270,7 @@
     <div class="edu-entry">
       <div class="edu-row">
         <span class="edu-degree">Ph.D. Candidate in Computer Science (AI Infrastructure)</span>
-        <span class="edu-date">08/2019 – Sep. 2026 (exp.)</span>
+        <span class="edu-date">08/2019 – Present</span>
       </div>
       <div class="edu-school">Case Western Reserve University</div>
     </div>
@@ -466,95 +389,84 @@
     </div>
   </div>
 
-  <!-- RESEARCH EXPERIENCE -->
+  <!-- INDUSTRY EXPERIENCE -->
   <div class="section" style="page-break-before: always; padding-top: 0.45in;">
-    <div class="section-title">Research &amp; Systems Engineering Experience</div>
+    <div class="section-title">Industry Experience</div>
 
     <div class="entry">
       <div class="entry-header">
-        <span class="entry-title">Research Assistant, AI Infrastructure &amp; ML Systems</span>
+        <span class="entry-title">Technical Product Manager</span>
+        <span class="entry-date">07/2018 – 01/2019</span>
       </div>
-      <div class="entry-org">Case Western Reserve University</div>
-
+      <div class="entry-org">Xiaomi</div>
       <ul class="bullets">
+        <li>Market-facing PM role: conducted competitive analysis and user research to define product requirements for a smart IoT appliance.</li>
+        <li>Assessed technical feasibility and complexity of proposed features; delivered initial technical proposals covering architecture trade-offs and implementation risks to align engineering and business stakeholders.</li>
+      </ul>
+    </div>
 
-        <li>
-          <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span><br>
-          PPO-based centralized RL scheduler dynamically adapting batch size via real-time system signals;
-          evaluated on PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves
-          <span class="metric">46% training speedup</span> over optimal fixed batch size strategy
-          with improved model generalization, on up to <span class="metric">64 A100 GPUs</span>
-          at Ohio Supercomputer Center and Lambda Labs HPC.
-        </li>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Product Manager</span>
+        <span class="entry-date">09/2016 – 06/2018</span>
+      </div>
+      <div class="entry-org">Midea Group</div>
+      <ul class="bullets">
+        <li>Served as technical PM for <strong>Fun Oven II</strong>, a multi-disciplinary smart appliance spanning data collection, ML model training &amp; deployment, mobile app integration, cloud backend, and culinary algorithm design.</li>
+        <li>Participated in resolving technical challenges across all dimensions — from training AI image recognition models and deploying Docker services on Alibaba Cloud, to defining cooking curves and app UX.</li>
+        <li>Product debuted at <span class="metric">2018 AWE Show</span> and won the <span class="metric">Red Dot Design Award</span> · <a href="https://www.red-dot.org/project/fun-22465" style="color:#2563eb;">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" style="color:#2563eb;">PR Newswire ↗</a></li>
+      </ul>
+    </div>
 
-        <li>
-          <span class="proj-name">PRISM – Priority-Aware Transport for Distributed ML Training</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span><br>
-          Priority-based selective reliability transport between NCCL/Gloo and UDP; magnitude-based
-          gradient classification with full retransmission for high-priority and local compensation for
-          low-priority; dual congestion windows, adaptive window borrowing, GPU-accelerated TopK,
-          SACK-based tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves
-          <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP
-          on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at 144-worker scale
-          on commodity infrastructure.
-        </li>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer II</span>
+        <span class="entry-date">06/2015 – 08/2016</span>
+      </div>
+      <div class="entry-org">Cisco Systems, Inc.</div>
+      <ul class="bullets">
+        <li>Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK.</li>
+        <li>Contributed to QoS and ECMP modules, reducing forwarding latency under heavy load.</li>
+      </ul>
+    </div>
 
-        <li>
-          <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
-          Analyzed MXNet BSP PS-architecture communication patterns via push/pull instrumentation;
-          cross-correlated network traffic and Intel RAPL power side channels with outlier filtering
-          and polynomial regression; achieved <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
-          across ZFNet, AlexNet, and VGG variants — exposing DNN architecture stealing surfaces in MLaaS.
-        </li>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer Intern</span>
+        <span class="entry-date">10/2014 – 05/2015</span>
+      </div>
+      <div class="entry-org">Broadcom (Emulex)</div>
+      <ul class="bullets">
+        <li>Replaced polling-based data acquisition with a DMA + circular-buffer architecture in an RTOS pipeline,
+          <span class="metric">reducing CPU load by 30%</span> and improving sampling rate and control-loop responsiveness.</li>
+        <li>Ported a Linux-only management CLI for BladeEngine ASIC-based CNA hardware to Windows Server,
+          adapting system calls, threading models, and error handling.</li>
+      </ul>
+    </div>
 
-        <li>
-          <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span><br>
-          In-kernel eBPF priority-aware sketch framework (priority table + heavy flow table + 3-layer CMS);
-          achieved <span class="metric">96% Top-K accuracy, 100% priority-packet recall</span>,
-          and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed with CAIDA 2019 traffic.
-        </li>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Engineer Intern</span>
+        <span class="entry-date">01/2014 – 04/2014</span>
+      </div>
+      <div class="entry-org">Tenova I2S</div>
+      <ul class="bullets">
+        <li>Re-architected an RTOS data acquisition pipeline using DMA and circular buffers,
+          <span class="metric">reducing CPU load by 42%</span> and improving sampling rate and control-loop responsiveness.</li>
+      </ul>
+    </div>
+  </div>
 
-        <li>
-          <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span><br>
-          Developed a per-PID eBPF profiler with in-kernel Top-K tracking, delivering
-          <span class="metric">10–14× finer temporal resolution</span> than top/htop,
-          ~11 ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.
-        </li>
+  <!-- ADDITIONAL PROJECTS -->
+  <div class="section">
+    <div class="section-title">Additional Systems Engineering Experience</div>
 
-        <li>
-          <span class="proj-name">Enterprise-Grade LLM Production Deployment Platform on Kubernetes</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
-          Built a K8s microservices platform (Gateway / Router / Worker) supporting vLLM and TensorRT-LLM
-          inference with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD automation across
-          <span class="metric">50+ Kubernetes deployments</span>.
-        </li>
-
-        <li>
-          <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span><br>
-          Designed a distributed control-plane overlay using OvS-based traffic offloading and large-flow
-          migration; <span class="metric">reduced controller congestion by &gt;70%</span> on a 34-node GENI Clos topology.
-        </li>
-
-        <li>
-          <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
-          Fine-tuned PubMedBERT and Qwen-7B for HCC coding from EHR notes; achieved
-          <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and <span class="metric">0.81/0.802</span>
-          on MIMIC-IV with imbalance-aware training and per-label calibration.
-        </li>
-
-        <li>
-          <span class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing">Paper</a></span><br>
-          Designed a BiLSTM pipeline aligning CPU/memory energy traces with per-layer timestamps;
-          reliably distinguishes Conv, FC, and activation layers during distributed ML training using ensemble learning.
-        </li>
-
+    <div class="proj-entry">
+      <div class="proj-title">16-bit MIPS-Like Pipelined CPU Design and Implementation &nbsp;·&nbsp; <a href="https://github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation" style="color:#2563eb; font-weight:normal; font-size:0.9em;">Report ↗</a></div>
+      <ul class="bullets">
+        <li>Designed an end-to-end pipelined CPU from custom ISA through RTL, synthesis, and layout;
+          5-stage pipeline with hazard handling and branch prediction, achieving
+          <span class="metric">~3× speedup</span> over single-cycle design.</li>
       </ul>
     </div>
   </div>
@@ -569,14 +481,28 @@
     </p>
   </div>
 
-  <!-- PATENTS -->
+  <!-- SKILLS -->
   <div class="section">
-    <div class="section-title">Patents</div>
-    <p class="pub-text">
-      CN 108594898 B &mdash; Oven Temperature Control Method, Device and Computer-Readable Storage Medium.
-      Issued: July 23, 2021. Assignee: Midea Group Co., Ltd.
-      Inventors: Shao Guangyuan, Dai Yuanjun, Zhu Jiele, Cheng Gang, Gong Jun.
-    </p>
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-label">Languages</span>
+      <span class="skill-value">Python, C/C++, Java, Bash</span>
+
+      <span class="skill-label">AI / ML</span>
+      <span class="skill-value">PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM</span>
+
+      <span class="skill-label">Infrastructure</span>
+      <span class="skill-value">Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions</span>
+
+      <span class="skill-label">Observability</span>
+      <span class="skill-value">eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing</span>
+
+      <span class="skill-label">Cloud &amp; HPC</span>
+      <span class="skill-value">Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)</span>
+
+      <span class="skill-label">Research</span>
+      <span class="skill-value">Distributed ML Systems, ML Security, Side-Channel Analysis, RL-based Scheduling</span>
+    </div>
   </div>
 
 </div>
