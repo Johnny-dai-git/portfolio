@@ -350,15 +350,17 @@
         </li>
 
         <li>
-          <span class="proj-name">PRISM – Priority-Aware Transport for Distributed ML Training</span>
+          <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span><br>
-          Priority-based selective reliability transport between NCCL/Gloo and UDP; magnitude-based
-          gradient classification with full retransmission for high-priority and local compensation for
-          low-priority; dual congestion windows, adaptive window borrowing, GPU-accelerated TopK,
-          SACK-based tracking, kernel-bypass (LibVMA) and GSO/GRO optimizations; achieves
-          <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP
-          on 32 GPUs (OSC) and cross-site FABRIC testbed; matches NDP latency at 144-worker scale
-          on commodity infrastructure.
+          Designed and implemented PRISM as a transport-layer library between ML frameworks (NCCL/Gloo) and UDP —
+          intercepting gradient synchronization without modifying training code or model architecture;
+          classifies gradients by magnitude (GPU-accelerated TopK) into high-priority (full retransmission via SACK)
+          and low-priority (local compensation using cached values from prior iteration);
+          employs dual congestion windows with adaptive window borrowing, supporting both
+          kernel-bypass (LibVMA) and kernel-based (GSO/GRO) variants for hardware flexibility;
+          achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span>
+          over TCP under 1% packet loss on 32 GPUs;
+          matches NDP latency at 144-worker scale on commodity infrastructure without requiring specialized RDMA hardware.
         </li>
 
         <li>
