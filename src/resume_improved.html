@@ -387,9 +387,13 @@
         <li>
           <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span><br>
-          Developed a per-PID eBPF profiler with in-kernel Top-K tracking, delivering
-          <span class="metric">10–14× finer temporal resolution</span> than top/htop,
-          ~11 ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.
+          Designed eHashPipe, a dual-pipeline eBPF observability framework for DML workloads —
+          (1) a HashPipe-based memory profiler tracking Top-K memory-intensive processes via
+          cascading slot eviction with ptr2size deallocation tracking, and
+          (2) a per-thread CPU tracker hooking sched_switch tracepoint for thread-level CPU time
+          attribution aggregated per PID; atomic operations for thread-safe in-kernel updates;
+          delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop,
+          ~11ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.
         </li>
 
         <li>
