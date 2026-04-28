@@ -368,21 +368,27 @@
         </li>
 
         <li>
-          <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
-          Developed deep understanding of DML computation and communication behavior in Parameter Server architecture
-          to expose MLaaS training-phase side-channel vulnerability;
-          (1) applied <strong>K-means clustering</strong> on push/pull network traffic to identify silent periods
-          (forward pass computation without communication);
-          (2) applied <strong>Fourier transform</strong> on Intel RAPL CPU and memory power signals for noise reduction,
-          extracting layer-by-layer energy consumption patterns;
-          (3) trained a <strong>Decision Tree classifier</strong> on energy features across Conv and FC layers
-          under varying parameter sizes for layer-type classification;
-          (4) built <strong>polynomial regression models</strong> on CPU energy profiles of activation functions
-          for activation function classification;
-          reconstructed complete target DNN architecture; achieves
-          <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
-          across ZFNet, AlexNet, and VGG.
+          <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
+          Independently designed and implemented end-to-end a K8s microservices platform (Gateway / Router / Worker)
+          supporting vLLM inference with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD automation across
+          <span class="metric">50+ Kubernetes deployments</span>.
+        </li>
+
+        <li>
+          <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
+          Designed an end-to-end chronic disease code classifier (115 HCC codes) from unstructured EHR notes
+          on an extremely imbalanced multi-label dataset (MIMIC-V);
+          built a semi-supervised labeling pipeline using <strong>few-shot prompting with GPT-4o</strong>
+          (CMS definitions as context, domain expert verification) to construct training labels;
+          replaced standard self-attention with <strong>Fast Attention</strong> (O(Ld) vs O(L²))
+          to support longer clinical sequences;
+          applied <strong>inverse-frequency per-label positive weighting</strong> to counter severe class imbalance,
+          and independently tuned a <strong>decision threshold per label</strong> for calibration and interpretability;
+          fine-tuned <strong>PubMedBERT via NVIDIA NeMo</strong> and <strong>Qwen-7B via Megatron-LM + DeepSpeed</strong>
+          on Lambda Labs A100 GPUs;
+          achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and macro-AUC of 0.9362.
         </li>
 
         <li>
@@ -409,6 +415,24 @@
         </li>
 
         <li>
+          <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span><br>
+          Developed deep understanding of DML computation and communication behavior in Parameter Server architecture
+          to expose MLaaS training-phase side-channel vulnerability;
+          (1) applied <strong>K-means clustering</strong> on push/pull network traffic to identify silent periods
+          (forward pass computation without communication);
+          (2) applied <strong>Fourier transform</strong> on Intel RAPL CPU and memory power signals for noise reduction,
+          extracting layer-by-layer energy consumption patterns;
+          (3) trained a <strong>Decision Tree classifier</strong> on energy features across Conv and FC layers
+          under varying parameter sizes for layer-type classification;
+          (4) built <strong>polynomial regression models</strong> on CPU energy profiles of activation functions
+          for activation function classification;
+          reconstructed complete target DNN architecture; achieves
+          <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span>
+          across ZFNet, AlexNet, and VGG.
+        </li>
+
+        <li>
           <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span><br>
           Designed Scotch, an Open vSwitch-based elastic overlay for SDN control-plane scalability under DDoS attacks —
@@ -418,30 +442,6 @@
           (migrated back to physical paths); overlay automatically phases out when congestion clears;
           achieves <span class="metric">&gt;70% controller congestion reduction</span>
           on 34-node GENI Clos topology without modifying physical switch hardware.
-        </li>
-
-        <li>
-          <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span><br>
-          Independently designed and implemented end-to-end a K8s microservices platform (Gateway / Router / Worker)
-          supporting vLLM inference with ArgoCD GitOps, Prometheus/Grafana observability, and CI/CD automation across
-          <span class="metric">50+ Kubernetes deployments</span>.
-        </li>
-
-        <li>
-          <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span><br>
-          Designed an end-to-end chronic disease code classifier (115 HCC codes) from unstructured EHR notes
-          on an extremely imbalanced multi-label dataset (MIMIC-V);
-          built a semi-supervised labeling pipeline using <strong>few-shot prompting with GPT-4o</strong>
-          (CMS definitions as context, domain expert verification) to construct training labels;
-          replaced standard self-attention with <strong>Fast Attention</strong> (O(Ld) vs O(L²))
-          to support longer clinical sequences;
-          applied <strong>inverse-frequency per-label positive weighting</strong> to counter severe class imbalance,
-          and independently tuned a <strong>decision threshold per label</strong> for calibration and interpretability;
-          fine-tuned <strong>PubMedBERT via NVIDIA NeMo</strong> and <strong>Qwen-7B via Megatron-LM + DeepSpeed</strong>
-          on Lambda Labs A100 GPUs;
-          achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span> and macro-AUC of 0.9362.
         </li>
 
 
