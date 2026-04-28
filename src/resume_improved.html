@@ -376,11 +376,12 @@
         <li>
           <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span><br>
-          In-kernel eBPF priority-aware sketch framework (priority table + heavy flow table + 3-layer CMS);
-          sequence-number-based retransmission detection; atomic operations for thread-safe concurrent
-          updates; voting-based collision resolution and CMS minimum-value flow reconstruction;
-          achieved <span class="metric">96% Top-K accuracy, 100% priority-packet recall</span>,
-          and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed with CAIDA 2019 traffic.
+          Designed and implemented PSketch, the first in-kernel priority-aware sketch data structure using eBPF;
+          high-priority flows tracked precisely via BPF_HASH priority table (O(1) lookup),
+          low-priority flows estimated via 3-layer Count-Min Sketch;
+          voting-based hash collision resolution and atomic operations for thread-safe in-kernel updates;
+          achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>,
+          and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed with CAIDA 2019 backbone traffic.
         </li>
 
         <li>
