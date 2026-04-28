@@ -338,11 +338,15 @@
         <li>
           <span class="proj-name">DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML</span>
           <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span><br>
-          PPO-based centralized RL scheduler dynamically adapting batch size via real-time system signals;
-          evaluated on PS (BytePS) and Ring AllReduce (PyTorch DDP) architectures; achieves
-          <span class="metric">46% training speedup</span> over optimal fixed batch size strategy
-          with improved model generalization, on up to <span class="metric">64 A100 GPUs</span>
-          at Ohio Supercomputer Center and Lambda Labs HPC.
+          Designed a PPO-based centralized RL scheduler monitoring real-time hardware signals (CPU/memory usage,
+          network bandwidth, retransmission rate via custom eBPF probes) and statistical efficiency signals
+          (loss convergence rate, generalization performance) to dynamically adapt batch size;
+          co-scales learning rate proportionally (Linear Scaling Rule) to maintain training stability;
+          evaluated on CNN architectures across CIFAR-100 and similar benchmarks using both
+          Ring AllReduce (PyTorch DDP) and Parameter Server (BytePS) across
+          <span class="metric">8–64 A100 GPUs</span>; achieves
+          <span class="metric">46% end-to-end training time reduction</span> and
+          improved final model accuracy over fixed batch size baseline.
         </li>
 
         <li>
