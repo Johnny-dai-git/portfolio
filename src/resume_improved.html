@@ -410,7 +410,7 @@
           <ul class="sub-bullets">
             <li>Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting</li>
             <li>Applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning</li>
-            <li>Fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM</strong>) on Lambda Labs A100; achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362</li>
+            <li>Fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM / FSDP</strong>) on Lambda Labs A100; achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362</li>
           </ul>
         </li>
 
