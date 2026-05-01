@@ -1285,9 +1285,9 @@ footer a:hover { color: var(--accent); }
     </div>
 
     <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-dist">DeepSpeed ZeRO-3</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
+      <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
       <div class="proj-name" data-i18n="research.proj8.name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
-      <div class="proj-desc" data-i18n-html="research.proj8.desc">Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning; fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM + DeepSpeed</strong>) on Lambda Labs A100; achieves <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362.</div>
+      <div class="proj-desc" data-i18n-html="research.proj8.desc">Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning; fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM</strong>) on Lambda Labs A100; achieves <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362.</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -1555,7 +1555,7 @@ footer a:hover { color: var(--accent); }
       <div class="skill-tags">
         <span class="skill-tag">PyTorch DDP/FSDP</span><span class="skill-tag">TensorFlow</span>
         <span class="skill-tag">BytePS</span><span class="skill-tag">Megatron-LM</span>
-        <span class="skill-tag">NCCL</span><span class="skill-tag">DeepSpeed</span><span class="skill-tag">vLLM</span><span class="skill-tag">TensorRT-LLM</span>
+        <span class="skill-tag">NCCL</span><span class="skill-tag">vLLM</span><span class="skill-tag">TensorRT-LLM</span>
       </div>
     </div>
     <div class="skill-category fade-in">
@@ -1826,7 +1826,7 @@ const TRANSLATIONS = {
     'research.proj7.name': 'Scalable LLM Serving Infrastructure on Kubernetes',
     'research.proj7.desc': 'Independently designed and built end-to-end a <strong>K8s</strong> microservices platform (Gateway / Router / Worker) with <strong>vLLM</strong> inference; <strong>ArgoCD</strong> GitOps, <strong>Prometheus/Grafana</strong> observability, and <strong>CI/CD</strong> pipelines across <span class="proj-metric">50+ deployments</span>.',
     'research.proj8.name': 'Domain-Adapted LLMs for Clinical Risk Adjustment Coding',
-    'research.proj8.desc': 'Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning; fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM + DeepSpeed</strong>) on Lambda Labs A100; achieves <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362.',
+    'research.proj8.desc': 'Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning; fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM</strong>) on Lambda Labs A100; achieves <span class="proj-metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362.',
     'research.proj9.name': 'BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis',
     'research.proj9.desc': 'Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">>97% layer-type accuracy</span> vs. BiLSTM\'s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).',
     'research.proj10.name': '16-bit MIPS-Like Pipelined CPU Design and Implementation',

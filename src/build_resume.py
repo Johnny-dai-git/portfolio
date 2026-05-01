@@ -332,7 +332,7 @@ LABEL_W = 115
 
 skills = [
     ("Languages",         "Python, C/C++, Java, Bash"),
-    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, DeepSpeed, vLLM, TensorRT-LLM"),
+    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, vLLM, TensorRT-LLM"),
     ("Infrastructure",    "Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions"),
     ("Observability",     "eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing"),
     ("Cloud & Networks",  "Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
