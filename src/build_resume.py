@@ -205,7 +205,7 @@ draw_text("Case Western Reserve University", ML, 8.5, color=GRAY)
 move(12)
 
 bullet("DYNAMIX – RL-Based Adaptive Batch Scheduling for Distributed ML  |  Paper / Code\n"
-       "Designed a system-signal-driven RL scheduler (BytePS, PyTorch DDP, TensorFlow) with asynchronous "
+       "Designed a system-signal-driven RL scheduler (BytePS, PyTorch DDP) with asynchronous "
        "event-driven control, achieving 46% end-to-end training speedup on 32+ nodes across HPC and cloud environments.")
 move(1)
 
@@ -332,7 +332,7 @@ LABEL_W = 115
 
 skills = [
     ("Languages",         "Python, C/C++, Java, Bash"),
-    ("AI / ML",           "PyTorch (DDP/FSDP), TensorFlow, BytePS, Megatron-LM, NCCL, vLLM, TensorRT-LLM"),
+    ("AI / ML",           "PyTorch (DDP/FSDP), BytePS, Megatron-LM, NCCL, vLLM, TensorRT-LLM"),
     ("Infrastructure",    "Kubernetes, Docker, CI/CD, ArgoCD, Helm, Slurm, HPC, GitHub Actions"),
     ("Observability",     "eBPF, Prometheus, Grafana, DCGM Exporter, Intel RAPL, Kernel Tracing"),
     ("Cloud & Networks",  "Lambda Labs HPC, NSF FABRIC, CloudLab, SDN (OpenFlow / Ryu), P4, NPU/ASIC (Broadcom BCM SDK)"),
