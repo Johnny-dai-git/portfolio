@@ -445,7 +445,7 @@
           <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span>
           <ul class="sub-bullets">
-            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for flow monitoring and load balancing across the vSwitch cluster</li>
+            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for flow monitoring and load balancing across vSwitches</li>
             <li>Separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology</li>
           </ul>
         </li>
