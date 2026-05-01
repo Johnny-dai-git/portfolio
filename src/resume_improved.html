@@ -435,9 +435,9 @@
           <span class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</span>
           <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span>
           <ul class="sub-bullets">
-            <li>Exposed MLaaS training-phase side-channel vulnerability via deep analysis of DML <strong>computation/communication behavior</strong> in Parameter Server architecture</li>
-            <li>Applied <strong>K-means clustering</strong> on push/pull traffic (silent period detection), <strong>Fourier transform</strong> on <strong>Intel RAPL</strong> for noise reduction, <strong>Decision Tree</strong> for layer-type classification, and <strong>polynomial regression</strong> for <strong>activation function profiling</strong></li>
-            <li>Achieves <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span> across ZFNet, AlexNet, and VGG</li>
+            <li><strong>Training-phase black-box attack</strong> on <strong>MXNet BSP</strong> distributed training, reconstructing full DNN architectures via two unprivileged side channels: <strong>Intel RAPL</strong> (PP0+DRAM, 50μs via powercap/sysfs) and 0-payload network packet sequences (<strong>Seq_T</strong>) for tensor size extraction</li>
+            <li><strong>Lookahead</strong> (sliding-window SMA) + <strong>Lookbehind</strong> algorithms isolate forward passes; <strong>band-pass filtering</strong> segments individual layers; <strong>Decision Tree</strong> (entropy, 97.7%, 10-fold CV on 84K+ segments) and <strong>BiLSTM</strong> classify layer types; weighted-average <strong>MLP ensemble</strong> (weights ∝ 1/validation error) recovers Conv/FC dimensions</li>
+            <li>Achieves <span class="metric">&gt;97% layer-type accuracy</span>; validated across 20 DNN models (LeNet through VGG/ResNet families)</li>
           </ul>
         </li>
 
