@@ -408,9 +408,9 @@
           <span class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</span>
           <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span>
           <ul class="sub-bullets">
-            <li>Designed chronic disease classifier (115 HCC codes) on extremely imbalanced multi-label EHR data (MIMIC-V); built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting</li>
-            <li>Applied <strong>Fast Attention</strong> (O(Ld) vs O(L²)), inverse-frequency per-label weighting, and per-label threshold tuning</li>
-            <li>Fine-tuned <strong>PubMedBERT</strong> (<strong>NVIDIA NeMo</strong>) and <strong>Qwen-7B</strong> (<strong>Megatron-LM / FSDP</strong>) on Lambda Labs A100; achieves <span class="metric">macro-/micro-F1 of 0.775/0.742</span>, macro-AUC 0.9362</li>
+            <li>Built a 115-label HCC multi-label classifier on highly imbalanced EHR data (MIMIC-V), improving long-tail performance via <strong>inverse-frequency weighted binary cross-entropy loss</strong> and <strong>per-label threshold calibration</strong>; achieves <span class="metric">macro-F1 0.775 / micro-F1 0.742 / macro-AUC 0.9362</span></li>
+            <li>Trained <strong>PubMedBERT</strong> using <strong>PyTorch DDP</strong> on 2×NVIDIA RTX A6000 GPUs; fine-tuned <strong>Qwen-7B</strong> using distribution-aware <strong>few-shot prompting</strong> (5-shot with negative, frequent, and rare-label demonstrations) to enforce structured HCC outputs and improve sensitivity to sparse labels</li>
+            <li>Scaled full-parameter training via <strong>NeMo + Megatron-LM</strong> (TP=1, PP=1) with <strong>PyTorch FSDP (ZeRO-3)</strong>, <strong>FlashAttention</strong>, and activation checkpointing, enabling training under GPU memory constraints</li>
           </ul>
         </li>
 
