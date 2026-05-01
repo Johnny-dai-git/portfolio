@@ -388,7 +388,7 @@
 
         <li>
           <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a> (Under Review)</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a></span>
           <ul class="sub-bullets">
             <li>Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events; classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values)</li>
             <li>Supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants; achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale</li>
