@@ -399,8 +399,10 @@
           <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a></span>
           <ul class="sub-bullets">
-            <li>Independently designed and built end-to-end a <strong>K8s</strong> microservices platform (Gateway / Router / Worker) with <strong>vLLM</strong> inference</li>
-            <li><strong>ArgoCD</strong> GitOps, <strong>Prometheus/Grafana</strong> observability, and <strong>CI/CD</strong> pipelines across <span class="metric">50+ deployments</span></li>
+            <li>Independently designed and built a self-hosted <strong>K8s</strong> LLM inference platform: NGINX Ingress → <strong>FastAPI</strong> Gateway → <strong>vLLM</strong> Worker with OpenAI-compatible API, SSE streaming, and static web frontend on a single consumer GPU (RTX 4050 6GB)</li>
+            <li>Established full <strong>GitOps CI/CD</strong> pipeline (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; applied <strong>NVIDIA GPU time-slicing</strong> (1 physical → 2 virtual GPU slots) with custom-metrics <strong>HPA</strong> on vLLM queue depth</li>
+            <li>Built 4-layer observability with <strong>Prometheus + Grafana</strong>: GPU hardware (<strong>DCGM Exporter</strong> — utilization, VRAM, temperature, power), <strong>vLLM</strong> business metrics (queue depth, KV cache, TTFT, e2e latency), <strong>FastAPI</strong> gateway (Counter + Histogram per endpoint), and K8s cluster (<strong>kube-prometheus-stack</strong>); dashboards auto-imported via Grafana sidecar + labeled ConfigMap</li>
+            <li>Achieved <span class="metric">800 tokens/sec</span> sustained throughput via <strong>vLLM continuous batching + PagedAttention</strong>; validated with a 6-stage automated test suite (latency P50–P99, throughput, <strong>HPA scaling</strong>, sustained load) — 0 errors over 1,130 requests / 5-min run</li>
           </ul>
         </li>
 
