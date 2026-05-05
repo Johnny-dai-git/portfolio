@@ -399,8 +399,8 @@
           <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a> / <a class="proj-link" href="https://www.youtube.com/watch?v=ebnzQBiLJnQ">Video</a></span>
           <ul class="sub-bullets">
-            <li>Independently designed and built a self-hosted <strong>K8s</strong> LLM inference platform (NGINX Ingress → <strong>FastAPI</strong> → <strong>vLLM</strong>) with full <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across <span class="metric">50+ deployments</span>; deployed on two hardware tiers: laptop (RTX 4050, <strong>NVIDIA GPU time-slicing</strong>, HPA 1↔2) and Lambda Labs A100 (<strong>MIG</strong> 7×1g.5gb, HPA 1↔7)</li>
-            <li>Under extreme stress (concurrency 60, 12-min, ~2,000-token prompts on A100): <strong>HPA</strong> scaled 1→5 replicas, <span class="metric">91.3% peak GPU compute</span>, 3,460 requests served; built 4-layer GPU observability (<strong>DCGM Exporter</strong> + <strong>Prometheus</strong> + <strong>Grafana</strong>) — <span class="metric">0 errors over 1,130 requests</span> in 5-min sustained load test</li>
+            <li>Independently designed a self-hosted <strong>K8s</strong> LLM inference platform (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; tested on RTX 4050 (<strong>GPU time-slicing</strong>, HPA 1↔2) and Lambda Labs A100 (<strong>MIG</strong> 7×1g.5gb, <strong>HPA</strong> 1↔7); A100 extreme stress: <span class="metric">91.3% peak GPU compute</span>, 3,460 requests, HPA scaled 1→5 replicas</li>
+            <li>Built 4-layer GPU observability (<strong>DCGM Exporter</strong> + <strong>Prometheus</strong> + <strong>Grafana</strong>: GPU hardware, vLLM metrics, FastAPI gateway, K8s cluster) — <span class="metric">0 errors over 1,130 requests</span> in 5-min sustained load</li>
           </ul>
         </li>
 
