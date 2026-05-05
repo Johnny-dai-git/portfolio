@@ -399,7 +399,7 @@
           <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a> / <a class="proj-link" href="https://www.youtube.com/watch?v=ebnzQBiLJnQ">Video</a></span>
           <ul class="sub-bullets">
-            <li>Independently designed a self-hosted <strong>K8s</strong> LLM inference platform (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; tested on RTX 4050 (<strong>GPU time-slicing</strong>, HPA 1↔2) and Lambda Labs A100 (<strong>MIG</strong> 7×1g.5gb, <strong>HPA</strong> 1↔7); A100 extreme stress: <span class="metric">91.3% peak GPU compute</span>, 3,460 requests, HPA scaled 1→5 replicas</li>
+            <li>Independently designed a self-hosted <strong>K8s</strong> LLM inference platform (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; validated on <strong>RTX 4050</strong> (<strong>GPU time-slicing</strong>, <strong>HPA</strong> 1↔2) and <strong>Lambda Labs A100</strong> (<strong>MIG</strong> 7×1g.5gb, <strong>HPA</strong> 1↔7) with <span class="metric">91.3% peak GPU compute</span> under extreme stress</li>
             <li>Built 4-layer GPU observability (<strong>DCGM Exporter</strong> + <strong>Prometheus</strong> + <strong>Grafana</strong>: GPU hardware, vLLM metrics, FastAPI gateway, K8s cluster) — <span class="metric">0 errors over 1,130 requests</span> in 5-min sustained load</li>
           </ul>
         </li>
