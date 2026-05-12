@@ -417,9 +417,8 @@
           <span class="proj-name">AI-Powered Job Hunting Agent</span>
           <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter">Code</a></span>
           <ul class="sub-bullets">
-            <li>Built a <strong>multi-agent LangGraph</strong> orchestration system for automated job discovery and resume tailoring, with 5 specialized agents (Context, Collection, Matching, Digest, Validation) running as a daily cron pipeline across LinkedIn, Indeed, Dice, YC, and HackerNews</li>
-            <li>Designed a <strong>6-dimension LLM scoring pipeline</strong> (<strong>DeepSeek</strong> structured tool_use output) and a 2-round tailoring pipeline: DeepSeek for gap analysis → <strong>Claude Opus</strong> for execution; implemented cost-aware model routing (~$0.07/application)</li>
-            <li>Deployed a <strong>FastAPI</strong> web UI with liveness/readiness health probes, <strong>SQLite</strong>-backed job tracking with SHA256 content-hash deduplication, and persistent ResumeRevision version history with HR/HM dual-perspective chat refinement</li>
+            <li>Designed a <strong>multi-agent LangGraph</strong> system with 6 asynchronous agents; implemented <strong>multi-LLM routing</strong>: <strong>DeepSeek</strong> for high-volume 6D scoring (structured tool_use) and <strong>Claude Opus</strong> for quality-critical resume tailoring (~$0.07/application)</li>
+            <li>Built <strong>FastAPI</strong> backend with <strong>SQLite</strong> persistent job tracking, <strong>SHA256</strong> content-hash cross-platform deduplication, liveness/readiness health probes, and interactive ResumeRevision chat with HR/HM dual-perspective refinement</li>
           </ul>
         </li>
 
@@ -451,14 +450,6 @@
           </ul>
         </li>
 
-        <li>
-          <span class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span>
-          <ul class="sub-bullets">
-            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches</li>
-            <li>Separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology</li>
-          </ul>
-        </li>
 
 
       </ul>
