@@ -413,6 +413,16 @@
           </ul>
         </li>
 
+        <li>
+          <span class="proj-name">AI-Powered Job Hunting Agent</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter">Code</a></span>
+          <ul class="sub-bullets">
+            <li>Built a <strong>multi-agent LangGraph</strong> orchestration system for automated job discovery and resume tailoring, with 5 specialized agents (Context, Collection, Matching, Digest, Validation) running as a daily cron pipeline across LinkedIn, Indeed, Dice, YC, and HackerNews</li>
+            <li>Designed a <strong>6-dimension LLM scoring pipeline</strong> (<strong>DeepSeek</strong> structured tool_use output) and a 2-round tailoring pipeline: DeepSeek for gap analysis → <strong>Claude Opus</strong> for execution; implemented cost-aware model routing (~$0.07/application)</li>
+            <li>Deployed a <strong>FastAPI</strong> web UI with liveness/readiness health probes, <strong>SQLite</strong>-backed job tracking with SHA256 content-hash deduplication, and persistent ResumeRevision version history with HR/HM dual-perspective chat refinement</li>
+          </ul>
+        </li>
+
         <li style="page-break-before: always; padding-top: 0.3in;">
           <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
           <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span>
