@@ -449,7 +449,7 @@
           <ul class="sub-bullets">
             <li><strong>Analyzed DML computation/communication behavior</strong> in <strong>MXNet BSP</strong> Parameter Server: instrumented push/pull primitives to profile per-layer network traffic patterns; modified MXNet source code for ground-truth collection to capture <strong>DML network behavior</strong> at layer granularity</li>
             <li>Profiled <strong>ML energy consumption</strong> via <strong>Intel RAPL</strong> (PP0+DRAM, 50μs via powercap/sysfs); applied <strong>Lookahead</strong> (sliding-window SMA) + <strong>Lookbehind</strong> algorithms to isolate forward passes; used <strong>band-pass filtering</strong> for layer segmentation and <strong>polynomial regression</strong> for per-layer <strong>energy profiling</strong>; cross-correlated network traffic and power side channels with outlier filtering</li>
-            <li>Classified layer types via <strong>Decision Tree</strong> (entropy, 97.7%, 10-fold CV on 84K+ segments) and <strong>BiLSTM</strong>; recovered Conv/FC dimensions via weighted-average <strong>MLP ensemble</strong>; achieves <span class="metric">&gt;99% layer-type accuracy and &lt;1.5% tensor-size error</span> across ZFNet, AlexNet, and VGG — exposing DNN architecture stealing surfaces in MLaaS environments</li>
+            <li>Classified layer types via <strong>Decision Tree</strong> and <strong>BiLSTM</strong>; recovered Conv/FC dimensions via weighted-average <strong>MLP ensemble</strong> — exposing DNN architecture stealing surfaces in MLaaS environments</li>
           </ul>
         </li>
 
