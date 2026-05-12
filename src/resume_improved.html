@@ -387,20 +387,14 @@
         </li>
 
         <li>
-          <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a></span>
+          <span class="proj-name">AI-Powered Job Hunting Agent</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter">Code</a></span>
           <ul class="sub-bullets">
-            <li>Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events; classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values)</li>
-            <li>Supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants; achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale</li>
-          </ul>
-        </li>
-
-        <li>
-          <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a> / <a class="proj-link" href="https://www.youtube.com/watch?v=ebnzQBiLJnQ">Video</a></span>
-          <ul class="sub-bullets">
-            <li>Independently designed a self-hosted <strong>K8s</strong> LLM inference platform (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; validated on <strong>RTX 4050</strong> (<strong>GPU time-slicing</strong>, <strong>Horizontal Pod Autoscaler (HPA)</strong> 1↔2) and <strong>Lambda Labs A100</strong> (<strong>Multi-Instance GPU (MIG)</strong> 7×1g.5gb, <strong>HPA</strong> 1↔7) with <span class="metric">91.3% peak GPU compute</span> under extreme stress</li>
-            <li>Built 4-layer GPU observability (<strong>DCGM Exporter</strong> + <strong>Prometheus</strong> + <strong>Grafana</strong>: GPU hardware, vLLM metrics, FastAPI gateway, K8s cluster)</li>
+            <li>Built a production-oriented <strong>multi-agent AI platform</strong> for automated job discovery, semantic matching, and personalized resume optimization across LinkedIn, Indeed, Dice, YC Jobs, and HackerNews</li>
+            <li>Designed a <strong>LangGraph-based orchestration pipeline</strong> with specialized agents for job collection, matching, resume refinement, trend analysis, and workflow validation</li>
+            <li>Developed a <strong>6-dimension LLM-based job matching framework</strong> via careful <strong>prompt engineering</strong> to evaluate skills, experience, seniority, work authorization, and company preference beyond keyword filtering</li>
+            <li>Implemented a <strong>capability-aware multi-model routing pipeline</strong> for analytical planning and recruiter-oriented resume optimization</li>
+            <li>Engineered scalable backend infrastructure with <strong>FastAPI</strong>, cross-platform job deduplication, health monitoring endpoints, and deployment-ready automation services</li>
           </ul>
         </li>
 
@@ -414,14 +408,20 @@
         </li>
 
         <li>
-          <span class="proj-name">AI-Powered Job Hunting Agent</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter">Code</a></span>
+          <span class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a> / <a class="proj-link" href="https://www.youtube.com/watch?v=ebnzQBiLJnQ">Video</a></span>
           <ul class="sub-bullets">
-            <li>Built a production-oriented <strong>multi-agent AI platform</strong> for automated job discovery, semantic matching, and personalized resume optimization across LinkedIn, Indeed, Dice, YC Jobs, and HackerNews</li>
-            <li>Designed a <strong>LangGraph-based orchestration pipeline</strong> with specialized agents for job collection, matching, resume refinement, trend analysis, and workflow validation</li>
-            <li>Developed a <strong>6-dimension LLM-based job matching framework</strong> via careful <strong>prompt engineering</strong> to evaluate skills, experience, seniority, work authorization, and company preference beyond keyword filtering</li>
-            <li>Implemented a <strong>capability-aware multi-model routing pipeline</strong> for analytical planning and recruiter-oriented resume optimization</li>
-            <li>Engineered scalable backend infrastructure with <strong>FastAPI</strong>, cross-platform job deduplication, health monitoring endpoints, and deployment-ready automation services</li>
+            <li>Independently designed a self-hosted <strong>K8s</strong> LLM inference platform (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong> + GitHub Actions) across 50+ deployments; validated on <strong>RTX 4050</strong> (<strong>GPU time-slicing</strong>, <strong>Horizontal Pod Autoscaler (HPA)</strong> 1↔2) and <strong>Lambda Labs A100</strong> (<strong>Multi-Instance GPU (MIG)</strong> 7×1g.5gb, <strong>HPA</strong> 1↔7) with <span class="metric">91.3% peak GPU compute</span> under extreme stress</li>
+            <li>Built 4-layer GPU observability (<strong>DCGM Exporter</strong> + <strong>Prometheus</strong> + <strong>Grafana</strong>: GPU hardware, vLLM metrics, FastAPI gateway, K8s cluster)</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a></span>
+          <ul class="sub-bullets">
+            <li>Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events; classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values)</li>
+            <li>Supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants; achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale</li>
           </ul>
         </li>
 
