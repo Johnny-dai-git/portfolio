@@ -426,20 +426,11 @@
         </li>
 
         <li>
-          <span class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a></span>
+          <span class="proj-name">In-Kernel eBPF Sketch Systems for Network and System Resource Monitoring</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper (PSketch)</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a> &nbsp;·&nbsp; <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper (eHashPipe)</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span>
           <ul class="sub-bullets">
-            <li>Designed PSketch, the first in-kernel priority-aware sketch using <strong>eBPF</strong>; high-priority flows tracked via in-kernel hashmap (O(1)), low-priority via <strong>3-layer Count-Min Sketch</strong>; enables <strong>O(n) Top-K detection</strong> with sub-linear memory, voting-based collision resolution and atomic operations for thread-safe updates</li>
-            <li>Achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>, and &lt;1.1% throughput overhead at 10 Gbps on FABRIC testbed</li>
-          </ul>
-        </li>
-
-        <li>
-          <span class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span>
-          <ul class="sub-bullets">
-            <li>Designed eHashPipe, a dual-pipeline <strong>eBPF</strong> framework with <strong>O(n) Top-K tracking</strong>: (1) HashPipe-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via sched_switch tracepoint</li>
-            <li>Delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop, ~11ms latency, and &gt;90% Top-K fidelity on commodity Linux servers</li>
+            <li><strong>PSketch</strong>: first in-kernel priority-aware sketch using <strong>eBPF</strong>; high-priority flows tracked via in-kernel hashmap (O(1)), low-priority via <strong>3-layer Count-Min Sketch</strong>; enables <strong>O(n) Top-K detection</strong> with sub-linear memory; achieves <span class="metric">96% Top-K accuracy, 96.4% retransmission recall</span>, &lt;1.1% throughput overhead at 10 Gbps</li>
+            <li><strong>eHashPipe</strong>: dual-pipeline <strong>eBPF</strong> framework with <strong>O(n) Top-K tracking</strong> — (1) HashPipe-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via sched_switch tracepoint; delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop, ~11ms latency</li>
           </ul>
         </li>
 
