@@ -1317,6 +1317,16 @@ footer a:hover { color: var(--accent); }
     </div>
 
     <div class="proj-card fade-in">
+      <div class="proj-tags"><span class="tag tag-net">SDN</span><span class="tag tag-net">OvS</span><span class="tag tag-net">DDoS Defense</span><span class="tag tag-net">Control Plane</span><span class="tag tag-net">Ryu</span><span class="tag tag-net">vSwitch</span></div>
+      <div class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</div>
+      <div class="proj-desc">Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="proj-metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology.</div>
+      <div class="proj-links">
+        <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
+        <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Side-Channel</span><span class="tag tag-sec">MLaaS Security</span><span class="tag tag-dist">MXNet</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ebpf">Intel RAPL</span><span class="tag tag-dist">BSP / PS Arch</span><span class="tag tag-ml">Model Reconstruction</span></div>
       <div class="proj-name" data-i18n="research.proj7.name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
       <div class="proj-desc" data-i18n-html="research.proj7.desc"><strong>Analyzed DML computation/communication behavior</strong> in <strong>MXNet BSP</strong> Parameter Server: instrumented push/pull primitives to profile per-layer network traffic patterns; modified MXNet source code for ground-truth collection to capture <strong>DML network behavior</strong> at layer granularity; profiled <strong>ML energy consumption</strong> via <strong>Intel RAPL</strong> (PP0+DRAM, 50μs via powercap/sysfs); applied <strong>sliding window</strong> algorithms to isolate forward passes; used <strong>band-pass filtering</strong> and <strong>K-means clustering</strong> for noise reduction and layer segmentation; applied <strong>polynomial regression</strong> for per-layer and <strong>activation function energy profiling</strong>; classified layer types via <strong>Decision Tree</strong> and recovered Conv/FC dimensions via weighted-average <strong>MLP ensemble</strong> — exposing DNN architecture stealing surfaces in MLaaS environments.</div>
@@ -1382,6 +1392,10 @@ footer a:hover { color: var(--accent); }
     <div class="pub-item fade-in">
       <div class="pub-title">High-Resolution eBPF System Resource Profiling for DML Workloads <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE CCNC 2026</span></div>
       <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
+    </div>
+    <div class="pub-item fade-in">
+      <div class="pub-title">Scotch: Elastically Augmenting Control-Path Throughput in SDN <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-acm">ACM TOIT</span></div>
+      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1145/3559759" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
     </div>
     <div class="pub-item fade-in">
       <div class="pub-title">Training-Time Side-Channel Attacks on Distributed ML Systems <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-spring">Springer SecureComm</span></div>
