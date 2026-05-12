@@ -795,7 +795,7 @@ footer a:hover { color: var(--accent); }
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
       <div class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
-      <div class="proj-desc">Built a 115-label HCC multi-label classifier on highly imbalanced EHR data (MIMIC-V), improving long-tail performance via <strong>inverse-frequency weighted binary cross-entropy loss</strong> and <strong>per-label threshold calibration</strong>, achieving <span class="proj-metric">0.775 macro-F1 / 0.742 micro-F1 / 0.9362 macro-AUC</span>. Trained <strong>PubMedBERT</strong> using <strong>PyTorch DDP</strong> on 2×NVIDIA RTX A6000 GPUs for efficient scaling, while fine-tuning <strong>Qwen-7B</strong> using distribution-aware <strong>few-shot prompting</strong> (5-shot with negative, frequent, and rare-label demonstrations) to enforce structured HCC outputs and improve sensitivity to sparse labels; scaled full-parameter training via <strong>NeMo + Megatron-LM</strong> (TP=1, PP=1) with <strong>PyTorch FSDP (ZeRO-3)</strong>, <strong>FlashAttention</strong>, and <strong>activation checkpointing</strong>, enabling training under GPU memory constraints (avoiding OOM).</div>
+      <div class="proj-desc">Built a 115-label HCC multi-label classifier on highly imbalanced EHR data (MIMIC-V), improving long-tail performance via <strong>inverse-frequency weighted binary cross-entropy loss</strong> and <strong>per-label threshold calibration</strong>, achieving <span class="proj-metric">0.775 macro-F1 / 0.742 micro-F1 / 0.9362 macro-AUC</span>. Trained <strong>PubMedBERT</strong> using <strong>PyTorch DDP</strong> on 2×NVIDIA RTX A6000 GPUs for efficient scaling, while fine-tuning <strong>Qwen-7B</strong> using distribution-aware <strong>few-shot prompting</strong> to mitigate hallucination and enforce structured HCC outputs with improved sensitivity to sparse labels; scaled full-parameter training via <strong>NeMo + Megatron-LM</strong> (TP=1, PP=1) with <strong>PyTorch FSDP (ZeRO-3)</strong>, <strong>FlashAttention</strong>, and <strong>activation checkpointing</strong>, enabling training under GPU memory constraints (avoiding OOM).</div>
       <div class="proj-links">
         <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
       </div>
@@ -831,24 +831,6 @@ footer a:hover { color: var(--accent); }
       </div>
     </div>
 
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-sdn">SDN</span><span class="tag tag-sec">DDoS Mitigation</span><span class="tag tag-dist">Control-Plane Elasticity</span><span class="tag tag-sdn">OvS Overlay</span><span class="tag tag-sdn">OpenFlow</span><span class="tag tag-dist">Round-Robin Scheduling</span><span class="tag tag-dist">Large-Flow Migration</span><span class="tag tag-ml">ECMP Load Balancing</span></div>
-      <div class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</div>
-      <div class="proj-desc">Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="proj-metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology.</div>
-      <div class="proj-links">
-        <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
-      <div class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
-      <div class="proj-desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM’s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
-      <div class="proj-links">
-        <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-      </div>
-    </div>
 
     <div class="proj-card fade-in">
       <div class="proj-tags"><span class="tag tag-ml">Microarchitecture</span><span class="tag tag-ml">Pipelined CPU</span><span class="tag tag-ml">Hazard Resolution</span><span class="tag tag-ml">ASIC P&amp;R</span></div>
@@ -906,10 +888,6 @@ footer a:hover { color: var(--accent); }
     <div class="pub-item fade-in">
       <div class="pub-title">High-Resolution eBPF System Resource Profiling for DML Workloads <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE CCNC 2026</span></div>
       <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
-    </div>
-    <div class="pub-item fade-in">
-      <div class="pub-title">Scotch: Elastically Augmenting Control-Path Throughput in SDN <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-acm">ACM TOIT</span></div>
-      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1145/3559759" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
     </div>
     <div class="pub-item fade-in">
       <div class="pub-title">Training-Time Side-Channel Attacks on Distributed ML Systems <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-spring">Springer SecureComm</span></div>
@@ -1052,6 +1030,10 @@ footer a:hover { color: var(--accent); }
     <div class="section-line"></div>
   </div>
   <div class="skills-section">
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Agentic AI</div>
+      <div class="skill-tags"><span class="skill-tag">LangGraph</span><span class="skill-tag">Multi-Agent Orchestration</span><span class="skill-tag">Multi-Model Routing</span><span class="skill-tag">Prompt Engineering</span></div>
+    </div>
     <div class="skill-category fade-in">
       <div class="skill-cat-label">Languages</div>
       <div class="skill-tags">

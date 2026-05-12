@@ -764,154 +764,6 @@ footer a:hover { color: var(--accent); }
   </div>
   <div class="projects-grid">
 
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Side-Channel</span><span class="tag tag-sec">MLaaS Security</span><span class="tag tag-dist">MXNet</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ebpf">Intel RAPL</span><span class="tag tag-dist">BSP / PS Arch</span><span class="tag tag-ml">Model Reconstruction</span></div>
-      <div class="proj-name">Training-Time Side-Channel Attacks on Distributed ML Systems</div>
-      <div class="proj-desc"><strong>Training-phase black-box attack</strong> on <strong>MXNet BSP</strong> distributed training, reconstructing full DNN architectures via two unprivileged side channels: <strong>Intel RAPL</strong> (PP0+DRAM, 50μs via powercap/sysfs) and 0-payload network packet sequences (<strong>Seq_T</strong>) for tensor size extraction. <strong>Lookahead</strong> (sliding-window SMA) + <strong>Lookbehind</strong> algorithms isolate forward passes; <strong>band-pass filtering</strong> segments individual layers. <strong>Decision Tree</strong> (entropy, 97.7%, 10-fold CV on 84K+ segments) and <strong>BiLSTM</strong> classify layer types; weighted-average <strong>MLP ensemble</strong> (weights ∝ 1/validation error) recovers Conv/FC dimensions. Achieves <span class="proj-metric">&gt;97% layer-type accuracy</span>; validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
-      <div class="proj-links">
-        <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-sec">ML Security</span><span class="tag tag-sec">Power Side-Channel</span><span class="tag tag-sec">Intel RAPL</span><span class="tag tag-ml">Power Profiling</span><span class="tag tag-ml">Model Training</span><span class="tag tag-sec">BiLSTM</span><span class="tag tag-sec">Ensemble Regression</span><span class="tag tag-dist">MXNet / BSP</span><span class="tag tag-sec">DNN Reverse Engineering</span><span class="tag tag-sec">Layer-Level Analysis</span></div>
-      <div class="proj-name">BiLSTM-Based Side-Channel Modeling for Distributed ML Analysis</div>
-      <div class="proj-desc">Training-phase black-box attack on MXNet BSP distributed training reconstructing full DNN architectures via two unprivileged side channels: Intel RAPL PP0 + DRAM power sampled at 50μs via powercap/sysfs, and 0-payload network packet sequences (Seq_T) for tensor size extraction. Lookahead (sliding-window SMA) + Lookbehind algorithms isolate forward passes; band-pass filtering segments individual layers. Decision Tree (entropy, 97.7%, 10-fold CV on 84K+ FC/Conv segments) and BiLSTM classify layer types; a weighted-average ensemble of top-5 MLP regressors (weights ∝ 1/validation error) recovers Conv kernel dimensions and FC neuron counts. DT/MLP achieves <span class="proj-metric">&gt;97% layer-type accuracy</span> vs. BiLSTM’s ~92% (MAIA baseline); validated across 20 DNN models (LeNet through VGG/ResNet families).</div>
-      <div class="proj-links">
-        <a href="https://drive.google.com/file/d/13IFxD7_QHTmE7aHTrxclKUWzKaxV0uJM/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-ml">Reinforcement Learning</span><span class="tag tag-ml">PPO</span><span class="tag tag-dist">PyTorch DDP</span><span class="tag tag-dist">BytePS</span><span class="tag tag-llm">Batch Scheduling</span><span class="tag tag-llm">A100 GPU</span><span class="tag tag-dist">Model Training</span></div>
-      <div class="proj-name">DYNAMIX – Reinforcement Learning-Based Adaptive Batch Scheduling for Distributed ML</div>
-      <div class="proj-desc">Designed a <strong>PPO</strong>-based <strong>Reinforcement Learning (RL)</strong> scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via <strong>eBPF</strong> probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size; co-scales learning rate via <strong>Linear Scaling Rule</strong>; evaluated on <strong>PyTorch DDP</strong> and <strong>Parameter Server (BytePS)</strong>; achieves <span class="proj-metric">46% wall-clock speedup and ~6% accuracy gain</span> across <span class="proj-metric">8–64 A100 GPUs</span>.</div>
-      <div class="proj-links">
-        <a href="https://arxiv.org/abs/2510.08522" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/DML-via-RL" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-dist">Network Telemetry</span><span class="tag tag-ebpf">In-Kernel</span><span class="tag tag-ml">Count-Min Sketch</span><span class="tag tag-ebpf">Atomic Operations</span><span class="tag tag-dist">Retransmission Detection</span><span class="tag tag-dist">Flow Reconstruction</span></div>
-      <div class="proj-name">Priority-Based eBPF Network Flow Telemetry for AI / DML Infrastructure</div>
-      <div class="proj-desc">Designed PSketch, the first in-kernel priority-aware sketch using <strong>eBPF</strong>; high-priority flows tracked via in-kernel hashmap (O(1)), low-priority via <strong>3-layer Count-Min Sketch</strong>; enables O(n) Top-K detection with sub-linear memory; voting-based collision resolution and atomic operations for thread-safe updates; achieves <span class="proj-metric">96% Top-K accuracy, 96.4% retransmission recall</span>, and <span class="proj-metric">&lt;1.1% throughput overhead</span> at 10 Gbps on FABRIC testbed.</div>
-      <div class="proj-links">
-        <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/Psketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-ebpf">eBPF</span><span class="tag tag-ebpf">HashPipe Algorithm</span><span class="tag tag-ebpf">Top-K Tracking</span><span class="tag tag-ebpf">Per-PID Profiling</span><span class="tag tag-dist">In-Kernel Telemetry</span><span class="tag tag-ml">DML Observability</span></div>
-      <div class="proj-name">High-Resolution eBPF System Resource Profiling for DML Workloads</div>
-      <div class="proj-desc">Designed eHashPipe, a dual-pipeline <strong>eBPF</strong> framework: (1) HashPipe-based memory profiler with cascading slot eviction and ptr2size deallocation tracking, (2) per-thread CPU tracker via sched_switch tracepoint; with O(n) Top-K tracking; delivers <span class="proj-metric">10–14× finer temporal resolution</span> than top/htop, ~11ms latency, and &gt;90% Top-K fidelity on commodity Linux servers.</div>
-      <div class="proj-links">
-        <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-dist">Distributed ML</span><span class="tag tag-dist">Model Training</span><span class="tag tag-ml">Transport Protocol</span><span class="tag tag-dist">NCCL</span><span class="tag tag-ml">Gradient Prioritization</span><span class="tag tag-ebpf">Kernel Bypass</span><span class="tag tag-ml">SACK</span><span class="tag tag-dist">Cross-Datacenter</span></div>
-      <div class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</div>
-      <div class="proj-desc">Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events; classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values); supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants; achieves <span class="proj-metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at <span class="proj-metric">144-worker scale</span>.</div>
-      <div class="proj-links">
-        <a href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <span class="proj-link-btn link-review">🔄 Under Review</span>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-llm">LLM Inference</span><span class="tag tag-llm">vLLM / TensorRT-LLM</span><span class="tag tag-llm">Continuous Batching</span><span class="tag tag-dist">NVIDIA Device Plugin</span><span class="tag tag-dist">ArgoCD GitOps</span><span class="tag tag-ml">DCGM GPU Telemetry</span><span class="tag tag-sec">Zero-Trust NetworkPolicy</span><span class="tag tag-ml">Prometheus / Grafana</span></div>
-      <div class="proj-name">Scalable LLM Serving Infrastructure on Kubernetes</div>
-      <div class="proj-desc">Independently designed and built end-to-end a <strong>K8s</strong> microservices platform (Gateway / Router / Worker) with <strong>vLLM</strong> inference; <strong>ArgoCD</strong> GitOps, <strong>Prometheus/Grafana</strong> observability, and <strong>CI/CD</strong> pipelines across <span class="proj-metric">50+ deployments</span>.</div>
-      <div class="proj-links">
-        <a href="https://github.com/Johnny-dai-git/llm-deployment" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-sdn">SDN</span><span class="tag tag-sec">DDoS Mitigation</span><span class="tag tag-dist">Control-Plane Elasticity</span><span class="tag tag-sdn">OvS Overlay</span><span class="tag tag-sdn">OpenFlow</span><span class="tag tag-dist">Round-Robin Scheduling</span><span class="tag tag-dist">Large-Flow Migration</span><span class="tag tag-ml">ECMP Load Balancing</span></div>
-      <div class="proj-name">Scotch – Elastic SDN Overlay for Control-Plane Scalability under DDoS</div>
-      <div class="proj-desc">Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized Ryu SDN controller for flow monitoring and load balancing across vSwitches; separates small DDoS flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="proj-metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology.</div>
-      <div class="proj-links">
-        <a href="https://doi.org/10.1145/3559759" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-        <a href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-llm">LLM Fine-tuning</span><span class="tag tag-llm">NeMo / Megatron-LM</span><span class="tag tag-ml">Flash Attention</span><span class="tag tag-ml">Multi-label HCC Coding</span><span class="tag tag-ml">MIMIC-IV</span><span class="tag tag-ml">Clinical NLP</span></div>
-      <div class="proj-name">Domain-Adapted LLMs for Clinical Risk Adjustment Coding</div>
-      <div class="proj-desc">Designed chronic disease classifier (115 HCC codes) for EHR data using PyTorch FSDP (ZeRO-3) and FlashAttention; built semi-supervised labeling via <strong>few-shot GPT-4o</strong> prompting; applied activation checkpointing, inverse-frequency per-label weighting, and per-label threshold tuning; fine-tuned PubMedBERT and Qwen-7B on Lambda Labs A100; achieves <span class="proj-metric">macro-F1 of 0.775, micro-F1 of 0.742</span>, macro-AUC 0.9362.</div>
-      <div class="proj-links">
-        <a href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing" target="_blank" class="proj-link-btn link-paper">📄 Paper</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-ml">Microarchitecture</span><span class="tag tag-ml">Pipelined CPU</span><span class="tag tag-ml">Hazard Resolution</span><span class="tag tag-ml">ASIC P&amp;R</span></div>
-      <div class="proj-name">16-bit MIPS-Like Pipelined CPU Design and Implementation</div>
-      <div class="proj-desc">End-to-end CPU design: custom 16-bit MIPS-style ISA with Perl two-pass assembler; VHDL RTL for single-cycle and 5-stage pipeline with hazard detection, data forwarding, and 2-bit branch predictor; synthesized &amp; place-and-routed on FPGA with behavioral/post-synth/post-layout verification; achieves <span class="proj-metric">~3× speedup</span> (≈260 ps vs 780 ps critical path).</div>
-      <div class="proj-links">
-        <a href="https://github.com/Johnny-dai-git/16-bit-MIPS-Like-Pipelined-CPU-Design-and-Implementation" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-    <div class="proj-card fade-in">
-      <div class="proj-tags"><span class="tag tag-dist">Distributed Systems</span><span class="tag tag-dist">P2P Networking</span><span class="tag tag-dist">Socket Programming</span><span class="tag tag-ml">Java</span><span class="tag tag-dist">Multi-threading</span><span class="tag tag-dist">UDP / TCP</span></div>
-      <div class="proj-name">P2P File Sharing System</div>
-      <div class="proj-desc">Gnutella-style decentralized P2P file sharing in Java: UDP Ping/Pong for peer discovery, flooding-based QUERY propagation with traceback routing for indirect responses, and TCP for reliable file transfer; multi-threaded architecture (UDP listener, TCP query/file listeners, CentralControl) with ConcurrentHashMap + ConcurrentLinkedQueue for thread-safe state; query deduplication prevents redundant flooding.</div>
-      <div class="proj-links">
-        <a href="https://github.com/Johnny-dai-git/P2P-File-Sharing-System" target="_blank" class="proj-link-btn link-code">💻 Code</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── PUBLICATIONS ── -->
-<section id="publications">
-  <div class="section-header fade-in">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Publications</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="pub-summary-card fade-in">
-    <div class="pub-stat"><div class="pub-stat-num">8</div><div class="pub-stat-label">Total Papers</div></div>
-    <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">7</div><div class="pub-stat-label">First-Author</div></div>
-    <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">5</div><div class="pub-stat-label">Published</div></div>
-    <div class="pub-divider"></div>
-    <div class="pub-stat"><div class="pub-stat-num">3</div><div class="pub-stat-label">Under Review</div></div>
-    <div class="pub-divider"></div>
-    <div class="pub-venues">
-      <p>Published at <strong>IEEE IPDPS, IEEE CCNC, IEEE ICNC, ACM TOIT, Springer SecureComm</strong>.<br>
-      </p>
-    </div>
-  </div>
-
-  <div class="pub-list">
-    <div class="pub-item fade-in">
-      <div class="pub-title">DYNAMIX: RL-Based Adaptive Batch Scheduling for Distributed ML Training <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE IPDPS</span></div>
-      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://arxiv.org/abs/2510.08522" target="_blank" style="color:var(--accent2);">arXiv:2510.08522 ↗</a></div>
-    </div>
-    <div class="pub-item fade-in">
-      <div class="pub-title">Priority-Based eBPF Network Flow Telemetry for AI/DML Infrastructure <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE ICNC 2026</span></div>
-      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/ICNC68183.2026.11416971" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
-    </div>
-    <div class="pub-item fade-in">
-      <div class="pub-title">High-Resolution eBPF System Resource Profiling for DML Workloads <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-ieee">IEEE CCNC 2026</span></div>
-      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1109/CCNC65079.2026.11366341" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
-    </div>
-    <div class="pub-item fade-in">
-      <div class="pub-title">Scotch: Elastically Augmenting Control-Path Throughput in SDN <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-acm">ACM TOIT</span></div>
-      <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://doi.org/10.1145/3559759" target="_blank" style="color:var(--accent2);">DOI ↗</a></div>
-    </div>
     <div class="pub-item fade-in">
       <div class="pub-title">Training-Time Side-Channel Attacks on Distributed ML Systems <span class="pub-venue-badge badge-accepted">Accepted</span> <span class="pub-venue-badge badge-spring">Springer SecureComm</span></div>
       <div class="pub-meta"><strong style="color:#0f172a;">Yuanjun Dai</strong> et al. · <a href="https://par.nsf.gov/servlets/purl/10560766" target="_blank" style="color:var(--accent2);">NSF PAR ↗</a></div>
@@ -1053,6 +905,10 @@ footer a:hover { color: var(--accent); }
     <div class="section-line"></div>
   </div>
   <div class="skills-section">
+    <div class="skill-category fade-in">
+      <div class="skill-cat-label">Agentic AI</div>
+      <div class="skill-tags"><span class="skill-tag">LangGraph</span><span class="skill-tag">Multi-Agent Orchestration</span><span class="skill-tag">Multi-Model Routing</span><span class="skill-tag">Prompt Engineering</span></div>
+    </div>
     <div class="skill-category fade-in">
       <div class="skill-cat-label">Languages</div>
       <div class="skill-tags">
