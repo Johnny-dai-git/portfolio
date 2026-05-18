@@ -448,6 +448,15 @@
         </li>
 
         <li>
+          <span class="proj-name">Scotch – Elastic Distributed Overlay for Control-Plane Scalability and Load Balancing</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span>
+          <ul class="sub-bullets">
+            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches</li>
+            <li>Separates small disruptive flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology without hardware modification</li>
+          </ul>
+        </li>
+
+        <li>
           <span class="proj-name">DYNAMIX – Reinforcement Learning-Based Adaptive Batch Scheduling for Distributed ML</span>
           <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span>
           <ul class="sub-bullets">
@@ -489,15 +498,6 @@
           <ul class="sub-bullets">
             <li><strong>Analyzed DML computation/communication behavior</strong> in <strong>MXNet BSP</strong> Parameter Server: instrumented push/pull primitives and modified MXNet source code to capture <strong>DML network behavior</strong> and ground-truth per-layer traffic patterns</li>
             <li>Profiled <strong>ML energy consumption</strong> via <strong>Intel RAPL</strong>; used <strong>band-pass filtering</strong> and <strong>K-means clustering</strong> for noise reduction and layer segmentation; applied <strong>polynomial regression</strong> for <strong>activation function energy profiling</strong>; classified layer types via <strong>Decision Tree</strong> and <strong>MLP ensemble</strong></li>
-          </ul>
-        </li>
-
-        <li>
-          <span class="proj-name">Scotch – Elastic Distributed Overlay for Control-Plane Scalability and Load Balancing</span>
-          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span>
-          <ul class="sub-bullets">
-            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches</li>
-            <li>Separates small disruptive flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology without hardware modification</li>
           </ul>
         </li>
 
