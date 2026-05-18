@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Liberation Sans', Arial, sans-serif;
+    font-size: 8.8pt;
+    color: #000;
+    background: white;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.35in 0.55in 0.30in 0.55in;
+    margin: 0 auto;
+    background: white;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  .name {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .contact {
+    font-size: 8.2pt;
+    color: #555;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .contact a { color: #2563eb; text-decoration: underline; }
+
+  .header-rule {
+    border: none;
+    border-top: 0.7px solid #444;
+    margin-bottom: 8px;
+  }
+
+  /* ── SUMMARY ─────────────────────────────────────────── */
+  .summary-text {
+    font-size: 8.8pt;
+    color: #222;
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+
+
+  .pub-item {
+    font-size: 9.5pt;
+    color: #000;
+    margin-bottom: 4px;
+    padding-left: 20px;
+    text-indent: -20px;
+    line-height: 1.45;
+  }
+  /* ── SECTIONS ────────────────────────────────────────── */
+  .section {
+    margin-top: 12px;
+  }
+
+  .section-title {
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 0.5px solid #333;
+    padding-bottom: 1px;
+    margin-bottom: 6px;
+  }
+
+  /* ── EDUCATION ───────────────────────────────────────── */
+  .edu-entry {
+    margin-bottom: 6px;
+  }
+
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .edu-degree {
+    font-size: 9.2pt;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .edu-date {
+    font-size: 8.2pt;
+    color: #666;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .edu-school {
+    font-size: 10pt;
+    font-style: normal;
+    color: #333;
+    margin-top: 1px;
+  }
+
+  /* ── JOB / RESEARCH ENTRIES ──────────────────────────── */
+  .entry {
+    margin-bottom: 5px;
+    padding-bottom: 1px;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .entry-title {
+    font-size: 9.4pt;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .entry-date {
+    font-size: 8.2pt;
+    color: #555;
+    white-space: nowrap;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
+
+  .entry-org {
+    font-size: 9pt;
+    color: #000;
+    font-style: italic;
+    margin-bottom: 3px;
+  }
+
+  .entry-url {
+    font-size: 7.8pt;
+    color: #3a6abf;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* ── BULLET LIST ─────────────────────────────────────── */
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.bullets li {
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 3px;
+    line-height: 1.38;
+    color: #1a1a1a;
+    font-size: 8.4pt;
+  }
+
+  ul.bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+    color: #333;
+    font-size: 9pt;
+  }
+
+  .proj-name {
+    font-weight: 600;
+  }
+
+  .proj-link {
+    font-weight: 400;
+    color: #3a6abf;
+    font-size: 8pt;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 1px;
+  }
+  .proj-link:hover { text-decoration: underline; }
+  a.proj-link { color: #3a6abf; }
+
+  ul.proj-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.proj-list > li {
+    margin-bottom: 10px;
+    line-height: 1.38;
+  }
+  ul.proj-list > li::before {
+    content: none;
+  }
+
+  ul.sub-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 2px 0 0 0;
+  }
+  ul.sub-bullets li {
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+    line-height: 1.38;
+    color: #1a1a1a;
+    font-size: 8.4pt;
+  }
+  ul.sub-bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 2px;
+    color: #1a1a1a;
+    font-size: 8pt;
+  }
+
+  .metric {
+    font-weight: 600;
+  }
+
+  /* ── PROJECT (additional) ────────────────────────────── */
+  .proj-entry {
+    margin-bottom: 6px;
+  }
+
+  .proj-title {
+    font-size: 9.2pt;
+    font-weight: 600;
+    color: #0d0d0d;
+  }
+
+  .proj-gh {
+    font-size: 7.8pt;
+    color: #3a6abf;
+    display: block;
+    margin: 1px 0 3px 0;
+  }
+
+  /* ── PUBLICATIONS ────────────────────────────────────── */
+  .pub-text {
+    font-size: 8.6pt;
+    color: #1a1a1a;
+    line-height: 1.45;
+  }
+
+  .pub-link {
+    color: #3a6abf;
+    font-weight: 500;
+  }
+
+  /* ── SKILLS ──────────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 145px 1fr;
+    gap: 4px 6px;
+  }
+
+  .skill-label {
+    font-size: 8.6pt;
+    font-weight: 600;
+    color: #0d0d0d;
+    white-space: nowrap;
+  }
+
+  .skill-value {
+    font-size: 8.6pt;
+    color: #1a1a1a;
+  }
+
+  /* ── PRINT ───────────────────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; padding: 0.45in 0.50in 0.40in 0.50in; width: 100%; }
+    @page { size: letter; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="name">YUANJUN (JOHNNY) DAI</div>
+  <div class="contact">
+    216-269-2394 &nbsp;•&nbsp; yxd429@case.edu &nbsp;•&nbsp; Cleveland, OH
+  </div>
+  <div class="contact" style="margin-top:-2px;">
+    <a href="https://github.com/Johnny-dai-git" target="_blank">GitHub</a> &nbsp;•&nbsp;
+    <a href="https://johnny-dai-git.github.io/portfolio" target="_blank">Portfolio</a> &nbsp;•&nbsp;
+    <a href="https://medium.com/@yxd429" target="_blank">Blog</a> &nbsp;•&nbsp;
+    <a href="https://www.linkedin.com/in/yuanjun-johnny-d-0b8107191/" target="_blank">LinkedIn</a>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">Case Western Reserve University</span>
+        <span class="edu-date">08/2019 – Dec. 2026 (exp.)</span>
+      </div>
+      <div class="edu-school" style="display:flex; justify-content:space-between;"><span>Ph.D. Candidate in Computer Science &nbsp;·&nbsp; Advisor: Prof. An Wang <strong>(NSF CAREER Award)</strong></span><span>Cleveland, OH</span></div>
+      <div style="font-size:10pt; font-style:normal; color:#444; margin-top:2px;">Research focus: applied machine learning, LLM fine-tuning and deployment, and agentic AI systems</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">University of Pittsburgh</span>
+        <span class="edu-date">2014</span>
+      </div>
+      <div class="edu-school" style="display:flex; justify-content:space-between;"><span>M.S. in Electrical and Computer Engineering</span><span>Pittsburgh, PA</span></div>
+      <div style="font-size:10pt; font-style:normal; color:#444; margin-top:2px;">Research focus: Computer Architecture and Microarchitecture</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-row">
+        <span class="edu-degree">Northeastern University</span>
+        <span class="edu-date">2008</span>
+      </div>
+      <div class="edu-school" style="display:flex; justify-content:space-between;"><span>B.S. in Electrical Engineering</span><span>Shenyang, China</span></div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <span class="skill-label">ML Frameworks</span>
+      <span class="skill-value">PyTorch (DDP/FSDP), vLLM, Megatron-LM, NCCL, BytePS, scikit-learn</span>
+
+      <span class="skill-label">Agentic AI</span>
+      <span class="skill-value">LangGraph, Multi-Agent Orchestration, Multi-Model Routing, Prompt Engineering</span>
+
+      <span class="skill-label">Parallelism Paradigms</span>
+      <span class="skill-value">Data Parallel (DDP/FSDP), Tensor Parallel (TP), Pipeline Parallel (PP), Hybrid Parallel</span>
+
+      <span class="skill-label">Languages</span>
+      <span class="skill-value">Python, C/C++</span>
+
+      <span class="skill-label">Infrastructure</span>
+      <span class="skill-value">Kubernetes, Docker, CI/CD Pipelines (GitHub Actions), ArgoCD, Slurm</span>
+
+      <span class="skill-label">Systems &amp; APIs</span>
+      <span class="skill-value">FastAPI, REST API, gRPC</span>
+
+      <span class="skill-label">Observability</span>
+      <span class="skill-value">eBPF (Kernel Tracing), Prometheus, Grafana, DCGM Exporter, Intel RAPL</span>
+
+      <span class="skill-label">Cloud &amp; HPC</span>
+      <span class="skill-value">Lambda Labs HPC, Ohio Supercomputer Center, NSF FABRIC, CloudLab</span>
+
+      <span class="skill-label">Networking</span>
+      <span class="skill-value">SDN (Software-Defined Networking), P4, NPU/ASIC (Broadcom BCM SDK)</span>
+
+    </div>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer II</span>
+        <span class="entry-date">06/2015 – 08/2016</span>
+      </div>
+      <div class="entry-org">Cisco Systems, Inc.</div>
+      <ul class="bullets">
+        <li>Developed NPU/ASIC features for a 100 Gbps core router (Azure, AWS, Alibaba Cloud) using Broadcom BCM SDK; contributed to packet forwarding modules, reducing latency under heavy load.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Software Engineer Intern</span>
+        <span class="entry-date">10/2014 – 05/2015</span>
+      </div>
+      <div class="entry-org">Broadcom (Emulex)</div>
+      <ul class="bullets">
+        <li>Re-architected RTOS data acquisition (DMA + circular-buffer, <span class="metric">30% CPU reduction</span>); ported BladeEngine ASIC CLI from Linux to Windows Server.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Technical Product Manager</span>
+        <span class="entry-date">07/2018 – 01/2019</span>
+      </div>
+      <div class="entry-org">Xiaomi</div>
+      <ul class="bullets">
+        <li>Defined IoT appliance requirements via competitive analysis and user research; translated market needs into actionable engineering specifications.</li>
+        <li>Assessed technical feasibility and delivered architecture proposals covering trade-offs and risks to align engineering and business stakeholders.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Product Manager</span>
+        <span class="entry-date">09/2016 – 06/2018</span>
+      </div>
+      <div class="entry-org">Midea Group</div>
+      <ul class="bullets">
+        <li>Led technical PM for <strong>Fun Oven II</strong> across ML model training, Docker deployment on Alibaba Cloud, mobile app, and culinary algorithm design; won <span class="metric">Red Dot Design Award</span>, debuted at 2018 AWE Show · <a href="https://www.red-dot.org/project/fun-22465" style="color:#1a56c4;">Red Dot ↗</a> · <a href="https://www.prnewswire.com/news-releases/making-life-better-with-inventions-midea-wows-2018-awe-with-smart-kitchen-experience-676640513.html" style="color:#1a56c4;">PR Newswire ↗</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- RESEARCH EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Research Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Research Assistant</span>
+        <span class="entry-date">08/2019 – Dec. 2026 (exp.)</span>
+      </div>
+      <div class="entry-org">Case Western Reserve University</div>
+
+      <ul class="proj-list">
+
+        <li>
+          <span class="proj-name">LLM Fine-tuning for Multi-label Text Classification on Imbalanced Data</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1HggMwZQwoOtVsUKFwxy4C5skJrs_Serd/view?usp=sharing">Paper</a></span>
+          <ul class="sub-bullets">
+            <li>Built a multi-label text classifier across 115 highly imbalanced labels — applied <strong>inverse-frequency weighted loss</strong> and <strong>per-label threshold calibration</strong> to improve long-tail performance</li>
+            <li>Fine-tuned <strong>PubMedBERT</strong> via <strong>PyTorch DDP</strong> on 2×RTX A6000 GPUs; fine-tuned <strong>Qwen-7B</strong> via <strong>NeMo + Megatron-LM</strong> with <strong>FSDP (ZeRO-3)</strong> and <strong>FlashAttention</strong> to fit under GPU memory constraints; used <strong>few-shot prompting</strong> to mitigate hallucination in label generation</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">AI-Powered Job Hunting Agent</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter">Code</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/jobhunter/blob/master/docs/project_report.pdf">Report</a></span>
+          <ul class="sub-bullets">
+            <li>Built a <strong>multi-agent AI platform</strong> using <strong>LangGraph</strong> for automated job discovery and resume optimization — orchestrates specialized agents for collection, scoring, and refinement across 5 platforms, with a <strong>6-dimension LLM matching framework</strong> designed via <strong>prompt engineering</strong></li>
+            <li>Implemented <strong>capability-aware multi-model routing</strong> (<strong>DeepSeek</strong> for high-volume scoring, <strong>Claude Opus</strong> for quality-critical tailoring) and a <strong>FastAPI</strong> backend with cross-platform deduplication and health monitoring endpoints</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">Scalable AI Model Serving Infrastructure on Kubernetes</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://github.com/Johnny-dai-git/llm-deployment">Code</a> / <a class="proj-link" href="https://www.youtube.com/watch?v=ebnzQBiLJnQ">Video</a></span>
+          <ul class="sub-bullets">
+            <li>Designed a self-hosted LLM inference platform on <strong>Kubernetes</strong> (NGINX → <strong>FastAPI</strong> → <strong>vLLM</strong>) with <strong>GitOps CI/CD</strong> (<strong>ArgoCD</strong>), <strong>GPU time-slicing</strong>, hardware <strong>MIG</strong> partitioning, and custom-metrics <strong>HPA</strong> autoscaling</li>
+            <li>Built 4-layer observability via <strong>Prometheus</strong> + <strong>Grafana</strong>: GPU hardware (<strong>DCGM</strong>: utilization, VRAM, temperature, power), <strong>vLLM</strong> inference (queue depth, KV cache, TTFT), gateway/router request counters and latency histograms per endpoint (<strong>prometheus_client</strong>), and K8s cluster metrics (<strong>kube-prometheus-stack</strong>)</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">DYNAMIX – Reinforcement Learning-Based Adaptive Batch Scheduling for Distributed ML</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://arxiv.org/abs/2510.08522">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DML-via-RL">Code</a></span>
+          <ul class="sub-bullets">
+            <li>Designed a <strong>PPO</strong>-based <strong>Reinforcement Learning (RL)</strong> scheduler monitoring hardware signals (CPU/memory, bandwidth, retransmission rate via <strong>eBPF</strong> probes) and statistical signals (loss convergence, generalization) to dynamically adapt batch size, evaluated on <strong>PyTorch DDP</strong> and <strong>Parameter Server (BytePS)</strong></li>
+            <li>Achieves <span class="metric">46% wall-clock speedup</span> and <span class="metric">~6% accuracy gain</span> across <span class="metric">8–64 A100 GPUs</span> over fixed batch size baseline</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">PRISM – Priority-Based Selective Reliability for Distributed ML Training</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://drive.google.com/file/d/1MIH6184UM9pPOpZhGbo5FE5_SNJjsfGc/view?usp=sharing">Paper</a></span>
+          <ul class="sub-bullets">
+            <li>Designed a transport-layer library (<strong>NCCL/Gloo → UDP</strong>) hooking into <strong>PyTorch DDP</strong>'s AllReduce at bucket-ready events; classifies gradients by magnitude into high-priority (full <strong>SACK</strong>-based retransmission) and low-priority (local compensation via cached values)</li>
+            <li>Supports kernel-bypass (<strong>LibVMA</strong>) and kernel-based (<strong>GSO/GRO</strong>) variants; achieves <span class="metric">8–15% throughput gain for CNNs and 15–21% for LLMs</span> over TCP, matching NDP latency at 144-worker scale</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">In-Kernel eBPF Sketch Systems for DML Network and System Resource Monitoring</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1109/ICNC68183.2026.11416971">Paper (PSketch)</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Psketch">Code</a> &nbsp;·&nbsp; <a class="proj-link" href="https://doi.org/10.1109/CCNC65079.2026.11366341">Paper (eHashPipe)</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Top-k-eBPF-In-kernel-Sketch">Code</a></span>
+          <ul class="sub-bullets">
+            <li><strong>PSketch</strong>: Designed a three-tier in-kernel network monitoring system in <strong>eBPF</strong> that classifies flows by behavior — priority flows get exact per-packet tracking via a hashmap, elephant flows are identified and tracked via a heavy flow table with <strong>voting-based kick-out collision resolution</strong>, and remaining mice flows are approximated via a <strong>3-layer Count-Min Sketch</strong>; achieves <strong>O(n) Top-K detection</strong>, <span class="metric">96% accuracy</span>, and &lt;1.1% throughput overhead at 10 Gbps</li>
+            <li><strong>eHashPipe</strong>: Designed a dual-pipeline in-kernel observability framework in <strong>eBPF</strong> for DML workloads — one pipeline profiles memory usage via HashPipe with cascading slot eviction and deallocation tracking, the other tracks per-thread CPU time by hooking the <strong>sched_switch</strong> tracepoint; delivers <span class="metric">10–14× finer temporal resolution</span> than top/htop at ~11ms latency</li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">Side-Channel Attack Analysis and Behavioral Profiling of Distributed ML Systems</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://par.nsf.gov/servlets/purl/10560766">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/DNN-Architecture-Attacks-via-Network-and-Power-Side-Channels">Code</a></span>
+          <ul class="sub-bullets">
+            <li><strong>Analyzed DML computation/communication behavior</strong> in <strong>MXNet BSP</strong> Parameter Server: instrumented push/pull primitives and modified MXNet source code to capture <strong>DML network behavior</strong> and ground-truth per-layer traffic patterns</li>
+            <li>Profiled <strong>ML energy consumption</strong> via <strong>Intel RAPL</strong>; used <strong>band-pass filtering</strong> and <strong>K-means clustering</strong> for noise reduction and layer segmentation; applied <strong>polynomial regression</strong> for <strong>activation function energy profiling</strong>; classified layer types via <strong>Decision Tree</strong> and <strong>MLP ensemble</strong></li>
+          </ul>
+        </li>
+
+        <li>
+          <span class="proj-name">Scotch – Elastic Distributed Overlay for Control-Plane Scalability and Load Balancing</span>
+          <span class="proj-link"> | <a class="proj-link" href="https://doi.org/10.1145/3559759">Paper</a> / <a class="proj-link" href="https://github.com/Johnny-dai-git/Elastically-augmenting-the-control-path-throughput-in-SDN-to-deal-with-internet-DDoS-attacks">Code</a></span>
+          <ul class="sub-bullets">
+            <li>Designed an <strong>OvS</strong>-based elastic overlay: when physical switch OFA is saturated, tunnels new flows to a <strong>vSwitch</strong> pool via <strong>event-driven</strong> Packet-In Edge messages; built a centralized <strong>Ryu SDN</strong> controller for <strong>flow monitoring</strong> and <strong>load balancing</strong> across vSwitches</li>
+            <li>Separates small disruptive flows (terminated at vSwitches) from large flows (migrated to physical paths); achieves <span class="metric">&gt;70% controller congestion reduction</span> on 34-node GENI Clos topology without hardware modification</li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="section">
+    <div class="section-title">Publications</div>
+    <p class="pub-text">
+      7 papers (6 first-author) at IEEE IPDPS, IEEE ICNC, IEEE CCNC, ACM TOIT, and Springer SecureComm; 2 under review at ACM TOPS. &nbsp;
+      Full list: <a class="pub-link" href="https://johnny-dai-git.github.io/portfolio">johnny-dai-git.github.io/portfolio</a>
+    </p>
+  </div>
+
+  <!-- PATENTS -->
+  <div class="section">
+    <div class="section-title">Patents</div>
+    <p class="pub-text">
+      Oven Temperature Control Method, Device and Computer-Readable Storage Medium &mdash;
+      Granted <a href="https://patents.google.com/patent/CN108594898B" style="color:#1a56c4; text-decoration:none;">CN 108594898 B</a> &nbsp;|&nbsp; Dai Yuanjun et al.
+    </p>
+  </div>
+</div>
+</body>
+</html>
