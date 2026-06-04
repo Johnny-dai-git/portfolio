@@ -871,10 +871,10 @@ footer a:hover { color: var(--accent); }
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">☰</button>
   <div class="lang-switcher" id="langSwitcher">
     <span style="font-size:0.82rem;font-weight:600;color:var(--accent);margin-right:0.4rem;" data-i18n="nav.lang">选择语言</span>
-    <button class="lang-btn" id="langBtn">EN ▾</button>
+    <button class="lang-btn" id="langBtn">简中 ▾</button>
     <div class="lang-dropdown" id="langDropdown">
-      <div class="lang-option active" data-lang="en">English</div>
-      <div class="lang-option" data-lang="zh_hans">简体中文</div>
+      <div class="lang-option" data-lang="en">English</div>
+      <div class="lang-option active" data-lang="zh_hans">简体中文</div>
       <div class="lang-option" data-lang="zh_hant">繁體中文</div>
     </div>
   </div>
@@ -2289,6 +2289,8 @@ function initStaggeredSlideIn() {
 }
 
 let currentLang = 'en';
+// Default to Simplified Chinese on page load
+document.addEventListener('DOMContentLoaded', () => { setLang('zh_hans'); });
 
 // ── TAG TRANSLATIONS ──────────────────────────────────────────
 const TAG_ZH_HANS = {
